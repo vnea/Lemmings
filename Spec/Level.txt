@@ -1,0 +1,63 @@
+Service: Level
+
+Types: bool, int, enum Nature{EMPTY, DIRT, METAL}
+
+Observators: 
+			 const height: [Level] -> int
+             const width: [Level] -> int
+             editing: [Level] -> bool
+             nature: [Level] * int * int -> Nature
+                 pre nature(L,h,w) require squareExist(L,h,w)
+             squareExist: [Level] * int * int -> bool
+             hEntrance: [Level] -> int
+             	 pre hEntrance(L) require editing(L) = false 
+             wEntrance: [Level] -> int
+             	 pre wEntrance(L) require editing(L) = false 
+             hExit: [Level] -> int
+             	 pre hExit(L) require editing(L) = false 
+             wExit: [Level] -> int
+             	 pre wExit(L) require editing(L) = false 
+            
+Constructors: 
+			  init: int * int -> [Level]
+                   pre init(h,w) require 19<h<51 ^ 19<w<51
+ 
+Operators: 
+		    setNature: [Level] * int * int * Nature -> [Level]
+ 				pre setNature(L,h,w,n) require editing(L) ^ squareExist(L,h,w)
+            goPlay: [Level] -> [Level]
+            	pre goPlay(L) require 
+            			∀ i, 0 ≤ i ≤ height(L)-1, nature(L,i,0)=Nature::METAL ^ nature(L,i,width(L)-1)=Nature::METAL   
+            			^ ∀ j, 0 ≤ j ≤ width(L)-1, nature(L,0,j)=Nature::METAL ^ nature(L,height(L)-1,j)=Nature::METAL
+            			^ editing(L)
+            remove: [Level] * int * int -> [Level]
+            	pre remove(L,h,w) require editing(L)=false ^ nature(L,h,w)=Nature::DIRT
+            build: [Level] * int * int -> [Level]          
+				pre remove(L,h,w) require editing(L)=false ^ nature(L,h,w)=Nature::EMPTY
+			defEntrance: [Level] * int * int -> [Level]
+				pre defEntrance(L,h,w) require nature(L,h,w)=Nature::EMPTY ^ nature(L,h-1,w)=Nature::EMPTY ^ nature(L,h+1,w)=Nature::EMPTY 
+			defExit: [Level] * int * int -> [Level]
+				pre defExit(L,h,w) require nature(L,h,w)=Nature::EMPTY ^ nature(L,h-1,w)=Nature::EMPTY ^ nature(L,h+1,w)=Nature::METAL 
+Observations: 
+			  [invariants]
+			  		∀ i, 0 ≤ i < height(L) ^ ∀ j, 0 ≤ j < width(L), squareExist(L,i,j)
+			  [init]	
+			  		height(init(h,w)) = h
+			  		width(init(h,w)) = w
+			  		editing(init(h,w)) = true
+			  		∀ i, 0 ≤ i < height(init(h,w)) ^ ∀ j, 0 ≤ j < width(init(h,w)), nature(init(h,w),i,j)=Nature::EMPTY 
+			  [setNature]
+			  		nature(setNature(L,h,w,n),h,w) = n 
+			  [goPlay]
+			  		editing(goPlay(L)) = false
+			  [remove]
+			  		nature(remove(L,h,w),h,w) = Nature::EMPTY
+			  [build]
+			  		nature(build(L,h,w),h,w) = Nature::DIRT
+			  [defEntrance]
+			  		hEntrance(defEntrance(L,h,w)) = h
+			  		wEntrance(defEntrance(L,h,w)) = w
+			  [defExit]
+			  		hExit(defExit(L,h,w)) = h
+			  		wExit(defExit(L,h,w)) = w
+	

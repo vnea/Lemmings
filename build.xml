@@ -1,0 +1,77 @@
+<project name="projet" default="compile" basedir=".">
+    <description>
+       Fichier de construction pour le projet "Lemmings" de CPS
+    </description>
+  <!-- set global properties for this build -->
+  <property name="src" location="src"/>
+  <property name="build" location="build"/>
+  <property name="jars" location="jars"/>
+
+  <!-- METTRE ICI LE NOM DU BINOME -->
+  <property name="nom1" value="LAUSSAUZAY"/>
+  <property name="nom2" value="NEA"/>
+
+  <target name="init">
+    <!-- Create the time stamp -->
+    <tstamp/>
+    <!-- Create the build directory structure used by compile -->
+    <mkdir dir="${build}"/>
+  </target>
+
+  <target name="compile" depends="init"
+        description="compile the source " >
+    <!-- Compile the java code from ${src} into ${build} -->
+    <javac debug="true" srcdir="${src}" excludes="" destdir="${build}" includeantruntime="false" />
+  </target>
+
+  <target name="test" depends="compile"
+          description="test of good implementation">
+    <echo>================ Run first test ================</echo>
+    <junit printsummary="yes">
+      <classpath>
+        <pathelement location="${build}"/>
+        <pathelement location="${jars}/junit.jar"/>
+      </classpath>
+
+      <formatter type="plain"/>
+
+      <test name="Jeu.tests.GoodImplTest" outfile="reportTest"/>
+
+    </junit>
+  </target>
+
+  <target name="testBad" depends="compile"
+          description="test of bad implementation">
+    <echo>================ Run first test ================</echo>
+    <junit printsummary="yes">
+      <classpath>
+        <pathelement location="${build}"/>
+        <pathelement location="${jars}/junit.jar"/>
+      </classpath>
+
+      <formatter type="plain"/>
+
+      <test name="Jeu.tests.BadImplTest" outfile="reportBadTest"/>
+
+    </junit>
+  </target>
+
+  <target name="dist" depends="init,clean"
+        description="Generer la distribution" >
+    <!-- tout mettre dans l'archive -->
+    <jar basedir=".." jarfile="../CPS_Projet-${nom1}-${nom2}-${DSTAMP}.jar"
+    includes="CPS_Projet/**/*" excludes="**/CVS"/>
+  </target>
+
+  <target name="clean"
+        description="clean up" >	
+	<echo>================ Removing temporary files... ================</echo>
+        <delete verbose="true"> <!-- Remove all *~ files -->
+	   <fileset dir="${basedir}" defaultexcludes="no">
+             <include name="**/*~"/>
+           </fileset>
+        </delete>
+        <echo>================ Removing build directory ================</echo>    
+	<delete dir="${build}"/>
+  </target>
+</project>

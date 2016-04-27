@@ -1,0 +1,38 @@
+Service: Player
+
+Types: bool, int, enum TokenType{WALKER}
+
+Observators:
+             const nbTokenWalkerInit: [Player] -> int
+			 nbTokenWalker: [Player] -> int
+			 tokenSelected: [Player] -> TokenType
+			 gameEngine: [Player] -> GameEng
+			 
+Constructors:
+			 init: int * GameEng -> [Player]
+			 	   pre init(nbTokenWalker,G) require nbTokenWalker > 0
+Operators:
+			 useToken: [Player] * int -> [Player]
+				   pre useToken(P, numLemming) require if tokenSelected(P)=TokenType::WALKER then:
+				   	    Lemming::behaviour(GameEng::getLemming(gameEngine(P),numLemming)) != Behaviour::WALKER ^
+				   	    nbTokenWalker(P) > 0
+			 resetGame: [Player] -> [Player]
+			 selectToken: [Player] * TokenType -> [Player]
+Observations:
+			 [invariants]
+			 	   nbTokenWalker(P) ≥ 0
+			 [init]
+			 	   nbTokenWalker(init(nbTokenWalker,G)) = nbTokenWalker
+			 	   nbTokenWalkerInit(init(nbTokenWalker,G)) = nbTokenWalker
+			 	   tokenSelected(init(nbTokenWalker,G)) = TokenType::WALKER
+			 	   gameEngine(init(nbTokenWalker,G)) = G
+			 [useToken]
+			       if tokenSelected(P)=TokenType::WALKER then:
+				 	   nbTokenWalker(useToken(P, numLemming)) = nbTokenWalker(P)-1 ^
+				 	   Lemming::behaviour(GameEng::getLemming(gameEngine(useToken(P, numLemming)),numLemming)) = Behaviour::WALKER
+			 [resetGame]
+			 	   gameEngine(resetGame(P)) = GameEng::init(GameEng::level(sizeC(P)),GameEng::level(spawnS(P)),GameEng::level(gameEngine(P)))
+			 	   nbTokenWalker(resetGame(P)) = nbTokenWalkerInit(P)
+			 	   tokenSelected(resetGame(P)) = TokenType::WALKER
+			 [selectToken]
+			 	   tokenSelected(selectToken(P, tokenType)) = tokenType

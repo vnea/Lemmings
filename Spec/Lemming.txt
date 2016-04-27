@@ -1,0 +1,64 @@
+Service: Lemming
+
+Types: bool, int, enum Direction{LEFT, RIGHT}, enum Behaviour{WALKER, FALLER}
+
+Observators: 
+			 const num: [Lemming] -> int
+			 direction: [Lemming] -> Direction
+			 behaviour: [Lemming] -> Behaviour
+			 hPos: [Lemming] -> int
+			 wPos: [Lemming] -> int
+			 dead: [Lemming] -> bool
+			 gameEngine: [Lemming] -> GameEng
+
+Constructors:
+			 init: int * int * int * GameEng -> [Lemming]
+		 	       pre init(num, h, w, G) require num ≥ 0 ^ h ≥ 2 ^ w ≥ 1 
+Operators:
+			 step: [Lemming] -> [Lemming]
+Observations:
+			 [invariants] 
+			 	   GameEng::obstacle(gameEngine(L),hPos(L)-1,wPos(L)) = false
+			 [init]		
+			 		num(init(num,h,w,G)) = num
+			 		hPos(init(num,h,w,G)) = h
+			 		wPos(init(num),h,w,G)) = w
+			 		direction(init(num,h,w,G)) = Direction::RIGHT
+			 		behaviour(init(num,h,w,G)) = Behaviour::FALLER
+			 		dead(init(num,h,w,G)) = false
+			 [step]
+			 		if behaviour(L)=Behaviour::WALKER then:
+			 			if direction(L)=Direction::RIGHT then:
+			 				if GameEng::obstacle(gameEngine(L),hPos(L)+1,wPos(L))=false then:
+			 						behaviour(step(L)) = Behaviour::FALLER
+			 				else if GameEng::obstacle(gameEngine(L),hPos(L)-1,wPos(L)+1) then
+			 						direction(step(L)) = Direction::LEFT
+			 				else if GameEng::obstacle(gameEngine(L),hPos(L),wPos(L)+1) then:
+			 					if GameEng::obstacle(gameEngine(L),hPos(L)-2,wPos(L)+1)) then:
+			 							direction(step(L)) = Direction::LEFT
+			 					else: 
+			 							hPos(step(L)) = hPos-1 ^ wPos(step(L)) = wPos+1
+			 				else:
+			 						wPos(step(L)) = wPos+1
+			 			else: 
+			 				if GameEng::obstacle(gameEngine(L),hPos(L)+1,wPos(L))=false then:
+			 						behaviour(step(L)) = Behaviour::FALLER
+			 				else if GameEng::obstacle(gameEngine(L),hPos(L)-1,wPos(L)-1) then
+			 						direction(step(L)) = Direction::RIGHT
+			 				else if GameEng::obstacle(gameEngine(L),hPos(L),wPos(L)-1) then:
+			 					if GameEng::obstacle(gameEngine(L),hPos(L)-2,wPos(L)-1)) then:
+			 							direction(step(L)) = Direction::LEFT
+			 					else: 
+			 							hPos(step(L)) = hPos-1 ^ wPos(step(L)) = wPos-1
+			 				else:
+			 						wPos(step(L)) = wPos-1
+			 			
+			 		else if behaviour(L)=Behaviour::FALLER then:
+			 			if GameEng::obstacle(gameEngine(L),hPos(L)+1,wPos(L)) then:
+			 					hPos(step(L)) = hPos+1
+			 			else: 
+			 				if ∀i, 0<i<8 GameEng::obstacle(gameEngine(L),hPos(L)-i,wPos(L))=false then:
+			 						dead(step(l)) = true
+			 				else:
+			 					behaviour(step(L)) = Behaviour::WALKER
+		 	
