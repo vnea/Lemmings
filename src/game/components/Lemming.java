@@ -6,7 +6,6 @@ import game.services.GameEngService;
 import game.services.LemmingService;
 
 public class Lemming implements LemmingService {
-
     @Override
     public int getNum() {
         // TODO Auto-generated method stub
@@ -60,5 +59,4 @@ public class Lemming implements LemmingService {
         // TODO Auto-generated method stub
         
     }
-
 }

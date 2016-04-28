@@ -54,8 +54,8 @@ public interface PlayerService {
     
     /** Reset the game
      * \post: getGameEngine() == getGameEngine()@pre.init(getGameEngine()@pre.getSizeColony(), getGameEngine()@pre.getSpawnSpeed()) <----- TO CHANGE
-	 * \post: getNbTokenWalker() = getNbTokenWalkerInit()
-	 * \post: getTokenSelected() = TokenType::WALKER
+     * \post: getNbTokenWalker() = getNbTokenWalkerInit()
+     * \post: getTokenSelected() = TokenType::WALKER
      */
     public void resetGame();
     

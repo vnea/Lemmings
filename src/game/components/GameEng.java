@@ -9,7 +9,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class GameEng implements GameEngService {
-    
     private int score;
     private int turn;
     
@@ -18,7 +17,6 @@ public class GameEng implements GameEngService {
     
     private int nbLemmingsDead;
     private int nbLemmingsSaved;
-    private int nbLemmingsActive;
     
     private List<LemmingService> lemmings;
     private LevelService level;
@@ -56,12 +54,12 @@ public class GameEng implements GameEngService {
 
     @Override
     public int getNbLemmingsActive() {
-        return nbLemmingsActive;
+        return lemmings.size();
     }
 
     @Override
     public int getNbLemmingsCreated() {
-        return lemmings.size();
+        return nbLemmingsDead + nbLemmingsSaved + lemmings.size();
     }
 
     @Override
@@ -100,7 +98,7 @@ public class GameEng implements GameEngService {
     }
 
     @Override
-    public void init(int sizeC, int spawnS) { // <----------------------------------------- TO CHANGE (Not all variables are init)
+    public void init(int sizeC, int spawnS) {
         turn = 0;
         sizeColony = sizeC;
         spawnSpeed = spawnS;
@@ -127,16 +125,28 @@ public class GameEng implements GameEngService {
 
     @Override
     public void checkSaved() {
-        // <----------------------------------------------- TO COMPLETE
-        
-        nbLemmingsSaved = lemmings.size() - nbLemmingsActive + nbLemmingsDead;
+        getNumLemmingsActive().removeIf(num -> {
+                LemmingService lemming = getLemming(num);
+                return lemming.getHPos() == level.getHExit() &&
+                       lemming.getWPos() == level.getWExit();
+        });
+
+        nbLemmingsSaved = getNbLemmingsCreated() - lemmings.size() +
+                          nbLemmingsDead;
     }
 
     @Override
     public void checkDead() {
-        // <----------------------------------------------- TO COMPLETE
+        List<Integer> numLemmingsActive = getNumLemmingsActive();
+        for (final Integer num : numLemmingsActive) {
+            final LemmingService lemming = getLemming(num);
+            if (lemming.isDead()) {
+                lemmings.remove(lemming);
+            }
+        }
         
-        nbLemmingsDead = lemmings.size() - nbLemmingsActive + nbLemmingsSaved;     
+        nbLemmingsDead = getNbLemmingsCreated() - lemmings.size() +
+                         nbLemmingsSaved;     
     }
 
     @Override
