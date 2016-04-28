@@ -31,7 +31,7 @@ Observations:
 				 	   nbTokenWalker(useToken(P, numLemming)) = nbTokenWalker(P)-1 ^
 				 	   Lemming::behaviour(GameEng::getLemming(gameEngine(useToken(P, numLemming)),numLemming)) = Behaviour::WALKER
 			 [resetGame]
-			 	   gameEngine(resetGame(P)) = GameEng::init(GameEng::level(sizeC(P)),GameEng::level(spawnS(P)),GameEng::level(gameEngine(P)))
+			 	   gameEngine(resetGame(P)) = GameEng::init(GameEng::getsSzeColony(gameEngine(resetGame(P))),GameEng::getSpawnS(gameEngine(resetGame(P))),GameEng::getLevel(gameEngine(resetGame(P))))
 			 	   nbTokenWalker(resetGame(P)) = nbTokenWalkerInit(P)
 			 	   tokenSelected(resetGame(P)) = TokenType::WALKER
 			 [selectToken]

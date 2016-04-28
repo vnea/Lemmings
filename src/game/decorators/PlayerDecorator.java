@@ -13,49 +13,41 @@ public class PlayerDecorator implements PlayerService {
 
     @Override
     public int getNbTokenWalker() {
-        // TODO Auto-generated method stub
-        return 0;
+        return delegate.getNbTokenWalker();
     }
 
     @Override
     public TokenType getTokenSelected() {
-        // TODO Auto-generated method stub
-        return null;
+        return delegate.getTokenSelected();
     }
 
     @Override
     public GameEngService getGameEngine() {
-        // TODO Auto-generated method stub
-        return null;
+        return delegate.getGameEngine();
     }
 
     @Override
     public void init(int nbTokenWalker) {
-        // TODO Auto-generated method stub
-        
+        delegate.init(nbTokenWalker);
     }
 
     @Override
     public void useToken(int numLemming) {
-        // TODO Auto-generated method stub
-        
+        delegate.useToken(numLemming);
     }
 
     @Override
     public void resetGame() {
-        // TODO Auto-generated method stub
-        
+        delegate.resetGame();
     }
 
     @Override
     public void selectToken(TokenType tokenType) {
-        // TODO Auto-generated method stub
-        
+        delegate.selectToken(tokenType);
     }
 
     @Override
     public int getNbTokenWalkerInit() {
-        // TODO Auto-generated method stub
-        return 0;
+        return delegate.getNbTokenWalker();
     }
 }

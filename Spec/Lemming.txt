@@ -19,7 +19,7 @@ Operators:
 Observations:
 			 [invariants] 
 			 	   GameEng::obstacle(gameEngine(L),hPos(L)-1,wPos(L)) = false
-			 [init]		
+			 [init]
 			 		num(init(num,h,w,G)) = num
 			 		hPos(init(num,h,w,G)) = h
 			 		wPos(init(num),h,w,G)) = w

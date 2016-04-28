@@ -3,7 +3,9 @@ package game.components;
 import game.enums.Nature;
 import game.services.LevelService;
 
-public class Level implements LevelService {
+public class Level implements
+    /* provide */
+    LevelService {
     private int height;
     private int width;
     

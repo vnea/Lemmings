@@ -12,97 +12,81 @@ public class LevelDecorator implements LevelService {
 
     @Override
     public int getHeight() {
-        // TODO Auto-generated method stub
-        return 0;
+        return delegate.getHeight();
     }
 
     @Override
     public int getWidth() {
-        // TODO Auto-generated method stub
-        return 0;
+        return delegate.getWidth();
     }
 
     @Override
     public boolean isEditing() {
-        // TODO Auto-generated method stub
-        return false;
+        return delegate.isEditing();
     }
 
     @Override
     public Nature getNature(int h, int w) {
-        // TODO Auto-generated method stub
-        return null;
+        return delegate.getNature(h, w);
     }
 
     @Override
     public boolean squareExist(int h, int w) {
-        // TODO Auto-generated method stub
-        return false;
+        return delegate.squareExist(h, w);
     }
 
     @Override
     public int getHEntrance() {
-        // TODO Auto-generated method stub
-        return 0;
+        return delegate.getHEntrance();
     }
 
     @Override
     public int getWEntrance() {
-        // TODO Auto-generated method stub
-        return 0;
+        return delegate.getWEntrance();
     }
 
     @Override
     public int getHExit() {
-        // TODO Auto-generated method stub
-        return 0;
+        return delegate.getHExit();
     }
 
     @Override
     public int getWExit() {
-        // TODO Auto-generated method stub
-        return 0;
+        return delegate.getWExit();
     }
 
     @Override
     public void init(int h, int w) {
-        // TODO Auto-generated method stub
-        
+        delegate.init(h, w);
     }
 
     @Override
     public void setNature(int h, int w, Nature n) {
-        // TODO Auto-generated method stub
-        
+        delegate.setNature(h, w, n);
     }
 
     @Override
     public void goPlay() {
-        // TODO Auto-generated method stub
-        
+        delegate.goPlay();
     }
 
     @Override
     public void remove(int h, int w) {
-        // TODO Auto-generated method stub
-        
+        delegate.remove(h, w);
     }
 
     @Override
     public void build(int h, int w) {
-        // TODO Auto-generated method stub
-        
+        delegate.build(h, w);
     }
 
     @Override
     public void defEntrance(int h, int w) {
-        // TODO Auto-generated method stub
-        
+        delegate.defEntrance(h, w);
     }
 
     @Override
     public void defExit(int h, int w) {
-        // TODO Auto-generated method stub
-        
+        delegate.defExit(h, w);
     }
 }

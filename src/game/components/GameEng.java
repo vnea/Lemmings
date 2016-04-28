@@ -4,11 +4,17 @@ import game.enums.Nature;
 import game.services.GameEngService;
 import game.services.LemmingService;
 import game.services.LevelService;
+import game.services.RequireLevelService;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class GameEng implements GameEngService {
+public class GameEng implements
+    /* require */
+    RequireLevelService,
+
+    /* provide */
+    GameEngService {
     private int score;
     private int turn;
     
@@ -104,7 +110,8 @@ public class GameEng implements GameEngService {
         spawnSpeed = spawnS;
         
         lemmingsActive = new ArrayList<>();
-        nbLemmingsSaved = nbLemmingsDead = 0;
+        nbLemmingsSaved = 0;
+        nbLemmingsDead = 0;
     }
 
     @Override
@@ -143,5 +150,10 @@ public class GameEng implements GameEngService {
         if (isGameOver()) {
             score = nbLemmingsSaved / turn * 100;
         }
+    }
+
+    @Override
+    public void bindLevelService(LevelService service) {
+        level = service;
     }
 }

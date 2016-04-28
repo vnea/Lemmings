@@ -15,121 +15,101 @@ public class GameEngDecorator implements GameEngService {
 
     @Override
     public int getScore() {
-        // TODO Auto-generated method stub
-        return 0;
+        return delegate.getScore();
     }
 
     @Override
     public int getTurn() {
-        // TODO Auto-generated method stub
-        return 0;
+        return delegate.getTurn();
     }
 
     @Override
     public boolean isAnObstacle(int h, int w) {
-        // TODO Auto-generated method stub
-        return false;
+        return delegate.isAnObstacle(h, w);
     }
 
     @Override
     public int getSizeColony() {
-        // TODO Auto-generated method stub
-        return 0;
+        return delegate.getSizeColony();
     }
 
     @Override
     public int getNbLemmingsDead() {
-        // TODO Auto-generated method stub
-        return 0;
+        return delegate.getNbLemmingsDead();
     }
 
     @Override
     public int getNbLemmingsSaved() {
-        // TODO Auto-generated method stub
-        return 0;
+        return delegate.getNbLemmingsSaved();
     }
 
     @Override
     public int getNbLemmingsActive() {
-        // TODO Auto-generated method stub
-        return 0;
+        return delegate.getNbLemmingsActive();
     }
 
     @Override
     public int getNbLemmingsCreated() {
-        // TODO Auto-generated method stub
-        return 0;
+        return delegate.getNbLemmingsCreated();
     }
 
     @Override
     public LemmingService getLemming(int num) {
-        // TODO Auto-generated method stub
-        return null;
+        return delegate.getLemming(num);
     }
 
     @Override
     public boolean isActive(int num) {
-        // TODO Auto-generated method stub
-        return false;
+        return delegate.isActive(num);
     }
 
     @Override
     public List<Integer> getNumLemmingsActive() {
-        // TODO Auto-generated method stub
-        return null;
+        return delegate.getNumLemmingsActive();
     }
 
     @Override
     public int getSpawnSpeed() {
-        // TODO Auto-generated method stub
-        return 0;
+        return delegate.getSpawnSpeed();
     }
 
     @Override
     public boolean isGameOver() {
-        // TODO Auto-generated method stub
-        return false;
+        return delegate.isGameOver();
     }
 
     @Override
     public LevelService getLevel() {
-        // TODO Auto-generated method stub
-        return null;
+        return delegate.getLevel();
     }
 
     @Override
     public void init(int sizeC, int spawnS) {
-        // TODO Auto-generated method stub
-        
+        delegate.init(sizeC, spawnS);
     }
 
     @Override
     public void newLemming(int num) {
-        // TODO Auto-generated method stub
-        
+        delegate.newLemming(num);
     }
 
     @Override
     public void callStepLemmings() {
-        // TODO Auto-generated method stub
-        
+        delegate.callStepLemmings();
     }
 
     @Override
     public void checkSaved() {
-        // TODO Auto-generated method stub
-        
+        delegate.checkSaved();
     }
 
     @Override
     public void checkDead() {
-        // TODO Auto-generated method stub
-        
+        delegate.checkDead();        
     }
 
     @Override
     public void checkWin() {
-        // TODO Auto-generated method stub
-        
+        delegate.checkWin();
     }
 }

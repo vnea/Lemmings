@@ -14,55 +14,46 @@ public class LemmingDecorator implements LemmingService {
 
     @Override
     public int getNum() {
-        // TODO Auto-generated method stub
-        return 0;
+        return delegate.getNum();
     }
 
     @Override
     public Direction getDirection() {
-        // TODO Auto-generated method stub
-        return null;
+        return delegate.getDirection();
     }
 
     @Override
-    public Behaviour getBehaivour() {
-        // TODO Auto-generated method stub
-        return null;
+    public Behaviour getBehaviour() {
+        return delegate.getBehaviour();
     }
 
     @Override
     public int getHPos() {
-        // TODO Auto-generated method stub
-        return 0;
+        return delegate.getHPos();
     }
 
     @Override
     public int getWPos() {
-        // TODO Auto-generated method stub
-        return 0;
+        return delegate.getWPos();
     }
 
     @Override
     public boolean isDead() {
-        // TODO Auto-generated method stub
-        return false;
+        return delegate.isDead();
     }
 
     @Override
     public GameEngService getGameEngine() {
-        // TODO Auto-generated method stub
-        return null;
+        return delegate.getGameEngine();
     }
 
     @Override
     public void init(int num, int h, int w) {
-        // TODO Auto-generated method stub
-        
+        delegate.init(num, h, w);
     }
 
     @Override
     public void step() {
-        // TODO Auto-generated method stub
-        
+        delegate.step();
     }
 }

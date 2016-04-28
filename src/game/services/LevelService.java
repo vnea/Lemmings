@@ -61,7 +61,7 @@ public interface LevelService {
     //**INVARIANT(S)*********************************************************// /* <---------------------- TO CHANGE (LACK OF INVARIANTS) */
     
     /**\inv: \forall i \in [0, getHeight()[ ^ \forall j in [0, getWidth()[,
-     *         squareExist(, i, j) */
+     *         squareExist(i, j) */
     
     //***********************************************************************//
 

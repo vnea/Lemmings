@@ -24,7 +24,7 @@ public interface LemmingService {
     public Direction getDirection();
     
     /** Behaviour of the Lemming */
-    public Behaviour getBehaivour();
+    public Behaviour getBehaviour();
     
     /** Vertical position of the Lemming */
     public int getHPos();

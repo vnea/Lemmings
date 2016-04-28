@@ -3,55 +3,75 @@ package game.components;
 import game.enums.TokenType;
 import game.services.GameEngService;
 import game.services.PlayerService;
+import game.services.RequireGameEngService;
 
-public class Player implements PlayerService {
+public class Player implements
+    /* require */
+    RequireGameEngService,
 
+    /* provide */
+    PlayerService {
+    private int nbTokenWalkerInit;
+    private int nbTokenWalker;
+    
+    private TokenType tokenSelected;
+    
+    private GameEngService gameEngine;
+    
     @Override
     public int getNbTokenWalker() {
-        // TODO Auto-generated method stub
-        return 0;
+        return nbTokenWalker;
     }
 
     @Override
     public TokenType getTokenSelected() {
-        // TODO Auto-generated method stub
-        return null;
+        return tokenSelected;
     }
 
     @Override
     public GameEngService getGameEngine() {
-        // TODO Auto-generated method stub
-        return null;
+        return gameEngine;
     }
 
     @Override
     public void init(int nbTokenWalker) {
-        // TODO Auto-generated method stub
-        
+        this.nbTokenWalker = nbTokenWalker;
+        nbTokenWalkerInit = nbTokenWalker;
+        tokenSelected = TokenType.WALKER;
     }
 
     @Override
     public void useToken(int numLemming) {
-        // TODO Auto-generated method stub
-        
+        switch (tokenSelected) {
+            case WALKER:
+                --nbTokenWalker;
+                //<---------------------------------- TO COMPLETE
+                // change behaviour lemming
+            break;
+        }
     }
 
     @Override
     public void resetGame() {
-        // TODO Auto-generated method stub
-        
+        //<---------------------------------- TO COMPLETE
+        // gameEngine reset/init
+        gameEngine.init(gameEngine.getSizeColony(), gameEngine.getSpawnSpeed());
+        nbTokenWalker = nbTokenWalkerInit;
+        tokenSelected = TokenType.WALKER;
     }
 
     @Override
     public void selectToken(TokenType tokenType) {
-        // TODO Auto-generated method stub
-        
+        tokenSelected = tokenType;
     }
 
     @Override
     public int getNbTokenWalkerInit() {
-        // TODO Auto-generated method stub
-        return 0;
+        return nbTokenWalkerInit;
     }
 
+    @Override
+    public void bindGameEngService(GameEngService service) {
+        gameEngine = service;
+    }
 }
