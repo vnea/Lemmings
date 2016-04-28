@@ -24,8 +24,8 @@ Constructors:
 			 init: int * int * Level -> [GameEng]
 			 	   pre init(sizeC,spawnS,L) require sizeC>0 ^ spawnS>0
 Operators:
-			 newLemming: [GameEng] * int * int * int -> [GameEng]
-			 	   pre newLemming(G,num,h,w) require active(G,num)=false 
+			 newLemming: [GameEng] * int -> [GameEng]
+			 	   pre newLemming(G,num) require active(G,num)=false 
 			 	   								  ^ nbLemmingsCreated(G) < sizeColony(G)
 			 	   								  ^ nbLemmingsCreated(G)*spawnSpeed(G) = turn(G)
 			 callStepLemmings: [GameEng] -> [GameEng]
@@ -61,11 +61,11 @@ Observations:
 			 [callStepLemmings]
 			        turn(callStepLemmings(G)) = turn(G) + 1	
 			 [newLemming]
-			 		numLemmingsActive(newLemming(G,num,h,w)) = numLemmingsActive U{num}
-			 		lemming(newLemming(G,num,h,w),num) = Lemming::init(num,h,w,G)
-			 		∀ n ∈ numLemmingsActive(G) lemming(newLemming(G,num,h,w),n) = lemming(G,n)
-			 		Lemming::hPos(lemming(newLemming(G,num,h,w),num) = Level::hEntrance(level(G))
-			 		Lemming::wPos(lemming(newLemming(G,num,h,w),num) = Level::wEntrance(level(G))
+			 		numLemmingsActive(newLemming(G,num)) = numLemmingsActive U{num}
+			 		lemming(newLemming(G,num),num) = Lemming::init(num,G)
+			 		∀ n ∈ numLemmingsActive(G) lemming(newLemming(G,num),n) = lemming(G,n)
+			 		Lemming::hPos(lemming(newLemming(G,num),num) = Level::hEntrance(level(G))
+			 		Lemming::wPos(lemming(newLemming(G,num),num) = Level::wEntrance(level(G))
 			 [checkSaved]
 			 		∀ num ∈ numLemmingsActive(G) if Lemming::hPos(lemming(checkSaved(G),num) = Level::hExit(level(G)) ^
 			 		                                Lemming::wPos(lemming(checkSaved(G),num) = Level::wExit(level(G)) then:

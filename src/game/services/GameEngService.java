@@ -117,7 +117,7 @@ public interface GameEngService {
      * \post: getLemming(num).getHPos() == getLevel().getHEntrance()
      * \post: getLemming(num).getWPos() == getLevel().getWEntrance()
      */
-    public void newLemming(int num, int h, int w);
+    public void newLemming(int num);
     
     /** Call step operator for each Lemming
      * \pre: !isGameOver()

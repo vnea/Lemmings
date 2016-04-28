@@ -18,7 +18,7 @@ public class GameEng implements GameEngService {
     private int nbLemmingsDead;
     private int nbLemmingsSaved;
     
-    private List<LemmingService> lemmings;
+    private List<LemmingService> lemmingsActive;
     private LevelService level;
     
     @Override
@@ -54,31 +54,31 @@ public class GameEng implements GameEngService {
 
     @Override
     public int getNbLemmingsActive() {
-        return lemmings.size();
+        return lemmingsActive.size();
     }
 
     @Override
     public int getNbLemmingsCreated() {
-        return nbLemmingsDead + nbLemmingsSaved + lemmings.size();
+        return nbLemmingsDead + nbLemmingsSaved + lemmingsActive.size();
     }
 
     @Override
     public LemmingService getLemming(int num) {
-        return lemmings.get(num);
+        return lemmingsActive.get(num);
     }
 
     @Override
     public boolean isActive(int num) {
-        return num < lemmings.size();
+        return num < lemmingsActive.size();
     }
 
     @Override
     public List<Integer> getNumLemmingsActive() {
-        List<Integer> numLemmingsActive = new ArrayList<>(lemmings.size());
-        for (final LemmingService lemming : lemmings) {
-            numLemmingsActive.add(lemming.getNum());
-        }
-        
+        final List<Integer> numLemmingsActive = new ArrayList<>
+                                             (lemmingsActive.size());
+        lemmingsActive.forEach(lemming ->
+                numLemmingsActive.add(lemming.getNum()));
+
         return numLemmingsActive;
     }
 
@@ -103,49 +103,38 @@ public class GameEng implements GameEngService {
         sizeColony = sizeC;
         spawnSpeed = spawnS;
         
-        lemmings = new ArrayList<>();
-        nbLemmingsSaved = 0;
+        lemmingsActive = new ArrayList<>();
+        nbLemmingsSaved = nbLemmingsDead = 0;
     }
 
     @Override
-    public void newLemming(int num, int h, int w) {
+    public void newLemming(int num) {
         LemmingService lemming = new Lemming();
-        lemming.init(num, h, w);
-        lemmings.add(lemming);
+        lemming.init(num, level.getHEntrance(), level.getWEntrance());
+        lemmingsActive.add(lemming);
     }
 
     @Override
     public void callStepLemmings() {
-        for (final LemmingService lemming : lemmings) {
-            lemming.step();
-        }
-        
+        lemmingsActive.forEach(lemming -> lemming.step());
         ++turn;
     }
 
     @Override
     public void checkSaved() {
-//        getNumLemmingsActive().removeIf(num -> {
-//                LemmingService lemming = getLemming(num);
-//                return lemming.getHPos() == level.getHExit() &&
-//                       lemming.getWPos() == level.getWExit();
-//        });
+        lemmingsActive.removeIf(lemming ->
+                    lemming.getHPos() == level.getHExit() &&
+                    lemming.getWPos() == level.getWExit());
 
-        nbLemmingsSaved = getNbLemmingsCreated() - lemmings.size() +
+        nbLemmingsSaved = getNbLemmingsCreated() - lemmingsActive.size() +
                           nbLemmingsDead;
     }
 
     @Override
     public void checkDead() {
-        List<Integer> numLemmingsActive = getNumLemmingsActive();
-        for (final Integer num : numLemmingsActive) {
-            final LemmingService lemming = getLemming(num);
-            if (lemming.isDead()) {
-                lemmings.remove(lemming);
-            }
-        }
+        lemmingsActive.removeIf(lemming -> lemming.isDead());
         
-        nbLemmingsDead = getNbLemmingsCreated() - lemmings.size() +
+        nbLemmingsDead = getNbLemmingsCreated() - lemmingsActive.size() +
                          nbLemmingsSaved;     
     }
 
@@ -155,5 +144,4 @@ public class GameEng implements GameEngService {
             score = nbLemmingsSaved / turn * 100;
         }
     }
-
 }

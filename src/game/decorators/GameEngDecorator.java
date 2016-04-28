@@ -104,7 +104,7 @@ public class GameEngDecorator implements GameEngService {
     }
 
     @Override
-    public void newLemming(int num, int h, int w) {
+    public void newLemming(int num) {
         // TODO Auto-generated method stub
         
     }
