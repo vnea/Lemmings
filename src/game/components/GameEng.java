@@ -125,11 +125,11 @@ public class GameEng implements GameEngService {
 
     @Override
     public void checkSaved() {
-        getNumLemmingsActive().removeIf(num -> {
-                LemmingService lemming = getLemming(num);
-                return lemming.getHPos() == level.getHExit() &&
-                       lemming.getWPos() == level.getWExit();
-        });
+//        getNumLemmingsActive().removeIf(num -> {
+//                LemmingService lemming = getLemming(num);
+//                return lemming.getHPos() == level.getHExit() &&
+//                       lemming.getWPos() == level.getWExit();
+//        });
 
         nbLemmingsSaved = getNbLemmingsCreated() - lemmings.size() +
                           nbLemmingsDead;
