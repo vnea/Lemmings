@@ -69,7 +69,7 @@ public interface LevelService {
     //**INIT*****************************************************************//
     
     /** Initialisation
-     * \pre: MIN_HEIGHT < h < MAX_HEIGHT ^ MIN_WIDTH < w < MIN_WIDTH
+     * \pre: MIN_HEIGHT < h < MAX_HEIGHT ^ MIN_WIDTH < w < MAX_WIDTH
      * \post: getHeight() == h
      * \post: getWidth() == w
      * \post: isEditing()
