@@ -3,8 +3,8 @@ Service: Player
 Types: bool, int, enum TokenType{WALKER}
 
 Observators:
-             const nbTokenWalkerInit: [Player] -> int
-			 nbTokenWalker: [Player] -> int
+             const nbTokenInit: [Player] * TokenType -> int
+			 nbToken: [Player] * TokenType -> int
 			 tokenSelected: [Player] -> TokenType
 			 gameEngine: [Player] -> GameEng
 			 
@@ -13,22 +13,24 @@ Constructors:
 			 	   pre init(nbTW,G) require nbTW > 0
 Operators:
 			 useToken: [Player] * int -> [Player]
-				   pre useToken(P, numLemming) require if tokenSelected(P)=TokenType::WALKER then:
-				   	    Lemming::behaviour(GameEng::getLemming(gameEngine(P),numLemming)) != Behaviour::WALKER  ^  nbTokenWalker(P) > 0
+				   pre useToken(P, numLemming) require 
+				   						if tokenSelected(P)=TokenType::X (X ∈  TokenType) then: 
+				   															Lemming::behaviour(GameEng::getLemming(gameEngine(P),numLemming)) != Behaviour::X  
+				   															^ nbToken(P,TokenType::X) > 0
 			 resetGame: [Player] -> [Player]
 			 selectToken: [Player] * TokenType -> [Player]
 Observations:
 			 [invariants]
 			 	   nbTokenWalker(P) ≥ 0
 			 [init]
-			 	   nbTokenWalker(init(nbTW,G)) = nbTW
-			 	   nbTokenWalkerInit(init(nbTW,G)) = nbTW
+			 	   nbToken(init(nbTW,G),TokenType::WALKER) = nbTW
+			 	   nbTokenInit(init(nbTW,G),TokenType::WALKER) = nbTW
 			 	   tokenSelected(init(nbTW,G)) = TokenType::WALKER
 			 	   gameEngine(init(nbTW,G)) = G
 			 [useToken]
-			       if tokenSelected(P)=TokenType::WALKER then:
-										 	   nbTokenWalker(useToken(P, numLemming)) = nbTokenWalker(P)-1 ^
-										 	   Lemming::behaviour(GameEng::getLemming(gameEngine(useToken(P, numLemming)),numLemming)) = Behaviour::WALKER
+			       if tokenSelected(P)=TokenType::X (X ∈  TokenType) then:
+										 	   nbToken(useToken(P, numLemming),TokenType::X) = nbToken(P,TokenType::X)-1 ^
+										 	   Lemming::behaviour(GameEng::Lemming(gameEngine(useToken(P, numLemming)),numLemming)) = Behaviour::X
 			 [resetGame]
 			 	   gameEngine(resetGame(P)) = GameEng::init(GameEng::getSizeColony(gameEngine(P)),GameEng::getSpawnS(gameEngine(P)),GameEng::getLevel(gameEngine(P)))
 			 	   nbTokenWalker(resetGame(P)) = nbTokenWalkerInit(P)
