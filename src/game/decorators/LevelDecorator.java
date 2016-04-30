@@ -66,11 +66,6 @@ public class LevelDecorator implements LevelService {
     }
 
     @Override
-    public void goPlay() {
-        delegate.goPlay();
-    }
-
-    @Override
     public void remove(int h, int w) {
         delegate.remove(h, w);
     }
@@ -79,14 +74,9 @@ public class LevelDecorator implements LevelService {
     public void build(int h, int w) {
         delegate.build(h, w);
     }
-
+    
     @Override
-    public void defEntrance(int h, int w) {
-        delegate.defEntrance(h, w);
-    }
-
-    @Override
-    public void defExit(int h, int w) {
-        delegate.defExit(h, w);
+    public void goPlay(int h1, int w1, int h2, int w2) {
+        delegate.goPlay(h1, w1, h2, w2);
     }
 }

@@ -89,13 +89,13 @@ public class GameEngDecorator implements GameEngService {
     }
 
     @Override
-    public void newLemming(int num) {
-        delegate.newLemming(num);
-    }
-
-    @Override
     public void callStepLemmings() {
         delegate.callStepLemmings();
+    }
+    
+    @Override
+    public void newLemming(int num) {
+        delegate.newLemming(num);
     }
 
     @Override

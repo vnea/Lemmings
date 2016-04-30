@@ -83,11 +83,6 @@ public class Level implements
     }
 
     @Override
-    public void goPlay() {
-        editing = false;
-    }
-
-    @Override
     public void remove(int h, int w) {
         squares[h][w] = Nature.EMPTY;        
     }
@@ -96,16 +91,13 @@ public class Level implements
     public void build(int h, int w) {
         squares[h][w] = Nature.DIRT;        
     }
-
+    
     @Override
-    public void defEntrance(int h, int w) {
-        hEntrance = h;
-        wEntrance = w;
-    }
-
-    @Override
-    public void defExit(int h, int w) {
-        hExit = h;
-        wExit = w;
+    public void goPlay(int h1, int w1, int h2, int w2) {
+        hEntrance = h1;
+        wEntrance = w1;
+        hExit = h2;
+        wExit = w2;
+        editing = false;
     }
 }

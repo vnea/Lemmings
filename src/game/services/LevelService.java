@@ -58,7 +58,7 @@ public interface LevelService {
     //***********************************************************************//
     
     
-    //**INVARIANT(S)*********************************************************// /* <---------------------- TO CHANGE (LACK OF INVARIANTS) */
+    //**INVARIANT(S)*********************************************************// 
     
     /**\inv: \forall i \in [0, getHeight()[ ^ \forall j in [0, getWidth()[,
      *         squareExist(i, j) */
@@ -89,16 +89,6 @@ public interface LevelService {
      */
     public void setNature(int h, int w, Nature n);
     
-    /** Switch to play mode
-     * \pre: \forall i in [0, getHeight() - 1],
-     *         getNature(i, 0) == Nature::METAL ^ getNature(i, getWidth() - 1) == Nature::METAL
-     * \pre: \forall j \in [0, getWidth() - 1],
-     *         getNature(0, j) == Nature::METAL ^ getNature(getHeight() - 1, j) == Nature::METAL
-     * \pre: isEditing()
-     * \post: !isEditing()
-     */
-    public void goPlay();
-    
     /** Change a square nature from Nature::DIRT to Nature::EMPTY
      * \pre: !isEditing()
      * \pre: getNature(h, w) == Nature::DIRT
@@ -113,23 +103,22 @@ public interface LevelService {
      */
     public void build(int h, int w);
     
-    /** Define the entrance
-     * \pre: getNature(h, w) == Nature::EMPTY
-     * \pre: getNature(h - 1, w) == Nature::EMPTY
-     * \pre: getNature(h + 1, w) == Nature::EMPTY
-     * \post: getHEntrance() == h
-     * \post: getWEntrance() == w
+    /** Switch to play mode
+     * \pre: \forall i in [0, getHeight() - 1],
+     *         getNature(i, 0) == Nature::METAL ^ getNature(i, getWidth() - 1) == Nature::METAL
+     * \pre: \forall j \in [0, getWidth() - 1],
+     *         getNature(0, j) == Nature::METAL ^ getNature(getHeight() - 1, j) == Nature::METAL
+     * \pre: isEditing()
+     * \pre: getNature(h1, w1) == Nature::EMPTY ^ getNature(h1 - 1, w1) == Nature::EMPTY ^ getNature(h1 + 1, w1) == Nature::EMPTY
+     * \pre: getNature(h2, w2) == Nature::EMPTY ^ getNature(h2 - 1, w2) == Nature::EMPTY ^ getNature(h2 + 1, w2) == Nature::EMPTY
+     * \pre: h1 != h2 v w1 != w2
+     * \post: !isEditing()
+     * \post: getHEntrance() == h1
+     * \post: getWEntrance() == w1
+     * \post: getHExit() == h2
+     * \post: getWExit() == w2
      */
-    public void defEntrance(int h, int w);
-    
-    /** Define the exit
-     * \pre: getNature(h, w) == Nature::EMPTY
-     * \pre: getNature(h - 1, w) == Nature::EMPTY
-     * \pre: getNature(h + 1, w) == Nature::EMPTY
-     * \post: getHExit() == h
-     * \post: getWExit() == w
-     */
-    public void defExit(int h, int w);
+    public void goPlay(int h1, int w1, int h2, int w2);
     
     //***********************************************************************//
 }

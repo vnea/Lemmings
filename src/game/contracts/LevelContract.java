@@ -138,52 +138,6 @@ public class LevelContract extends LevelDecorator {
     }
     
     @Override
-    public void goPlay() {
-        /* Pre-invariant */
-        checkInvariant();
-        
-        /* Pre-condition(s) */
-        // \pre: \forall i in [0, getHeight() - 1],
-        //         getNature(i, 0) == Nature::METAL ^ getNature(i, getWidth() - 1) == Nature::METAL
-        for (int i = 0; i < super.getHeight(); ++i) {
-            if (!(getNature(i, 0) == Nature.METAL &&
-                getNature(i,  getWidth() - 1) == Nature.METAL)) {
-                throw new PreconditionError("\forall i in [0, getHeight() - 1],"
-                        + "!(getNature(i, 0) == Nature::METAL ^ "
-                        + "getNature(i, getWidth() - 1) == Nature::METAL)");
-            }
-        }
-        
-        // \pre: \forall j \in [0, getWidth() - 1],
-        //         getNature(0, j) == Nature::METAL ^ getNature(getHeight() - 1, j) == Nature::METAL
-        for (int j = 0; j < super.getWidth(); ++j) {
-            if (!(getNature(0, j) == Nature.METAL &&
-                getNature(getHeight() - 1,  j) == Nature.METAL)) {
-                throw new PreconditionError("\forall i in [0, getHeight() - 1],"
-                        + "!(getNature(0, j) == Nature::METAL ^ "
-                        + "getNature(getHeight() - 1,  j) == Nature::METAL)");
-            }
-        }
-        
-        // \pre: isEditing()
-        if (!isEditing()) {
-            throw new PreconditionError("!isEditing()");
-        }
-        
-        /* Processing */
-        super.goPlay();
-        
-        /* Post-invariant */
-        checkInvariant();
-        
-        /* Post-condition(s) */
-        // \post: !isEditing()
-        if (isEditing()) {
-            throw new PostconditionError("isEditing()");
-        }
-    }
-    
-    @Override
     public void remove(int h, int w) {
         /* Pre-invariant */
         checkInvariant();
@@ -242,80 +196,81 @@ public class LevelContract extends LevelDecorator {
     }
     
     @Override
-    public void defEntrance(int h, int w) {
+    public void goPlay(int h1, int w1, int h2, int w2) {
         /* Pre-invariant */
         checkInvariant();
         
         /* Pre-condition(s) */
-        // \pre: getNature(h, w) == Nature::EMPTY
-        if (!(getNature(h, w) == Nature.EMPTY)) {
-            throw new PreconditionError("!(getNature(h, w) == Nature.EMPTY)");
+        // \pre: \forall i in [0, getHeight() - 1],
+        //         getNature(i, 0) == Nature::METAL ^ getNature(i, getWidth() - 1) == Nature::METAL
+        for (int i = 0; i < super.getHeight(); ++i) {
+            if (!(getNature(i, 0) == Nature.METAL && getNature(i,  getWidth() - 1) == Nature.METAL)) {
+                throw new PreconditionError("\forall i in [0, getHeight() - 1],"
+                        + "!(getNature(i, 0) == Nature::METAL ^ "
+                        + "getNature(i, getWidth() - 1) == Nature::METAL)");
+            }
         }
         
-        // \pre: getNature(h - 1, w) == Nature::EMPTY
-        if (!(getNature(h - 1, w) == Nature.EMPTY)) {
-            throw new PreconditionError("!(getNature(h - 1, w) == Nature.EMPTY)");
+        // \pre: \forall j \in [0, getWidth() - 1],
+        //         getNature(0, j) == Nature::METAL ^ getNature(getHeight() - 1, j) == Nature::METAL
+        for (int j = 0; j < super.getWidth(); ++j) {
+            if (!(getNature(0, j) == Nature.METAL && getNature(getHeight() - 1,  j) == Nature.METAL)) {
+                throw new PreconditionError("\forall i in [0, getHeight() - 1],"
+                        + "!(getNature(0, j) == Nature::METAL ^ "
+                        + "getNature(getHeight() - 1,  j) == Nature::METAL)");
+            }
         }
         
-        // \pre: getNature(h + 1, w) == Nature::EMPTY
-        if (!(getNature(h + 1, w) == Nature.EMPTY)) {
-            throw new PreconditionError("!(getNature(h + 1, w) == Nature.EMPTY)");
+        // \pre: isEditing()
+        if (!isEditing()) {
+            throw new PreconditionError("!isEditing()");
+        }
+        
+        // \pre: getNature(h1, w1) == Nature::EMPTY ^ getNature(h1 - 1, w1) == Nature::EMPTY ^ getNature(h1 + 1, w1) == Nature::EMPTY 
+        if (!(getNature(h1, w1) == Nature.EMPTY && getNature(h1 - 1, w1) == Nature.EMPTY && getNature(h1 + 1, w1) == Nature.EMPTY)) {
+            throw new PreconditionError("!(getNature(h1, w1) == Nature.EMPTY ^ getNature(h1 - 1, w1) == Nature.EMPTY ^ getNature(h1 + 1, w1) == Nature.EMPTY)");
+        }
+        
+        // \pre: getNature(h2, w2) == Nature::EMPTY ^ getNature(h2 - 1, w2) == Nature::EMPTY ^ getNature(h2 + 1, w2) == Nature::EMPTY 
+        if (!(getNature(h2, w2) == Nature.EMPTY && getNature(h2 - 1, w2) == Nature.EMPTY && getNature(h2 + 1, w2) == Nature.EMPTY)) {
+            throw new PreconditionError("!(getNature(h2, w2) == Nature.EMPTY ^ getNature(h2 - 1, w2) == Nature.EMPTY ^ getNature(h2 + 1, w2) == Nature.EMPTY)");
+        }
+        
+        // \pre: h1 != h2 v w1 != w2
+        if (!(h1 != h2 || w1 != w2)) {
+            throw new PreconditionError("!(h1 != h2 v w1 != w2)");
         }
         
         /* Processing */
-        super.defEntrance(h, w);
+        super.goPlay(h1, w1, h2, w2);
         
         /* Post-invariant */
         checkInvariant();
         
         /* Post-condition(s) */
-        // \post: getHEntrance() == h
-        if (!(getHEntrance() == h)) {
-            throw new PostconditionError("!(getHEntrance() == h)");
+        // \post: !isEditing()
+        if (isEditing()) {
+            throw new PostconditionError("isEditing()");
         }
         
-        // \post: getWEntrance() == w
-        if (!(getHEntrance() == w)) {
-            throw new PostconditionError("!(getHEntrance() == w)");
-        }
-    }
-    
-    @Override
-    public void defExit(int h, int w) {
-        /* Pre-invariant */
-        checkInvariant();
-        
-        /* Pre-condition(s) */
-        // \pre: getNature(h, w) == Nature::EMPTY
-        if (!(getNature(h, w) == Nature.EMPTY)) {
-            throw new PreconditionError("!(getNature(h, w) == Nature.EMPTY)");
+        // \post: getHEntrance() == h1
+        if (!(getHEntrance() == h1)) {
+            throw new PostconditionError("!(getHEntrance() == h1)");
         }
         
-        // \pre: getNature(h - 1, w) == Nature::EMPTY
-        if (!(getNature(h - 1, w) == Nature.EMPTY)) {
-            throw new PreconditionError("!(getNature(h - 1, w) == Nature.EMPTY)");
+        // \post: getWEntrance() == w1
+        if (!(getHEntrance() == w1)) {
+            throw new PostconditionError("!(getHEntrance() == w1)");
         }
         
-        // \pre: getNature(h + 1, w) == Nature::EMPTY
-        if (!(getNature(h + 1, w) == Nature.EMPTY)) {
-            throw new PreconditionError("!(getNature(h + 1, w) == Nature.EMPTY)");
+        // \post: getHExit() == h2
+        if (!(getHExit() == h2)) {
+            throw new PostconditionError("!(getHExit() == h2)");
         }
         
-        /* Processing */
-        super.defExit(h, w);
-        
-        /* Post-invariant */
-        checkInvariant();
-        
-        /* Post-condition(s) */
-        // \post: getHExit() == h
-        if (!(getHExit() == h)) {
-            throw new PostconditionError("!(getHExit() == h)");
-        }
-        
-        // \post: getWExit() == w
-        if (!(getWExit() == w)) {
-            throw new PostconditionError("!(getWExit() == w)");
+        // \post: getWExit() == w2
+        if (!(getWExit() == w2)) {
+            throw new PostconditionError("!(getWExit() == w2)");
         }
     }
 }
