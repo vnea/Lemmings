@@ -15,7 +15,7 @@ Operators:
 			 useToken: [Player] * int -> [Player]
 				   pre useToken(P, numLemming) require 
 				   						if tokenSelected(P)=TokenType::X (X ∈  TokenType) then: 
-				   															Lemming::behaviour(GameEng::getLemming(gameEngine(P),numLemming)) != Behaviour::X  
+				   															Lemming::Behaviour(GameEng::getLemming(gameEngine(P),numLemming)) != Behaviour::X  
 				   															^ nbToken(P,TokenType::X) > 0
 			 resetGame: [Player] -> [Player]
 			 selectToken: [Player] * TokenType -> [Player]
@@ -30,7 +30,7 @@ Observations:
 			 [useToken]
 			       if tokenSelected(P)=TokenType::X (X ∈  TokenType) then:
 										 	   nbToken(useToken(P, numLemming),TokenType::X) = nbToken(P,TokenType::X)-1 ^
-										 	   Lemming::behaviour(GameEng::Lemming(gameEngine(useToken(P, numLemming)),numLemming)) = Behaviour::X
+										 	   Lemming::Behaviour(GameEng::Lemming(gameEngine(useToken(P, numLemming)),numLemming)) = Behaviour::X
 			 [resetGame]
 			 	   gameEngine(resetGame(P)) = GameEng::init(GameEng::getSizeColony(gameEngine(P)),GameEng::getSpawnS(gameEngine(P)),GameEng::getLevel(gameEngine(P)))
 			 	   nbTokenWalker(resetGame(P)) = nbTokenWalkerInit(P)

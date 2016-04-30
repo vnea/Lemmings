@@ -1,6 +1,6 @@
 Service: Lemming
 
-Types: bool, int, enum Direction{LEFT, RIGHT}, enum Behaviour{WALKER, FALLER}
+Types: bool, int, enum Direction{LEFT, RIGHT}, enum Behaviour{WALKER, FALLER, DIGGER}
 
 Observators: 
 			 const num: [Lemming] -> int
