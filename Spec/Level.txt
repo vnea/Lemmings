@@ -36,6 +36,7 @@ Operators:
             			^ editing(L)
             			^ nature(L,h1,w1)=Nature::EMPTY ^ nature(L,h1-1,w1)=Nature::EMPTY ^ nature(L,h1+1,w1)=Nature::EMPTY
             			^ nature(L,h2,w2)=Nature::EMPTY ^ nature(L,h2-1,w2)=Nature::EMPTY ^ nature(L,h2+1,w2)=Nature::METAL 
+            			^ (h1 != h2 or w1 != w2)
 Observations: 
 			  [invariants]
 			  		∀ i, 0 ≤ i < height(L) ^ ∀ j, 0 ≤ j < width(L), squareExist(L,i,j)

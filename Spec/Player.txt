@@ -1,6 +1,6 @@
 Service: Player
 
-Types: bool, int, enum TokenType{WALKER}
+Types: bool, int, enum TokenType{WALKER, FALLER, DIGGER, BUILDER, STOPPER, BASHER, BASIC, CLIMBER, FLOATER, BOMBER}
 
 Observators:
              const nbTokenInit: [Player] * TokenType -> int
@@ -9,31 +9,57 @@ Observators:
 			 gameEngine: [Player] -> GameEng
 			 
 Constructors:
-			 init: int * GameEng -> [Player]
-			 	   pre init(nbTW,G) require nbTW > 0
+			 init: int * int * int * int * int * int * int * int * int * int * GameEng -> [Player]
+			 	   pre init(nbTW,nbFA,nbDI,nbBU,nbST,nbBA,nbB,nbCL,nbFL,nbBO,G) require 
+			 	   		 	nbTW > 0 nbFA > 0, nbDI > 0, nbBU > 0, nbST > 0, nbBA > 0, nbB > 0, nbCL > 0, nbFL > 0, nbBO > 0
 Operators:
 			 useToken: [Player] * int -> [Player]
 				   pre useToken(P, numLemming) require 
-				   						if tokenSelected(P)=TokenType::X (X ∈  TokenType) then: 
-				   															Lemming::Behaviour(GameEng::getLemming(gameEngine(P),numLemming)) != Behaviour::X  
-				   															^ nbToken(P,TokenType::X) > 0
+				   						if tokenSelected(P)=X, X ∈  {WALKER, FALLER, DIGGER, BUILDER, STOPPER, BASHER}) then: 
+				   															Lemming::Behaviour(GameEng::getLemming(gameEngine(P),numLemming)) != X 
+				   															^ nbToken(P,X) > 0
+				   						else tokenSelected(P)=X, X ∈  {BASIC, CLIMBER, FLOATER, BOMBER}) then: 
+				   															Lemming::State(GameEng::getLemming(gameEngine(P),numLemming)) != X  
+				   															^ nbToken(P,X) > 0
 			 resetGame: [Player] -> [Player]
 			 selectToken: [Player] * TokenType -> [Player]
 Observations:
 			 [invariants]
 			 	   nbTokenWalker(P) ≥ 0
 			 [init]
-			 	   nbToken(init(nbTW,G),TokenType::WALKER) = nbTW
-			 	   nbTokenInit(init(nbTW,G),TokenType::WALKER) = nbTW
-			 	   tokenSelected(init(nbTW,G)) = TokenType::WALKER
-			 	   gameEngine(init(nbTW,G)) = G
+			 	   nbToken(init(nbTW,nbFA,nbDI,nbBU,nbST,nbBA,nbB,nbCL,nbFL,nbBO,G),TokenType::WALKER) = nbTW
+			 	   nbTokenInit(init(nbTW,nbFA,nbDI,nbBU,nbST,nbBA,nbB,nbCL,nbFL,nbBO,G),TokenType::WALKER) = nbTW
+			 	   nbToken(init(nbTW,nbFA,nbDI,nbBU,nbST,nbBA,nbB,nbCL,nbFL,nbBO,G),TokenType::FALLER) = nbFA
+			 	   nbTokenInit(init(nbTW,nbFA,nbDI,nbBU,nbST,nbBA,nbB,nbCL,nbFL,nbBO,G),TokenType::FALLER) = nbFA
+			 	   nbToken(init(nbTW,nbFA,nbDI,nbBU,nbST,nbBA,nbB,nbCL,nbFL,nbBO,G),TokenType::DIGGER) = nbDI
+			 	   nbTokenInit(init(nbTW,nbFA,nbDI,nbBU,nbST,nbBA,nbB,nbCL,nbFL,nbBO,G),TokenType::DIGGER) = nbDI
+			 	   nbToken(init(nbTW,nbFA,nbDI,nbBU,nbST,nbBA,nbB,nbCL,nbFL,nbBO,G),TokenType::BUILDER) = nbBU
+			 	   nbTokenInit(init(nbTW,nbFA,nbDI,nbBU,nbST,nbBA,nbB,nbCL,nbFL,nbBO,G),TokenType::BUILDER) = nbBU
+			 	   nbToken(init(nbTW,nbFA,nbDI,nbBU,nbST,nbBA,nbB,nbCL,nbFL,nbBO,G),TokenType::STOPPER) = nbST
+			 	   nbTokenInit(init(nbTW,nbFA,nbDI,nbBU,nbST,nbBA,nbB,nbCL,nbFL,nbBO,G),TokenType::STOPPER) = nbST
+			 	   nbToken(init(nbTW,nbFA,nbDI,nbBU,nbST,nbBA,nbB,nbCL,nbFL,nbBO,G),TokenType::BASHER) = nbBA
+			 	   nbTokenInit(init(nbTW,nbFA,nbDI,nbBU,nbST,nbBA,nbB,nbCL,nbFL,nbBO,G),TokenType::BASHER) = nbBA
+			 	   nbToken(init(nbTW,nbFA,nbDI,nbBU,nbST,nbBA,nbB,nbCL,nbFL,nbBO,G),TokenType::BASIC) = nbB
+			 	   nbTokenInit(init(nbTW,nbFA,nbDI,nbBU,nbST,nbBA,nbB,nbCL,nbFL,nbBO,G),TokenType::BASIC) = nbB
+			 	   nbToken(init(nbTW,nbFA,nbDI,nbBU,nbST,nbBA,nbB,nbCL,nbFL,nbBO,G),TokenType::CLIMBER) = nbCL
+			 	   nbTokenInit(init(nbTW,nbFA,nbDI,nbBU,nbST,nbBA,nbB,nbCL,nbFL,nbBO,G),TokenType::CLIMBER) = nbCL
+			 	   nbToken(init(nbTW,nbFA,nbDI,nbBU,nbST,nbBA,nbB,nbCL,nbFL,nbBO,G),TokenType::FLOATER) = nbFL
+			 	   nbTokenInit(init(nbTW,nbFA,nbDI,nbBU,nbST,nbBA,nbB,nbCL,nbFL,nbBO,G),TokenType::FLOATER) = nbFL
+			 	   nbToken(init(nbTW,nbFA,nbDI,nbBU,nbST,nbBA,nbB,nbCL,nbFL,nbBO,G),TokenType::BOMBER) = nbBO
+			 	   nbTokenInit(init(nbTW,nbFA,nbDI,nbBU,nbST,nbBA,nbB,nbCL,nbFL,nbBO,G),TokenType::BOMBER) = nbBO
+			 	   tokenSelected(init(nbTW,nbFA,nbDI,nbBU,nbST,nbBA,nbB,nbCL,nbFL,nbBO,G)) = TokenType::WALKER
+			 	   gameEngine(init(nbTW,nbFA,nbDI,nbBU,nbST,nbBA,nbB,nbCL,nbFL,nbBO,G)) = G
 			 [useToken]
-			       if tokenSelected(P)=TokenType::X (X ∈  TokenType) then:
-										 	   nbToken(useToken(P, numLemming),TokenType::X) = nbToken(P,TokenType::X)-1 ^
-										 	   Lemming::Behaviour(GameEng::Lemming(gameEngine(useToken(P, numLemming)),numLemming)) = Behaviour::X
+			       if tokenSelected(P)=X, X ∈  {WALKER, FALLER, DIGGER, BUILDER, STOPPER, BASHER}) then: 
+										 	   nbToken(useToken(P, numLemming),X) = nbToken(P,X)-1 ^
+										 	   Lemming::Behaviour(GameEng::Lemming(gameEngine(useToken(P, numLemming)),numLemming)) = X
+				   else tokenSelected(P)=X, X ∈  {BASIC, CLIMBER, FLOATER, BOMBER}) then:
+				   							   nbToken(useToken(P, numLemming),X) = nbToken(P,X)-1 ^
+										 	   Lemming::State(GameEng::Lemming(gameEngine(useToken(P, numLemming)),numLemming)) = X
 			 [resetGame]
 			 	   gameEngine(resetGame(P)) = GameEng::init(GameEng::getSizeColony(gameEngine(P)),GameEng::getSpawnS(gameEngine(P)),GameEng::getLevel(gameEngine(P)))
-			 	   nbTokenWalker(resetGame(P)) = nbTokenWalkerInit(P)
+			 	          ∀ X ∈  TokenType, nbToken(resetGame(P),X) = nbToken(P,X) 
+			 	          ∀ X ∈  TokenType, nbTokenInit(resetGame(P),X) = nbTokenInit(P,X) 
 			 	   tokenSelected(resetGame(P)) = TokenType::WALKER
 			 [selectToken]
 			 	   tokenSelected(selectToken(P,tokenType)) = tokenType
