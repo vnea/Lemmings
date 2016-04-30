@@ -28,6 +28,7 @@ Operators:
 			 	   pre newLemming(G,num) require active(G,num)=false 
 			 	   								  ^ nbLemmingsCreated(G) < sizeColony(G)
 			 	   								  ^ nbLemmingsCreated(G)*spawnSpeed(G) = turn(G)
+			 	   								  ^ gameOver(G)=false
 			 callStepLemmings: [GameEng] -> [GameEng]
 			       pre callStepLemmings(G) require gameOver(G)=false
 			 checkSaved: [GameEng] -> [GameEng]
@@ -61,20 +62,20 @@ Observations:
 			 [callStepLemmings]
 			        turn(callStepLemmings(G)) = turn(G) + 1	
 			 [newLemming]
-			 		numLemmingsActive(newLemming(G,num)) = numLemmingsActive U{num}
+			 		numLemmingsActive(newLemming(G,num)) = numLemmingsActive U {num}
 			 		lemming(newLemming(G,num),num) = Lemming::init(num,G)
 			 		∀ n ∈ numLemmingsActive(G) lemming(newLemming(G,num),n) = lemming(G,n)
 			 		Lemming::hPos(lemming(newLemming(G,num),num) = Level::hEntrance(level(G))
 			 		Lemming::wPos(lemming(newLemming(G,num),num) = Level::wEntrance(level(G))
 			 [checkSaved]
-			 		∀ num ∈ numLemmingsActive(G) if Lemming::hPos(lemming(checkSaved(G),num) = Level::hExit(level(G)) ^
-			 		                                Lemming::wPos(lemming(checkSaved(G),num) = Level::wExit(level(G)) then:
-			 		    numLemmingsActive(checkSaved(G)) = numLemmingsActive(G) \{num}
-			 		nbLemmingSaved(checkSaved(G)) = nbLemmingsCreated(G) - (nbLemmingsActive(checkSaved(G))	+ nbLemmingsDead(G))	
+			 		∀ num ∈ numLemmingsActive(G) if Lemming::hPos(lemming(G),num) = Level::hExit(level(checkSaved(G))) ^
+			 		                                Lemming::wPos(lemming(G),num) = Level::wExit(level(checkSaved(G))) then:
+			 		    numLemmingsActive(checkSaved(G)) = numLemmingsActive(G) \ {num}
+			 		nbLemmingSaved(checkSaved(G)) = nbLemmingsCreated(checkSaved(G)) - (nbLemmingsActive(checkSaved(G))	+ nbLemmingsDead(checkSaved(G)))	
 			 [checkDead]
 			 		∀ num ∈ numLemmingsActive(G) if Lemming::dead(lemming(G,num)) then:
                         numLemmingsActive(checkDead(G)) = numLemmingsActive(G) \{num}
-                    nbLemmingsDead(checkDead(G)) = nbLemmingsCreated(G) - (nbLemmingsActive(checkDead(G)) + nbLemmingsSaved(G))
+                    nbLemmingsDead(checkDead(G)) = nbLemmingsCreated(checkDead(G)) - (nbLemmingsActive(checkDead(G)) + nbLemmingsSaved(checkDead(G)))
 			 [checkWin]
 			 		if gameOver(G) then:
 			 			  score(checkWin(G)) = (nbLemmingsSaved(G)/turn(G)) * 100

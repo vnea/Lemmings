@@ -1,4 +1,4 @@
-Service: Level
+﻿Service: Level
 
 Types: bool, int, enum Nature{EMPTY, DIRT, METAL}
 
@@ -25,19 +25,17 @@ Constructors:
 Operators: 
 		    setNature: [Level] * int * int * Nature -> [Level]
  				pre setNature(L,h,w,n) require editing(L) ^ squareExist(L,h,w)
-            goPlay: [Level] -> [Level]
-            	pre goPlay(L) require 
-            			∀ i, 0 ≤ i ≤ height(L)-1, nature(L,i,0)=Nature::METAL ^ nature(L,i,width(L)-1)=Nature::METAL   
-            			^ ∀ j, 0 ≤ j ≤ width(L)-1, nature(L,0,j)=Nature::METAL ^ nature(L,height(L)-1,j)=Nature::METAL
-            			^ editing(L)
-            remove: [Level] * int * int -> [Level]
+ 			remove: [Level] * int * int -> [Level]
             	pre remove(L,h,w) require editing(L)=false ^ nature(L,h,w)=Nature::DIRT
             build: [Level] * int * int -> [Level]          
 				pre remove(L,h,w) require editing(L)=false ^ nature(L,h,w)=Nature::EMPTY
-			defEntrance: [Level] * int * int -> [Level]
-				pre defEntrance(L,h,w) require nature(L,h,w)=Nature::EMPTY ^ nature(L,h-1,w)=Nature::EMPTY ^ nature(L,h+1,w)=Nature::EMPTY 
-			defExit: [Level] * int * int -> [Level]
-				pre defExit(L,h,w) require nature(L,h,w)=Nature::EMPTY ^ nature(L,h-1,w)=Nature::EMPTY ^ nature(L,h+1,w)=Nature::METAL 
+            goPlay: [Level] * int * int *int *int -> [Level]
+            	pre goPlay(L,h1,w1,h2,w2) require 
+            			∀ i, 0 ≤ i ≤ height(L)-1, nature(L,i,0)=Nature::METAL ^ nature(L,i,width(L)-1)=Nature::METAL   
+            			^ ∀ j, 0 ≤ j ≤ width(L)-1, nature(L,0,j)=Nature::METAL ^ nature(L,height(L)-1,j)=Nature::METAL
+            			^ editing(L)
+            			^ nature(L,h1,w1)=Nature::EMPTY ^ nature(L,h1-1,w1)=Nature::EMPTY ^ nature(L,h1+1,w1)=Nature::EMPTY
+            			^ nature(L,h2,w2)=Nature::EMPTY ^ nature(L,h2-1,w2)=Nature::EMPTY ^ nature(L,h2+1,w2)=Nature::METAL 
 Observations: 
 			  [invariants]
 			  		∀ i, 0 ≤ i < height(L) ^ ∀ j, 0 ≤ j < width(L), squareExist(L,i,j)
@@ -48,16 +46,14 @@ Observations:
 			  		∀ i, 0 ≤ i < height(init(h,w)) ^ ∀ j, 0 ≤ j < width(init(h,w)), nature(init(h,w),i,j)=Nature::EMPTY 
 			  [setNature]
 			  		nature(setNature(L,h,w,n),h,w) = n 
-			  [goPlay]
-			  		editing(goPlay(L)) = false
 			  [remove]
 			  		nature(remove(L,h,w),h,w) = Nature::EMPTY
 			  [build]
 			  		nature(build(L,h,w),h,w) = Nature::DIRT
-			  [defEntrance]
-			  		hEntrance(defEntrance(L,h,w)) = h
-			  		wEntrance(defEntrance(L,h,w)) = w
-			  [defExit]
-			  		hExit(defExit(L,h,w)) = h
-			  		wExit(defExit(L,h,w)) = w
+			  [goPlay]
+			  		editing(goPlay(L,h1,w1,h2,w2)) = false
+			  		hEntrance(goPlay(L,h1,w1,h2,w2)) = h1  
+			  		wEntrance(goPlay(L,h1,w1,h2,w2)) = w1
+			  		hExit(goPlay(L,h1,w1,h2,w2)) = h2
+			  		wExit(goPlay(L,h1,w1,h2,w2)) = w2
 	
