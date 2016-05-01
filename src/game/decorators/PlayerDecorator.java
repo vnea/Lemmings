@@ -12,8 +12,13 @@ public class PlayerDecorator implements PlayerService {
     }
 
     @Override
-    public int getNbTokenWalker() {
-        return delegate.getNbTokenWalker();
+    public int getNbTokenInit(TokenType tokenType) {
+        return delegate.getNbTokenInit(tokenType);
+    }
+    
+    @Override
+    public int getNbToken(TokenType tokenType) {
+        return delegate.getNbToken(tokenType);
     }
 
     @Override
@@ -27,8 +32,9 @@ public class PlayerDecorator implements PlayerService {
     }
 
     @Override
-    public void init(int nbTokenWalker) {
-        delegate.init(nbTokenWalker);
+    public void init(int nbTW, int nbFA, int nbDI, int nbBU, int nbST, int nbBA,
+                     int nbB, int nbCL, int nbFL, int nbBO) {
+        delegate.init(nbTW, nbFA, nbDI, nbBU, nbST, nbBA, nbB, nbCL, nbFL, nbBO);
     }
 
     @Override
@@ -44,10 +50,5 @@ public class PlayerDecorator implements PlayerService {
     @Override
     public void selectToken(TokenType tokenType) {
         delegate.selectToken(tokenType);
-    }
-
-    @Override
-    public int getNbTokenWalkerInit() {
-        return delegate.getNbTokenWalker();
     }
 }

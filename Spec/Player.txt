@@ -18,14 +18,14 @@ Operators:
 				   						if tokenSelected(P)=X, X ∈  {WALKER, FALLER, DIGGER, BUILDER, STOPPER, BASHER}) then: 
 				   															Lemming::Behaviour(GameEng::getLemming(gameEngine(P),numLemming)) != X 
 				   															^ nbToken(P,X) > 0
-				   						else tokenSelected(P)=X, X ∈  {BASIC, CLIMBER, FLOATER, BOMBER}) then: 
+				   						else if tokenSelected(P)=X, X ∈  {BASIC, CLIMBER, FLOATER, BOMBER}) then: 
 				   															Lemming::State(GameEng::getLemming(gameEngine(P),numLemming)) != X  
 				   															^ nbToken(P,X) > 0
 			 resetGame: [Player] -> [Player]
 			 selectToken: [Player] * TokenType -> [Player]
 Observations:
 			 [invariants]
-			 	   nbTokenWalker(P) ≥ 0
+			 	   ∀ X ∈ TokenType, nbToken(P, X) ≥ 0
 			 [init]
 			 	   nbToken(init(nbTW,nbFA,nbDI,nbBU,nbST,nbBA,nbB,nbCL,nbFL,nbBO,G),TokenType::WALKER) = nbTW
 			 	   nbTokenInit(init(nbTW,nbFA,nbDI,nbBU,nbST,nbBA,nbB,nbCL,nbFL,nbBO,G),TokenType::WALKER) = nbTW
@@ -58,8 +58,7 @@ Observations:
 										 	   Lemming::State(GameEng::Lemming(gameEngine(useToken(P, numLemming)),numLemming)) = X
 			 [resetGame]
 			 	   gameEngine(resetGame(P)) = GameEng::init(GameEng::getSizeColony(gameEngine(P)),GameEng::getSpawnS(gameEngine(P)),GameEng::getLevel(gameEngine(P)))
-			 	          ∀ X ∈  TokenType, nbToken(resetGame(P),X) = nbToken(P,X) 
-			 	          ∀ X ∈  TokenType, nbTokenInit(resetGame(P),X) = nbTokenInit(P,X) 
+			 	          ∀ X ∈  TokenType, nbToken(resetGame(P),X) = nbTokenInit(P,X) 
 			 	   tokenSelected(resetGame(P)) = TokenType::WALKER
 			 [selectToken]
 			 	   tokenSelected(selectToken(P,tokenType)) = tokenType

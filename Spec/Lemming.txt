@@ -60,10 +60,10 @@ Observations:
 			 			if GameEng::obstacle(gameEngine(L),hPos(L)+1,wPos(L))=false then:
 			 					hPos(step(L)) = hPos(L)+1
 			 			else: 
-			 				if direction(step(L)) = Direction::RIGHT
+			 				if direction(step(L)) = Direction::RIGHT then:
 				 				if ∀i, -1<i<7 GameEng::obstacle(gameEngine(L),hPos(L)-i,wPos(L)-1)=false then:
 				 						dead(step(l)) = true
-				 			else if direction(step(L)) = Direction::LEFT
+				 			else if direction(step(L)) = Direction::LEFT then:
 				 				if ∀i, -1<i<7 GameEng::obstacle(gameEngine(L),hPos(L)-i,wPos(L)+1)=false then:
 				 						dead(step(l)) = true
 			 				else:

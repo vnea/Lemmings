@@ -2,6 +2,7 @@ package game.decorators;
 
 import game.enums.Behaviour;
 import game.enums.Direction;
+import game.enums.State;
 import game.services.GameEngService;
 import game.services.LemmingService;
 
@@ -27,6 +28,11 @@ public class LemmingDecorator implements LemmingService {
         return delegate.getBehaviour();
     }
 
+    @Override
+    public State getState() {
+        return delegate.getState();
+    }
+    
     @Override
     public int getHPos() {
         return delegate.getHPos();

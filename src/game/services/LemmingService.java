@@ -2,6 +2,7 @@ package game.services;
 
 import game.enums.Behaviour;
 import game.enums.Direction;
+import game.enums.State;
 
 public interface LemmingService {
     //**CONSTANT(S)**********************************************************//
@@ -25,6 +26,9 @@ public interface LemmingService {
     
     /** Behaviour of the Lemming */
     public Behaviour getBehaviour();
+    
+    /** State of the Lemming */
+    public State getState();
     
     /** Vertical position of the Lemming */
     public int getHPos();
@@ -95,13 +99,17 @@ public interface LemmingService {
      *              else:
      *                  getWPos() == getWPos()@pre - 1
      *        else if getBehaviour() == Behaviour::FALLER then
-     *              if getGameEngine().isAnObstacle(getHPos() + 1, getWPos()) then
+     *              if !getGameEngine().isAnObstacle(getHPos() + 1, getWPos()) then
      *                  getHPos() == getHPos()@pre + 1
      *              else
-     *                  if \forall i \in ]0, 8[, getGameEngine().isAnObstacle(getHPos() - i, getWPos()) then <------------- TO CHANGE
-     *                      isDead()
-     *                  else
-     *                      getBehaviour() == Behaviour::WALKER    
+     *                  if getDirection() == Direction::RIGHT then
+     *                      if \forall i \in ]0, 8[, !getGameEngine().isAnObstacle(getHPos() - i, getWPos() - 1) then:
+     *                          isDead()
+     *                  else if getDirection() == Direction::LEFT
+     *                      if \forall i \in ]0, 8[, !getGameEngine().isAnObstacle(getHPos() - i, getWPos() + 1) then:
+     *                          isDead()
+     *                  else:
+     *                      getBehaviour() == Behaviour::WALKER
      */
     public void step();
     
