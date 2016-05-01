@@ -79,13 +79,13 @@ public class Lemming implements
     @Override
     public void step() {
         try {
-            // Call method stepXXX, where XXX = WALKER, FALLER, ...
+            // Call method stepXXX(), where XXX = WALKER, FALLER, ...
             getClass().getMethod("step" + behaviour).invoke(this);
         }
         catch (IllegalAccessException | IllegalArgumentException
                 | InvocationTargetException | NoSuchMethodException
-                | SecurityException e1) {
-            e1.printStackTrace();
+                | SecurityException e) {
+            e.printStackTrace();
         }
     }
 
@@ -154,14 +154,10 @@ public class Lemming implements
                     dead = gameEngine.isAnObstacle(hPos - i, wPos + 1);
                 }
             }
-            // IMPOSSIBLE ? <-------------------------------------------------------- TO CHANGE 
-            else {
+
+            if (!dead) {
                 behaviour = Behaviour.WALKER;
             }
-            // This solution is possible
-//            if (!dead) {
-//                behaviour = Behaviour.WALKER;
-//            }
         }
     }
 }

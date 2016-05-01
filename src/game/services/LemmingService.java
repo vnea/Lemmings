@@ -108,7 +108,8 @@ public interface LemmingService {
      *                  else if getDirection() == Direction::LEFT
      *                      if \forall i \in ]0, 8[, !getGameEngine().isAnObstacle(getHPos() - i, getWPos() + 1) then:
      *                          isDead()
-     *                  else:
+     *                          
+     *                  if !isDead() then:
      *                      getBehaviour() == Behaviour::WALKER
      */
     public void step();
