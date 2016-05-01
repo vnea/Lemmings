@@ -1,4 +1,4 @@
-package game.services;
+package game.services.display;
 
 public class DisplayService {
 
