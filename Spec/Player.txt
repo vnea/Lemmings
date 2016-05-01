@@ -59,6 +59,7 @@ Observations:
 			 [resetGame]
 			 	   gameEngine(resetGame(P)) = GameEng::init(GameEng::getSizeColony(gameEngine(P)),GameEng::getSpawnS(gameEngine(P)),GameEng::getLevel(gameEngine(P)))
 			 	          ∀ X ∈  TokenType, nbToken(resetGame(P),X) = nbTokenInit(P,X) 
+			 	          ∀ X ∈  TokenType, nbTokenInit(resetGame(P),X) = nbTokenInit(P,X) 
 			 	   tokenSelected(resetGame(P)) = TokenType::WALKER
 			 [selectToken]
 			 	   tokenSelected(selectToken(P,tokenType)) = tokenType
