@@ -127,7 +127,7 @@ public interface GameEngService {
     /**
      * \pre: !isGameOver()
      * \post: \forall num \in getNumLemmingsActive()@pre(),
-     *           if getLemming(num)@pre().getHPos() == getLevel().getHExit() ^ getLemming(num)@pre().getWPos() == getLevel().getWExit() then
+     *           if getNature(getLemming(num)@pre().getHPos(), getLemming(num)@pre().getWPos()) == Nature::EXIT then:
      *                getNumLemmingsActive() == getNumLemmingsActive()@pre() \ {num}
      * \post: getNbLemmingSaved() == getNbLemmingsCreated() -
      *                              getNbLemmingsActive() + getNbLemmingsDead()    

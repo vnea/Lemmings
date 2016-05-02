@@ -24,7 +24,6 @@ public class TileLevel extends JLabel implements TileService {
     
     private final Display display;
     
-
     public TileLevel(Nature nature, Display display, int h, int w) {
         super();
         this.display = display;
@@ -79,8 +78,10 @@ public class TileLevel extends JLabel implements TileService {
         updateNature(this.nature);
     }
     
+    @SuppressWarnings("incomplete-switch")
     private void updateNature(Nature nature) {
         this.nature = nature;
+        
         display.getLevel().setNature(h, w, this.nature);
         switch (this.nature) {
             case EMPTY:
@@ -111,14 +112,44 @@ public class TileLevel extends JLabel implements TileService {
             switch(lemming.getBehaviour()) {
                 case WALKER:
                     setIcon(lemming.getDirection() == Direction.LEFT
-                                            ? walkerLeftImg
-                                            : walkerRightImg);
+                                            ? walkerBodyLeftImg
+                                            : walkerBodyRightImg);
+                    
+                    if (h > 1) {
+                        TileLevel tile = display.getTile(h - 1, w);
+                        if (!tile.isADoor()) {
+                            tile.setIcon(lemming.getDirection() == Direction.LEFT
+                                                    ? walkerHeadLeftImg
+                                                    : walkerHeadRightImg);
+                        }
+                    }
+                    
                 break;
                 
                 case FALLER:
                     setIcon(lemming.getDirection() == Direction.LEFT
-                                            ? fallerLeftImg
-                                            : fallerRightImg);
+                                            ? fallerBodyLeftImg
+                                            : fallerBodyRightImg);
+                    if (h > 1) {
+                        TileLevel tile = display.getTile(h - 1, w);
+                        if (!tile.isADoor()) {
+                            tile.setIcon(lemming.getDirection() == Direction.LEFT
+                                                    ? fallerHeadLeftImg
+                                                    : fallerHeadRightImg);
+                        }
+
+                    }
+                break;
+                case BASHER:
+                break;
+                
+                case BUILDER:
+                break;
+                
+                case DIGGER:
+                break;
+                
+                case STOPPER:
                 break;
             }
         }
@@ -138,5 +169,9 @@ public class TileLevel extends JLabel implements TileService {
     
     public int getW() {
         return w;
+    }
+    
+    public boolean isADoor() {
+        return isEntrance || isExit;
     }
 }

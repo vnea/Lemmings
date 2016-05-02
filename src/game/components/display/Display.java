@@ -1,6 +1,5 @@
 package game.components.display;
 
-import game.components.Lemming;
 import game.enums.Nature;
 import game.services.GameEngService;
 import game.services.LemmingService;
@@ -227,5 +226,9 @@ public class Display {
         mainFrame.invalidate();
         mainFrame.validate();
         mainFrame.repaint();
+    }
+    
+    public TileLevel getTile(int h, int w) {
+        return tiles[h][w];
     }
 }

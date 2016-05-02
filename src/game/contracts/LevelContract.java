@@ -57,28 +57,6 @@ public class LevelContract extends LevelDecorator {
     }
     
     @Override
-    public int getHExit() {
-        /* Pre-condition(s) */
-        // \pre: !isEditing()
-        if (isEditing()) {
-            throw new PreconditionError("isEditing()");
-        }
-        
-        return super.getHExit();
-    }
-    
-    @Override
-    public int getWExit() {
-        /* Pre-condition(s) */
-        // \pre: !isEditing()
-        if (isEditing()) {
-            throw new PreconditionError("isEditing()");
-        }
-        
-        return super.getWExit();
-    }
-    
-    @Override
     public void init(int h, int w) {
         /* Pre-condition(s) */
         // \pre: MIN_HEIGHT < h < MAX_HEIGHT
@@ -258,14 +236,14 @@ public class LevelContract extends LevelDecorator {
             throw new PostconditionError("!(getHEntrance() == w1)");
         }
         
-        // \post: getHExit() == h2
-        if (!(getHExit() == h2)) {
-            throw new PostconditionError("!(getHExit() == h2)");
+        // \post: getNature(h1, w1) == Nature::ENTRANCE
+        if (!(getNature(h1, w1) == Nature.ENTRANCE)) {
+            throw new PostconditionError("!(getNature(h1, w1) == Nature.ENTRANCE)");
         }
         
-        // \post: getWExit() == w2
-        if (!(getWExit() == w2)) {
-            throw new PostconditionError("!(getWExit() == w2)");
+        // \post: getNature(h2, w2) == Nature::EXIT
+        if (!(getNature(h2, 21) == Nature.EXIT)) {
+            throw new PostconditionError("!(getNature(h2, w2) == Nature.EXIT)");
         }
     }
 }

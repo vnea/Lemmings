@@ -45,16 +45,6 @@ public interface LevelService {
      * */
     public int getWEntrance();
     
-    /** Height coordinate exit
-     * \pre: !isEditing()
-     * */
-    public int getHExit();
-    
-    /** Width coordiinate exit
-     * \pre: !isEditing()
-     * */
-    public int getWExit();
-    
     //***********************************************************************//
     
     
@@ -115,8 +105,8 @@ public interface LevelService {
      * \post: !isEditing()
      * \post: getHEntrance() == h1
      * \post: getWEntrance() == w1
-     * \post: getHExit() == h2
-     * \post: getWExit() == w2
+     * \post: getNature(h1, w1) == Nature::ENTRANCE
+     * \post: getNature(h2, w2) == Nature::EXIT
      */
     public void goPlay(int h1, int w1, int h2, int w2);
     

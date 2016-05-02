@@ -15,9 +15,6 @@ public class Level implements
     private int hEntrance;
     private int wEntrance;
     
-    private int hExit;
-    private int wExit;
-    
     @Override
     public int getHeight() {
         return height;
@@ -54,16 +51,6 @@ public class Level implements
     }
 
     @Override
-    public int getHExit() {
-        return hExit;
-    }
-
-    @Override
-    public int getWExit() {
-        return wExit;
-    }
-
-    @Override
     public void init(int h, int w) {
         height = h;
         width = w;
@@ -94,10 +81,14 @@ public class Level implements
     
     @Override
     public void goPlay(int h1, int w1, int h2, int w2) {
-        hEntrance = h1;
-        wEntrance = w1;
-        hExit = h2;
-        wExit = w2;
+        defEntrace(h1, w1);
+        setNature(h2, w2, Nature.EXIT);
         editing = false;
+    }
+    
+    private void defEntrace(int h, int w) {
+        hEntrance = h;
+        wEntrance = w;
+        setNature(h, w, Nature.ENTRANCE);
     }
 }

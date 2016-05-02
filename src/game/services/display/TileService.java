@@ -8,22 +8,33 @@ import javax.swing.ImageIcon;
 import javax.swing.border.Border;
 
 public interface TileService {
+    /** Border */
     final static Border border = BorderFactory.createLineBorder(Color.BLACK, 1);
+    
+    /** Dimension */
     final static Dimension dim = new Dimension(40, 40);
     
+    /** String for natures */
     final static String emptyStr = "Vide";
     final static String dirtStr = "Boue";
     final static String metalStr = "Métal";
 
-    final static ImageIcon emptyImg = new ImageIcon("res/EMPTY.png");
-    final static ImageIcon dirtImg = new ImageIcon("res/DIRT.png");
-    final static ImageIcon metalImg = new ImageIcon("res/METAL.png");
-    final static ImageIcon entranceImg = new ImageIcon("res/ENTRANCE.png");
-    final static ImageIcon exitImg = new ImageIcon("res/EXIT.png");
+    /** Images for natures */
+    final static ImageIcon emptyImg = new ImageIcon("res/tiles/EMPTY.png");
+    final static ImageIcon dirtImg = new ImageIcon("res/tiles/DIRT.png");
+    final static ImageIcon metalImg = new ImageIcon("res/tiles/METAL.png");
+    final static ImageIcon entranceImg = new ImageIcon("res/tiles/ENTRANCE.png");
+    final static ImageIcon exitImg = new ImageIcon("res/tiles/EXIT.png");
     
-    final static ImageIcon walkerLeftImg = new ImageIcon("res/WALKER_LEFT.png");
-    final static ImageIcon walkerRightImg = new ImageIcon("res/WALKER_RIGHT.png");
+    /** Images for walkers */
+    final static ImageIcon walkerBodyLeftImg = new ImageIcon("res/walker/WALKER_BODY_LEFT.png");
+    final static ImageIcon walkerBodyRightImg = new ImageIcon("res/walker/WALKER_BODY_RIGHT.png");
+    final static ImageIcon walkerHeadLeftImg = new ImageIcon("res/walker/WALKER_HEAD_LEFT.png");
+    final static ImageIcon walkerHeadRightImg = new ImageIcon("res/walker/WALKER_HEAD_RIGHT.png"); 
     
-    final static ImageIcon fallerLeftImg = new ImageIcon("res/FALLER_LEFT.png");
-    final static ImageIcon fallerRightImg = new ImageIcon("res/FALLER_RIGHT.png");
+    /** Images for fallers */
+    final static ImageIcon fallerBodyLeftImg = new ImageIcon("res/faller/FALLER_BODY_LEFT.png");
+    final static ImageIcon fallerBodyRightImg = new ImageIcon("res/faller/FALLER_BODY_RIGHT.png");
+    final static ImageIcon fallerHeadLeftImg = new ImageIcon("res/faller/FALLER_HEAD_LEFT.png");
+    final static ImageIcon fallerHeadRightImg = new ImageIcon("res/faller/FALLER_HEAD_RIGHT.png");
 }

@@ -22,6 +22,7 @@ public class GameEng implements
     private int sizeColony;
     private int spawnSpeed;
     
+    private int nbLemmingsCreated;
     private int nbLemmingsDead;
     private int nbLemmingsSaved;
     
@@ -66,7 +67,7 @@ public class GameEng implements
 
     @Override
     public int getNbLemmingsCreated() {
-        return nbLemmingsDead + nbLemmingsSaved + lemmingsActive.size();
+        return nbLemmingsCreated;
     }
 
     @Override
@@ -88,7 +89,6 @@ public class GameEng implements
                                              (lemmingsActive.size());
         lemmingsActive.forEach(lemming ->
                 numLemmingsActive.add(lemming.getNum()));
-        System.out.println("getNumLemmingsActive: " + lemmingsActive.size());
 
         return numLemmingsActive;
     }
@@ -115,6 +115,7 @@ public class GameEng implements
         spawnSpeed = spawnS;
         
         lemmingsActive = new ArrayList<>();
+        nbLemmingsCreated = 0;
         nbLemmingsSaved = 0;
         nbLemmingsDead = 0;
     }
@@ -124,7 +125,9 @@ public class GameEng implements
         Lemming lemming = new Lemming();
         lemming.init(num, level.getHEntrance(), level.getWEntrance());
         lemming.bindGameEngService(this);
+        
         lemmingsActive.add(lemming);
+        ++nbLemmingsCreated;
     }
 
     @Override
@@ -136,20 +139,18 @@ public class GameEng implements
     @Override
     public void checkSaved() {
         lemmingsActive.removeIf(lemming ->
-                    lemming.getHPos() == level.getHExit() &&
-                    lemming.getWPos() == level.getWExit());
-        System.out.println("checkSaved: " + lemmingsActive.size());
+          level.getNature(lemming.getHPos(), lemming.getWPos()) == Nature.EXIT);
 
-        nbLemmingsSaved = getNbLemmingsCreated() - lemmingsActive.size() +
-                          nbLemmingsDead;
+        nbLemmingsSaved = nbLemmingsCreated - (lemmingsActive.size() +
+                          nbLemmingsDead);
     }
 
     @Override
     public void checkDead() {
         lemmingsActive.removeIf(lemming -> lemming.isDead());
         
-        nbLemmingsDead = getNbLemmingsCreated() - lemmingsActive.size() +
-                         nbLemmingsSaved;     
+        nbLemmingsDead = nbLemmingsCreated - (lemmingsActive.size() +
+                         nbLemmingsSaved);     
     }
 
     @Override

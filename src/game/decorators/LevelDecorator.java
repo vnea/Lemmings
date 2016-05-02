@@ -46,16 +46,6 @@ public class LevelDecorator implements LevelService {
     }
 
     @Override
-    public int getHExit() {
-        return delegate.getHExit();
-    }
-
-    @Override
-    public int getWExit() {
-        return delegate.getWExit();
-    }
-
-    @Override
     public void init(int h, int w) {
         delegate.init(h, w);
     }
