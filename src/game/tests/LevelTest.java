@@ -286,6 +286,44 @@ public class LevelTest {
 	}
 	
 	@Test
+	// KO : \pre: n != Nature::ENTRANCE
+	public void testSetNaturePre4() {
+		boolean excpt = false; 
+		
+		// init
+		level.init(30, 30);
+		
+		// operation
+		try{
+			level.setNature(10, 10, Nature.ENTRANCE);
+		}
+		catch(PostconditionError | InvariantError e){}
+		catch(PreconditionError e){
+			excpt = true;
+		}
+		assertTrue("A PreconditionError must be raised.", excpt);
+	}
+	
+	@Test
+	// KO : \pre: n != Nature::EXIT
+	public void testSetNaturePre5() {
+		boolean excpt = false; 
+		
+		// init
+		level.init(30, 30);
+		
+		// operation
+		try{
+			level.setNature(10, 10, Nature.EXIT);
+		}
+		catch(PostconditionError | InvariantError e){}
+		catch(PreconditionError e){
+			excpt = true;
+		}
+		assertTrue("A PreconditionError must be raised.", excpt);
+	}
+	
+	@Test
 	// OK
 	public void testRemovePre1() {
 		// init

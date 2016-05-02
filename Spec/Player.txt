@@ -1,6 +1,6 @@
 Service: Player
 
-Types: bool, int, enum TokenType{WALKER, FALLER, DIGGER, BUILDER, STOPPER, BASHER, BASIC, CLIMBER, FLOATER, BOMBER}
+Types: bool, int, enum TokenType{WALKER, DIGGER, BUILDER, STOPPER, BASHER, BASIC, CLIMBER, FLOATER, BOMBER}
 
 Observators:
              const nbTokenInit: [Player] * TokenType -> int
@@ -24,8 +24,6 @@ Observations:
 			 [init]
 			 	   nbToken(init(nbTW,nbFA,nbDI,nbBU,nbST,nbBA,nbB,nbCL,nbFL,nbBO,G),TokenType::WALKER) = nbTW
 			 	   nbTokenInit(init(nbTW,nbFA,nbDI,nbBU,nbST,nbBA,nbB,nbCL,nbFL,nbBO,G),TokenType::WALKER) = nbTW
-			 	   nbToken(init(nbTW,nbFA,nbDI,nbBU,nbST,nbBA,nbB,nbCL,nbFL,nbBO,G),TokenType::FALLER) = nbFA
-			 	   nbTokenInit(init(nbTW,nbFA,nbDI,nbBU,nbST,nbBA,nbB,nbCL,nbFL,nbBO,G),TokenType::FALLER) = nbFA
 			 	   nbToken(init(nbTW,nbFA,nbDI,nbBU,nbST,nbBA,nbB,nbCL,nbFL,nbBO,G),TokenType::DIGGER) = nbDI
 			 	   nbTokenInit(init(nbTW,nbFA,nbDI,nbBU,nbST,nbBA,nbB,nbCL,nbFL,nbBO,G),TokenType::DIGGER) = nbDI
 			 	   nbToken(init(nbTW,nbFA,nbDI,nbBU,nbST,nbBA,nbB,nbCL,nbFL,nbBO,G),TokenType::BUILDER) = nbBU
@@ -45,7 +43,7 @@ Observations:
 			 	   tokenSelected(init(nbTW,nbFA,nbDI,nbBU,nbST,nbBA,nbB,nbCL,nbFL,nbBO,G)) = TokenType::WALKER
 			 	   gameEngine(init(nbTW,nbFA,nbDI,nbBU,nbST,nbBA,nbB,nbCL,nbFL,nbBO,G)) = G
 			 [useToken]
-			       if tokenSelected(P)=X, X ∈  {WALKER, FALLER, DIGGER, BUILDER, STOPPER, BASHER}) then: 
+			       if tokenSelected(P)=X, X ∈  {WALKER, DIGGER, BUILDER, STOPPER, BASHER}) then: 
 										 	   nbToken(useToken(P, numLemming),X) = nbToken(P,X)-1 ^
 										 	   Lemming::behaviour(GameEng::Lemming(gameEngine(useToken(P, numLemming)),numLemming)) = X
 				   else tokenSelected(P)=X, X ∈  {BASIC, CLIMBER, FLOATER, BOMBER}) then:
