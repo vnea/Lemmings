@@ -242,7 +242,7 @@ public class LevelContract extends LevelDecorator {
         }
         
         // \post: getNature(h2, w2) == Nature::EXIT
-        if (!(getNature(h2, 21) == Nature.EXIT)) {
+        if (!(getNature(h2, w2) == Nature.EXIT)) {
             throw new PostconditionError("!(getNature(h2, w2) == Nature.EXIT)");
         }
     }
