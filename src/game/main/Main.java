@@ -1,12 +1,12 @@
 package game.main;
 
-import game.components.Display;
 import game.components.GameEng;
 import game.components.Level;
 import game.components.Player;
+import game.components.display.Display;
 
 public class Main {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws InterruptedException {
         // Composant(s)
         GameEng gameEngine = new GameEng();
         Level level = new Level();
@@ -14,7 +14,7 @@ public class Main {
         
         // Initialisation(s)
         gameEngine.init(10, 1);
-        level.init(6, 10);
+        level.init(10, 10);
         player.init(5, 5, 5, 5, 5, 5, 5, 5, 5, 5);
         
         // Binding(s)
@@ -23,19 +23,6 @@ public class Main {
         
         Display display = new Display(gameEngine);
 
-        
-        // Edit level
-        while (level.isEditing()) {
-            display.stepEdit();
-            // level.goPlay()
-        }
-        
-        
-        
-        // Play
-        while (!gameEngine.isGameOver()) {
-            
-        }
         
     }
 }

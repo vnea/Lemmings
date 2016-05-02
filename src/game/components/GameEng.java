@@ -118,6 +118,7 @@ public class GameEng implements
     public void newLemming(int num) {
         LemmingService lemming = new Lemming();
         lemming.init(num, level.getHEntrance(), level.getWEntrance());
+        
         lemmingsActive.add(lemming);
     }
 
