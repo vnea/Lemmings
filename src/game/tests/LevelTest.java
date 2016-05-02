@@ -26,7 +26,6 @@ public class LevelTest {
 	public void testNaturePre1_1() {
 		
 		try {
-			lc.init(MIN_LEVEL, MAX_LEVEL);
 		}
 		catch (PostconditionError e) {
 	
