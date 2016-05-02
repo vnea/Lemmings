@@ -12,6 +12,7 @@ import java.util.List;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 
 public class Display {
     private JFrame mainFrame = new JFrame();
@@ -21,6 +22,8 @@ public class Display {
     
     private Nature currentNature = Nature.EMPTY;
     private boolean editing = true;
+    private boolean selectingDoors = false;
+    
     private boolean selectingEntrance = true;
     
     private TileLevel entrance = null;
@@ -61,13 +64,13 @@ public class Display {
             @Override
             public void actionPerformed(ActionEvent arg0) {
                 editing = false;
-                
+                selectingDoors = true;
+
                 mainFrame.remove(panelEditor);
                 mainFrame.remove(jButtonPlay);
                 
                 mainFrame.add(panelEntranceExit, BorderLayout.CENTER);
                 mainFrame.add(jButtonValidate, BorderLayout.SOUTH);
-
                 refreshMainFrame();
             }
         });
@@ -78,6 +81,8 @@ public class Display {
         jButtonValidate.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                selectingDoors = false;
+
                 mainFrame.remove(panelEntranceExit);
                 mainFrame.remove(jButtonValidate);
                 
@@ -88,7 +93,6 @@ public class Display {
                 
                 level.goPlay(entrance.getH(), entrance.getW(),
                              exit.getH(), exit.getW());
-                
                 refreshMainFrame();
             }
         });
@@ -116,35 +120,45 @@ public class Display {
         jbuttonNextTurn.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                gameEngine.callStepLemmings();
-                
-                for (int h = 0; h < level.getHeight(); ++h) {
-                    for (int w = 0; w < level.getWidth(); ++w) {
-                        tiles[h][w].setLemming(null);
+                if (!gameEngine.isGameOver()) {
+                    gameEngine.callStepLemmings();
+                    
+                    for (int h = 0; h < level.getHeight(); ++h) {
+                        for (int w = 0; w < level.getWidth(); ++w) {
+                            tiles[h][w].setLemming(null);
+                        }
+                    }
+                    
+                    List<Integer> numLemmings = gameEngine.getNumLemmingsActive();
+                    for (Integer numLemming : numLemmings) {
+                        LemmingService lemming = gameEngine.getLemming(numLemming);
+                        tiles[lemming.getHPos()][lemming.getWPos()].setLemming(lemming);
+                    }
+                    
+                    for (int h = 0; h < level.getHeight(); ++h) {
+                        for (int w = 0; w < level.getWidth(); ++w) {
+                            tiles[h][w].update();
+                        }
+                    }
+    
+                    gameEngine.checkSaved();
+                    gameEngine.checkDead();
+                    gameEngine.checkWin();
+                    
+                    if (!gameEngine.isGameOver() && 
+                        gameEngine.getNbLemmingsCreated() < gameEngine.getSizeColony() &&
+                        gameEngine.getTurn() % gameEngine.getSpawnSpeed() == 0) {
+                        gameEngine.newLemming(i++);
                     }
                 }
-                
-                List<Integer> numLemmings = gameEngine.getNumLemmingsActive();
-                //System.out.println(numLemmings.size());
-               // System.out.println(gameEngine.getNbLemmingsActive());
-                for (Integer numLemming : numLemmings) {
-                    //System.out.println(numLemming);
-                    LemmingService lemming = gameEngine.getLemming(numLemming);
-                    tiles[lemming.getHPos()][lemming.getWPos()].setLemming(lemming);
-                }
-                
-                for (int h = 0; h < level.getHeight(); ++h) {
-                    for (int w = 0; w < level.getWidth(); ++w) {
-                        tiles[h][w].update();
-                    }
-                }
-
-                gameEngine.checkSaved();
-                gameEngine.checkDead();
-                gameEngine.checkWin();
-                
-                if (gameEngine.getNbLemmingsCreated() < gameEngine.getSizeColony()) {
-                    gameEngine.newLemming(i++);
+                if (gameEngine.isGameOver()) {
+                    mainFrame.remove(jbuttonNextTurn);
+                    refreshMainFrame();
+                    
+                    JOptionPane.showMessageDialog(mainFrame,
+                            "Score : " + gameEngine.getScore(),
+                            "Fin du jeu",
+                            JOptionPane.PLAIN_MESSAGE);
                 }
             }
         });
@@ -155,7 +169,6 @@ public class Display {
         mainFrame.setTitle("Lemmings");
         mainFrame.add(panelLevel, BorderLayout.NORTH);
         mainFrame.add(panelEditor, BorderLayout.CENTER);
-        //mainFrame.add(panelInitGameEngine, BorderLayout.CENTER);
 
         mainFrame.add(jButtonPlay, BorderLayout.SOUTH);
         mainFrame.setResizable(false);
@@ -215,6 +228,10 @@ public class Display {
     
     public GameEngService getGameEngine() {
         return gameEngine;
+    }
+    
+    public boolean isSelectingDoors() {
+        return selectingDoors;
     }
     
     // To update

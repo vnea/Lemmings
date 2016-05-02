@@ -44,7 +44,7 @@ public class TileLevel extends JLabel implements TileService {
                     if (display.isEditing()) {
                         updateNature(display.getCurrentNature());
                     }
-                    else {
+                    else if (display.isSelectingDoors()) {
                         if (ref.nature == Nature.EMPTY) {
                             if (display.isSelectingEntrance()) {
                                 isEntrance = true;

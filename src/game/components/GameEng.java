@@ -156,7 +156,7 @@ public class GameEng implements
     @Override
     public void checkWin() {
         if (isGameOver()) {
-            score = nbLemmingsSaved / turn * 100;
+            score = (int) ((double) nbLemmingsSaved / turn * 100);
         }
     }
 
