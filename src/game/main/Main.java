@@ -14,7 +14,7 @@ public class Main {
         
         // Initialisation(s)
         //gameEngine.init(10, 1);
-        level.init(10, 12);
+        level.init(15, 12);
         player.init(5, 5, 5, 5, 0, 5, 5, 5, 5, 0);
         
         // Binding(s)

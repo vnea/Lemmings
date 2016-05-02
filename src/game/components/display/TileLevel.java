@@ -19,7 +19,6 @@ public class TileLevel extends JLabel implements TileService {
     private boolean isEntrance = false;
     private boolean isExit = false;
 
-    
     private Nature nature;
     private LemmingService lemming = null;
     
@@ -63,9 +62,11 @@ public class TileLevel extends JLabel implements TileService {
                     }
                     else {
                         TokenType tokenType = display.getCurrentTokenType();
-                        if (lemming != null && tokenType != null) {
-                            System.out.println(tokenType);
+                        if (lemming != null && tokenType != null &&
+                            display.getPlayer().getNbToken(tokenType) > 0) {
                             display.getPlayer().useToken(lemming.getNum());
+                            display.updateTextTileToken(tokenType);
+                            update();
                         }
                     }
                 }

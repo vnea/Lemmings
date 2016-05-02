@@ -23,7 +23,8 @@ public class PanelSelectToken extends JPanel {
             TileToken tileToken = new TileToken(tokenType, display);
             mapToken.put(tokenType, tileToken);
             add(tileToken);
+            
+            display.setMapToken(mapToken);
         }
     }
-    
 }

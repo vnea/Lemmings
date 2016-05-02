@@ -28,7 +28,6 @@ public class Display {
     private PlayerService player;
     
     private Nature currentNature = Nature.EMPTY;
-    private TokenType currentTokenType = null;
     
     private boolean editing = true;
     private boolean selectingDoors = false;
@@ -100,9 +99,7 @@ public class Display {
                 
                 mainFrame.add(panelInitGameEngine, BorderLayout.CENTER);
                 mainFrame.add(jButtonStart, BorderLayout.SOUTH);
-                
-                tiles = panelLevel.getTiles();
-                
+                                
                 level.goPlay(entrance.getH(), entrance.getW(),
                              exit.getH(), exit.getW());
                 refreshMainFrame();
@@ -122,7 +119,6 @@ public class Display {
                 
                 mainFrame.add(panelSelectToken, BorderLayout.CENTER);
                 mainFrame.add(jbuttonNextTurn, BorderLayout.SOUTH);
-                gameEngine.newLemming(idLemming++);
                 refreshMainFrame();
                 mainFrame.pack();
             }
@@ -134,6 +130,11 @@ public class Display {
             @Override
             public void actionPerformed(ActionEvent e) {
                 if (!gameEngine.isGameOver()) {
+                    if (gameEngine.getNbLemmingsCreated() < gameEngine.getSizeColony() &&
+                        gameEngine.getTurn() % gameEngine.getSpawnSpeed() == 0) {
+                        gameEngine.newLemming(idLemming++);
+                    }
+                    
                     gameEngine.callStepLemmings();
                     
                     for (int h = 0; h < level.getHeight(); ++h) {
@@ -157,15 +158,9 @@ public class Display {
                     gameEngine.checkSaved();
                     gameEngine.checkDead();
                     gameEngine.checkWin();
-                    
-                    if (!gameEngine.isGameOver() && 
-                        gameEngine.getNbLemmingsCreated() < gameEngine.getSizeColony() &&
-                        gameEngine.getTurn() % gameEngine.getSpawnSpeed() == 0) {
-                        gameEngine.newLemming(idLemming++);
-                    }
                 }
                 if (gameEngine.isGameOver()) {
-                    mainFrame.remove(jbuttonNextTurn);
+                    jbuttonNextTurn.setEnabled(false);
                     refreshMainFrame();
                     
                     JOptionPane.showMessageDialog(mainFrame,
@@ -198,6 +193,14 @@ public class Display {
             }
 
         });
+    }
+    
+    public void setTilesLevel(TileLevel [][] tiles) {
+        this.tiles = tiles;
+    }
+    
+    public void setMapToken(Map<TokenType, TileToken> mapToken) {
+        this.mapToken = mapToken;
     }
     
     public Nature getCurrentNature() {
@@ -263,11 +266,11 @@ public class Display {
     }
     
     public TokenType getCurrentTokenType() {
-        return currentTokenType;
+        return player.getTokenSelected();
     }
     
     public void setCurrentTokenType(TokenType tokenType) {
-        currentTokenType = tokenType;
+        player.selectToken(tokenType);
     }
     
     // To update
@@ -279,6 +282,10 @@ public class Display {
         mainFrame.invalidate();
         mainFrame.validate();
         mainFrame.repaint();
+    }
+    
+    public void updateTextTileToken(TokenType tokenType) {
+        mapToken.get(tokenType).updateText();
     }
     
     public TileLevel getTile(int h, int w) {

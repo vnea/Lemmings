@@ -22,9 +22,7 @@ public class PanelLevel extends JPanel {
                 add(tiles[h][w]);
             }
         }
-    }
-    
-    public TileLevel [][] getTiles() {
-        return tiles;
+        
+        display.setTilesLevel(tiles);
     }
 }

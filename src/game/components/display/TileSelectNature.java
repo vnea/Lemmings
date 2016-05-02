@@ -16,6 +16,7 @@ public class TileSelectNature extends JLabel implements TileService {
     @SuppressWarnings("unused")
     private Display display;
     
+    @SuppressWarnings("incomplete-switch")
     public TileSelectNature(Nature nature, Display display) {
         this.display = display;
         this.nature = nature;

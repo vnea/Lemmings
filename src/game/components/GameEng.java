@@ -46,6 +46,16 @@ public class GameEng implements
     }
 
     @Override
+    public boolean isADirtObstacle(int h, int w) {
+        return level.getNature(h, w) == Nature.DIRT;
+    }
+    
+    @Override
+    public boolean isAMetalObstacle(int h, int w) {
+        return  level.getNature(h, w) == Nature.METAL;
+    }
+    
+    @Override
     public int getSizeColony() {
         return sizeColony;
     }

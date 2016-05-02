@@ -13,8 +13,14 @@ public interface GameEngService {
     /** Turn of the game */
     public int getTurn();
     
-    /** Check if the square(x, w) is an obstacle */
+    /** Check if the square(h, w) is an obstacle */
     public boolean isAnObstacle(int h, int w);
+    
+    /** Check if the square(h, w) is a dirt obstacle */
+    public boolean isADirtObstacle(int h, int w);
+    
+    /** Check if the square(h, w) is a metal obstacle */
+    public boolean isAMetalObstacle(int h, int w);
     
     /** Size of the colony */
     public int getSizeColony();

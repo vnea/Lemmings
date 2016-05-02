@@ -29,6 +29,16 @@ public class GameEngDecorator implements GameEngService {
     }
 
     @Override
+    public boolean isADirtObstacle(int h, int w) {
+        return delegate.isADirtObstacle(h, w);
+    }
+    
+    @Override
+    public boolean isAMetalObstacle(int h, int w) {
+        return delegate.isAMetalObstacle(h, w);
+    }
+    
+    @Override
     public int getSizeColony() {
         return delegate.getSizeColony();
     }

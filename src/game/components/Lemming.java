@@ -172,6 +172,32 @@ public class Lemming implements
         }
     }
     
+    @SuppressWarnings("unused")
+    private void setDIGGER() {
+        final int POS_BELOW = hPos + 1;
+        if (!gameEngine.isAnObstacle(POS_BELOW, wPos)) {
+            behaviour = Behaviour.FALLER;
+        }
+        else if (gameEngine.isAMetalObstacle(POS_BELOW, wPos)){
+            behaviour = Behaviour.WALKER;
+        }
+        else if (gameEngine.isADirtObstacle(POS_BELOW, wPos)) {
+            
+        }
+    }
+    
+    @SuppressWarnings("unused")
+    private void stepBUILDER() {
+    }
+    
+    @SuppressWarnings("unused")
+    private void setSTOPPER() {
+    }
+    
+    @SuppressWarnings("unused")
+    private void setBASHER() {
+    }
+    
     private void resetCounterFaller() {
         counterFaller = 0;
     }

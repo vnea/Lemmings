@@ -33,11 +33,12 @@ public class TileToken extends JPanel implements TileService {
         this.tokenType = tokenType;
         this.display = display;
         
+        TileToken ref = this;
         addMouseListener(new MouseAdapter() {
             @Override
             public void mousePressed(MouseEvent e) {
                 super.mousePressed(e);
-                display.setCurrentTokenType(tokenType);
+                display.setCurrentTokenType(ref.tokenType);
             }
         });
         
@@ -45,7 +46,7 @@ public class TileToken extends JPanel implements TileService {
         updateText();
     }
 
-    private void updateText() {
+    public void updateText() {
         counter.setText(Integer.toString(display.getPlayer().getNbToken(tokenType)));
     }
     
@@ -56,35 +57,35 @@ public class TileToken extends JPanel implements TileService {
             break;
                
             case BASHER:
-                img.setText("BR");
+                img.setText("BASHER");
             break;
                 
             case BASIC:
-                img.setText("BC");
+                img.setText("BASIC");
             break;
                 
             case BOMBER:
-                img.setText("BO");
+                img.setText("BOMBER");
             break;
                 
             case BUILDER:
-                img.setText("BUI");
+                img.setText("BUILDER");
             break;
                 
             case CLIMBER:
-                img.setText("CL");
+                img.setText("CLIMBER");
             break;
                 
             case DIGGER:
-                img.setText("DI");
+                img.setIcon(diggerToken);
             break;
                 
             case FLOATER:
-                img.setText("FLO");
+                img.setText("FLOATER");
             break;
                 
             case STOPPER:
-                img.setText("ST");
+                img.setText("STOPPER");
 
             break;
             

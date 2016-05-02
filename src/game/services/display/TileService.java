@@ -38,8 +38,14 @@ public interface TileService {
     final static ImageIcon fallerHeadLeftImg = new ImageIcon("res/faller/FALLER_HEAD_LEFT.png");
     final static ImageIcon fallerHeadRightImg = new ImageIcon("res/faller/FALLER_HEAD_RIGHT.png");
     
+    /** Images for digger */
+    final static ImageIcon diggerBodyLeftImg = new ImageIcon("res/digger/DIGGER_BODY_LEFT.png");
+    final static ImageIcon diggerBodyRightImg = new ImageIcon("res/digger/DIGGER_BODY_RIGHT.png");
+    final static ImageIcon diggerHeadLeftImg = new ImageIcon("res/digger/DIGGER_HEAD_LEFT.png");
+    final static ImageIcon diggerHeadRightImg = new ImageIcon("res/digger/DIGGER_HEAD_RIGHT.png");
+    
     /** Tokens */
     final static ImageIcon walkerToken = new ImageIcon("res/walker/WALKER_TOKEN.png");
     final static ImageIcon fallerToken = new ImageIcon("res/faller/FALLER_TOKEN.png");
-
+    final static ImageIcon diggerToken = new ImageIcon("res/digger/DIGGER_TOKEN.png");
 }

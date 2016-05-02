@@ -7,6 +7,8 @@ Observators:
 			 	   pre score(G) require gameOver(G)
 			 turn: [GameEng] -> int
 			 obstacle: [GameEng] * int * int -> bool
+			 dirtObstacle: [GameEng] * int * int -> bool
+			 metalObstacle: [GameEng] * int * int -> bool
 			 const sizeColony: [GameEng] -> int
 			 nbLemmingsDead: [GameEng] -> int
 			 nbLemmingsSaved: [GameEng] -> int 
