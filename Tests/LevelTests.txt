@@ -1,99 +1,420 @@
 ///////// Test preconditions /////////
 
-Cas de test : testInitPre1
+Test : testInitPre1
 
-Couverture : preconditions
-Objectif : precondition resolved
-Conditions initiales : empty
-Opérations : C0 := init(30, 30)
+Coverage : preconditions
+Goal : precondition resolved
+Initial conditions : empty
+Operations : C0 := init(MAX_HEIGHT, MAX_WIDTH)
 Oracle :
 	No exception
-Rapport :
+Report :
 	A PreconditionError was raised :
 		"No exception must be raised."
 
 
-Cas de test : testInitPre2
+Test : testInitPre2
 
-Couverture : preconditions
-Objectif : precondition unresolved
-Conditions initiales : empty
-Opérations : C0 := init(MIN_HEIGHT-1, 30)
+Coverage : preconditions
+Goal : precondition unresolved
+Initial conditions : empty
+Operations : C0 := init(MIN_HEIGHT-1, 30)
 Oracle :
 	A PreconditionError must be raised
-Rapport :
+Report :
 	No exception :
 		"A PreconditionError must be raised."
 		
 
-Cas de test : testInitPre3
+Test : testInitPre3
 
-Couverture : preconditions
-Objectif : precondition unresolved
-Conditions initiales : empty
-Opérations : C0 := init(30, MIN_WIDTH-1)
+Coverage : preconditions
+Goal : precondition unresolved
+Initial conditions : empty
+Operations : C0 := init(30, MIN_WIDTH-1)
 Oracle :
 	A PreconditionError must be raised
-Rapport :
+Report :
 	No exception :
 		"A PreconditionError must be raised."
 		
 
-Cas de test : testInitPre4
+Test : testInitPre4
 
-Couverture : preconditions
-Objectif : precondition unresolved
-Conditions initiales : empty
-Opérations : C0 := init(MAX_HEIGHT+1, 30)
+Coverage : preconditions
+Goal : precondition unresolved
+Initial conditions : empty
+Operations : C0 := init(MAX_HEIGHT+1, 30)
 Oracle :
 	A PreconditionError must be raised
-Rapport :
+Report :
 	No exception :
 		"A PreconditionError must be raised."
 		
 		
-Cas de test : testInitPre5
+Test : testInitPre5
 
-Couverture : preconditions
-Objectif : precondition unresolved
-Conditions initiales : empty
-Opérations : C0 := init(30, MAX_WIDTH+1)
+Coverage : preconditions
+Goal : precondition unresolved
+Initial conditions : empty
+Operations : C0 := init(30, MAX_WIDTH+1)
 Oracle :
 	A PreconditionError must be raised
-Rapport :
+Report :
 	No exception :
 		"A PreconditionError must be raised."
 		
 
-Cas de test : testGetNaturePre1
+Test : testGetNaturePre1
 
-Couverture : preconditions
-Objectif : precondition resolved
-Conditions initiales : C0 = init(30, 30)
-Opérations : C1 := nature(C0, 30, 30);
+Coverage : preconditions
+Goal : precondition resolved
+Initial conditions : C0 := init(30, 30)
+Operations : C1 := nature(C0, 29, 29);
 Oracle :
 	No exception
-Rapport :
+Report :
 	A PreconditionError was raised :
 		"No exception must be raised"		
 		
 
-Cas de test : testGetNaturePre2
+Test : testGetNaturePre2
 
-Couverture : preconditions
-Objectif : precondition unresolved
-Conditions initiales : C0 = init(30, 30)
-Opérations : C1 := nature(C0, 20, 20);
+Coverage : preconditions
+Goal : precondition unresolved
+Initial conditions : C0 := init(30, 30)
+Operations : C1 := nature(C0, 30, 30);
+Oracle :
+	A PreconditionError must be raised
+Report :
+	No exception :
+		"A PreconditionError must be raised."	
+		
+		
+Test : testGetHEntrancePre1
+
+Coverage : preconditions
+Goal : precondition resolved
+Initial conditions : C0 := goPlay(conditions_for_goPlay,5,5,8,8)
+Operations : C1 := hEntrance(C0);
 Oracle :
 	No exception
-Rapport :
+Report :
 	A PreconditionError was raised :
-		"No exception must be raised"	
+		"No exception must be raised"
 		
 		
+Test : testGetHEntrancePre2
+
+Coverage : preconditions
+Goal : precondition unresolved
+Initial conditions : C0 := init(30, 30)   
+Operations : C1 := hEntrance(C0)
+Oracle :
+	A PreconditionError must be raised
+Report :
+	No exception :
+		"A PreconditionError must be raised."	
 		
+		
+Test : testGetWEntrancePre1
+
+Coverage : preconditions
+Goal : precondition resolved
+Initial conditions : C0 := goPlay(conditions_for_goPlay,5,5,8,8) 
+Operations : C1 := wEntrance(C0);
+Oracle :
+	No exception
+Report :
+	A PreconditionError was raised :
+		"No exception must be raised"
+		
+		
+Test : testGetWEntrancePre2
+
+Coverage : preconditions
+Goal : precondition unresolved
+Initial conditions : C0 := init(30, 30)  
+Operations : C1 := wEntrance(C0)
+Oracle :
+	A PreconditionError must be raised
+Report :
+	No exception :
+		"A PreconditionError must be raised."	
+		
+		
+Test : testSetNaturePre1
+
+Coverage : preconditions
+Goal : precondition resolved
+Initial conditions : C0 := init(30, 30)
+Operations : C1 := setNature(C0, 0, 0, DIRT);
+Oracle :
+	No exception
+Report :
+	A PreconditionError was raised :
+		"No exception must be raised"
 		
 
+Test : testSetNaturePre2
+
+Coverage : preconditions
+Goal : precondition unresolved
+Initial conditions : C0 := init(30, 30)  
+Operations : C1 := setNature(C0, -1, -1, DIRT);
+Oracle :
+	A PreconditionError must be raised
+Report :
+	No exception :
+		"A PreconditionError must be raised."
+		
+		
+Test : testSetNaturePre3
+
+Coverage : preconditions
+Goal : precondition unresolved
+Initial conditions : C0 := goPlay(conditions_for_goPlay,5,5,8,8)
+Operations : C1 := setNature(C0, 10, 10, DIRT);
+Oracle :
+	A PreconditionError must be raised
+Report :
+	No exception :
+		"A PreconditionError must be raised."
+		
+		
+Test : testRemovePre1
+
+Coverage : preconditions
+Goal : precondition resolved
+Initial conditions : C0 := goPlay(setNature(conditions_for_goPlay,10,10,DIRT),5,5,8,8)
+Operations : C1 := remove(C0, 10, 10)
+Oracle :
+	No exception
+Report :
+	A PreconditionError was raised :
+		"No exception must be raised"
+		
+		
+Test : testRemovePre2
+
+Coverage : preconditions
+Goal : precondition unresolved
+Initial conditions : C0 := goPlay(conditions_for_goPlay,5,5,8,8)
+Operations : C1 := remove(C0, 10, 10)
+Oracle :
+	A PreconditionError must be raised
+Report :
+	No exception :
+		"A PreconditionError must be raised."
+		
+		
+Test : testRemovePre3
+
+Coverage : preconditions
+Goal : precondition unresolved
+Initial conditions : C0 := init(30, 30)
+Operations : C1 := remove(C0, 10, 10)
+Oracle :
+	A PreconditionError must be raised
+Report :
+	No exception :
+		"A PreconditionError must be raised."
+		
+		
+Test : testBuildPre1
+
+Coverage : preconditions
+Goal : precondition resolved
+Initial conditions : C0 := goPlay(conditions_for_goPlay,5,5,8,8)
+Operations : C1 := build(C0, 10, 10)
+Oracle :
+	No exception
+Report :
+	A PreconditionError was raised :
+		"No exception must be raised"
+		
+		
+Test : testBuildPre2
+
+Coverage : preconditions
+Goal : precondition unresolved
+Initial conditions : C0 := goPlay(setNature(conditions_for_goPlay,10,10,DIRT),5,5,8,8)
+Operations : C1 := build(C0, 10, 10)
+Oracle :
+	A PreconditionError must be raised
+Report :
+	No exception :
+		"A PreconditionError must be raised."
+				
+				
+Test : testBuildPre3
+
+Coverage : preconditions
+Goal : precondition unresolved
+Initial conditions : C0 := init(30, 30)
+Operations : C1 := build(C0, 10, 10)
+Oracle :
+	A PreconditionError must be raised
+Report :
+	No exception :
+		"A PreconditionError must be raised."
+		
+
+Test : testGoPlayPre1
+
+Coverage : preconditions
+Goal : precondition resolved
+Initial conditions : C0 := conditions_for_goPlay
+Operations : C1 := goPlay(C0,5,5,8,8)
+Oracle :
+	No exception
+Report :
+	A PreconditionError was raised :
+		"No exception must be raised"
+		
+		
+Test : testGoPlayPre2
+
+Coverage : preconditions
+Goal : precondition unresolved
+Initial conditions : C0 := setNature(conditions_for_goPlay,0,0,EMPTY)
+Operations : C1 := goPlay(C0,5,5,8,8)
+Oracle :
+	A PreconditionError must be raised
+Report :
+	No exception :
+		"A PreconditionError must be raised."
+		
+
+Test : testGoPlayPre3
+
+Coverage : preconditions
+Goal : precondition unresolved
+Initial conditions : C0 := setNature(conditions_for_goPlay,height(conditions_for_goPlay)-1,0,EMPTY)
+Operations : C1 := goPlay(C0,5,5,8,8)
+Oracle :
+	A PreconditionError must be raised
+Report :
+	No exception :
+		"A PreconditionError must be raised."
+		
+
+Test : testGoPlayPre4
+
+Coverage : preconditions
+Goal : precondition unresolved
+Initial conditions : C0 := setNature(conditions_for_goPlay,0,width(conditions_for_goPlay)-1,EMPTY)
+Operations : C1 := goPlay(C0,5,5,8,8)
+Oracle :
+	A PreconditionError must be raised
+Report :
+	No exception :
+		"A PreconditionError must be raised."
+		
+		
+Test : testGoPlayPre5
+
+Coverage : preconditions
+Goal : precondition unresolved
+Initial conditions : C0 := setNature(conditions_for_goPlay,height(conditions_for_goPlay)-1,width(conditions_for_goPlay)-1,EMPTY)
+Operations : C1 := goPlay(C0,5,5,8,8)
+Oracle :
+	A PreconditionError must be raised
+Report :
+	No exception :
+		"A PreconditionError must be raised."
+		
+
+Test : testGoPlayPre6
+
+Coverage : preconditions
+Goal : precondition unresolved
+Initial conditions : C0 := goPlay(conditions_for_goPlay,5,5,8,8);
+Operations : C1 := goPlay(C0,5,5,8,8)
+Oracle :
+	A PreconditionError must be raised
+Report :
+	No exception :
+		"A PreconditionError must be raised."
+		
+		
+Test : testGoPlayPre7
+
+Coverage : preconditions
+Goal : precondition unresolved
+Initial conditions : C0 := setNature(conditions_for_goPlay,5,5,DIRT);
+Operations : C1 := goPlay(C0,5,5,8,8)
+Oracle :
+	A PreconditionError must be raised
+Report :
+	No exception :
+		"A PreconditionError must be raised."
+		
+		
+Test : testGoPlayPre8
+
+Coverage : preconditions
+Goal : precondition unresolved
+Initial conditions : C0 := setNature(conditions_for_goPlay,4,5,DIRT);
+Operations : C1 := goPlay(C0,5,5,8,8)
+Oracle :
+	A PreconditionError must be raised
+Report :
+	No exception :
+		"A PreconditionError must be raised."
+		
+
+Test : testGoPlayPre9
+
+Coverage : preconditions
+Goal : precondition unresolved
+Initial conditions : C0 := setNature(conditions_for_goPlay,6,5,DIRT);
+Operations : C1 := goPlay(C0,5,5,8,8)
+Oracle :
+	A PreconditionError must be raised
+Report :
+	No exception :
+		"A PreconditionError must be raised."
+		
+
+Test : testGoPlayPre10
+
+Coverage : preconditions
+Goal : precondition unresolved
+Initial conditions : C0 := setNature(conditions_for_goPlay,8,8,DIRT);
+Operations : C1 := goPlay(C0,5,5,8,8)
+Oracle :
+	A PreconditionError must be raised
+Report :
+	No exception :
+		"A PreconditionError must be raised."
+		
+		
+Test : testGoPlayPre11
+
+Coverage : preconditions
+Goal : precondition unresolved
+Initial conditions : C0 := setNature(conditions_for_goPlay,7,8,DIRT);
+Operations : C1 := goPlay(C0,5,5,8,8)
+Oracle :
+	A PreconditionError must be raised
+Report :
+	No exception :
+		"A PreconditionError must be raised."
+		
+		
+Test : testGoPlayPre12
+
+Coverage : preconditions
+Goal : precondition unresolved
+Initial conditions : C0 := setNature(conditions_for_goPlay,9,8,DIRT);
+Operations : C1 := goPlay(C0,5,5,8,8)
+Oracle :
+	A PreconditionError must be raised
+Report :
+	No exception :
+		"A PreconditionError must be raised."
+		
 
 
 ///////// Test transitions /////////

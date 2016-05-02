@@ -59,13 +59,13 @@ public class LevelContract extends LevelDecorator {
     @Override
     public void init(int h, int w) {
         /* Pre-condition(s) */
-        // \pre: MIN_HEIGHT < h < MAX_HEIGHT
-        if (!(MIN_HEIGHT < h && h < MAX_HEIGHT)) {
+        // \pre: MIN_HEIGHT <= h <= MAX_HEIGHT
+        if (!(MIN_HEIGHT <= h && h <= MAX_HEIGHT)) {
             throw new PreconditionError("!(MIN_HEIGHT < h < MAX_HEIGHT)");
         }
         
-        // \pre: MIN_WIDTH < w < MAX_WIDTH
-        if (!(MIN_WIDTH < w && w < MAX_WIDTH)) {
+        // \pre: MIN_WIDTH <= w <= MAX_WIDTH
+        if (!(MIN_WIDTH <= w && w <= MAX_WIDTH)) {
             throw new PreconditionError("!(MIN_WIDTH < w < MAX_WIDTH)");
         }
         

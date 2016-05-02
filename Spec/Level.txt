@@ -16,7 +16,7 @@ Observators:
             
 Constructors: 
 			  init: int * int -> [Level]
-                   pre init(h,w) require 19<h<51 ^ 19<w<51
+                   pre init(h,w) require 20 <= h <= 50  ^  20 <= w <= 50
  
 Operators: 
 		    setNature: [Level] * int * int * Nature -> [Level]
