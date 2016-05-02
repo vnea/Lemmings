@@ -16,6 +16,8 @@ Constructors:
 			 init: int * int * int * GameEng -> [Lemming]
 		 	       pre init(num, h, w, G) require num ≥ 0 ^ h ≥ 2 ^ w ≥ 1 
 Operators:
+			 setBehaviour: [Lemming] * Behaviour -> [Lemming]
+			 setState: [Lemming] * State -> [lemming]
 			 step: [Lemming] -> [Lemming]
 			 
 Observations:
@@ -29,6 +31,10 @@ Observations:
 			 		behaviour(init(num,h,w,G)) = Behaviour::FALLER
 			 		state(init(num,h,w,G)) = State::BASIC
 			 		dead(init(num,h,w,G)) = false
+			 [setBehaviour]
+			 		Behaviour(setBehaviour(L,b)) = b
+		 	 [setState]
+		 		    State(setState(L,s)) = s
 			 [step]
 			 		if behaviour(L)=Behaviour::WALKER then:
 			 			if direction(L)=Direction::RIGHT then:
@@ -68,7 +74,6 @@ Observations:
 				 						dead(step(l)) = true
 			 				
 			 				if dead(step(l))==false then:
-			 					behaviour(step(L)) = Behaviour::WALKER
-			 					
+			 					behaviour(step(L)) = Behaviour::WALKER			
 			 			
 		 	

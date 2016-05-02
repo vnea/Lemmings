@@ -15,12 +15,7 @@ Constructors:
 Operators:
 			 useToken: [Player] * int -> [Player]
 				   pre useToken(P, numLemming) require 
-				   						if tokenSelected(P)=X, X ∈  {WALKER, FALLER, DIGGER, BUILDER, STOPPER, BASHER}) then: 
-				   															Lemming::Behaviour(GameEng::getLemming(gameEngine(P),numLemming)) != X 
-				   															^ nbToken(P,X) > 0
-				   						else if tokenSelected(P)=X, X ∈  {BASIC, CLIMBER, FLOATER, BOMBER}) then: 
-				   															Lemming::State(GameEng::getLemming(gameEngine(P),numLemming)) != X  
-				   															^ nbToken(P,X) > 0
+				   						tokenSelected(P)=X => nbToken(P,X) > 0
 			 resetGame: [Player] -> [Player]
 			 selectToken: [Player] * TokenType -> [Player]
 Observations:
