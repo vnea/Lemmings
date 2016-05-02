@@ -7,11 +7,11 @@ public interface LevelService {
     
     /** Min and max height of the level */
     final static int MIN_HEIGHT = 6;
-    final static int MAX_HEIGHT = 51;
+    final static int MAX_HEIGHT = 50;
     
     /** Min and max width of the level */
     final static int MIN_WIDTH = 6;
-    final static int MAX_WIDTH = 51;
+    final static int MAX_WIDTH = 50;
     
     //***********************************************************************//
     

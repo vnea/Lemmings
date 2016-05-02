@@ -87,7 +87,7 @@ public class LevelContract extends LevelDecorator {
         }
         
         // \pre: MIN_WIDTH < w < MAX_WIDTH
-        if (!(MIN_WIDTH < h && h < MAX_WIDTH)) {
+        if (!(MIN_WIDTH < w && w < MAX_WIDTH)) {
             throw new PreconditionError("!(MIN_WIDTH < w < MAX_WIDTH)");
         }
         
@@ -109,7 +109,7 @@ public class LevelContract extends LevelDecorator {
         }
         
         // \post: !isEditing()
-        if (isEditing()) {
+        if (!isEditing()) {
             throw new PostconditionError("isEditing()");
         }
     }
@@ -203,7 +203,7 @@ public class LevelContract extends LevelDecorator {
         /* Pre-condition(s) */
         // \pre: \forall i in [0, getHeight() - 1],
         //         getNature(i, 0) == Nature::METAL ^ getNature(i, getWidth() - 1) == Nature::METAL
-        for (int i = 0; i < super.getHeight(); ++i) {
+        for (int i = 0; i < getHeight(); ++i) {
             if (!(getNature(i, 0) == Nature.METAL && getNature(i,  getWidth() - 1) == Nature.METAL)) {
                 throw new PreconditionError("\forall i in [0, getHeight() - 1],"
                         + "!(getNature(i, 0) == Nature::METAL ^ "
@@ -213,7 +213,7 @@ public class LevelContract extends LevelDecorator {
         
         // \pre: \forall j \in [0, getWidth() - 1],
         //         getNature(0, j) == Nature::METAL ^ getNature(getHeight() - 1, j) == Nature::METAL
-        for (int j = 0; j < super.getWidth(); ++j) {
+        for (int j = 0; j < getWidth(); ++j) {
             if (!(getNature(0, j) == Nature.METAL && getNature(getHeight() - 1,  j) == Nature.METAL)) {
                 throw new PreconditionError("\forall i in [0, getHeight() - 1],"
                         + "!(getNature(0, j) == Nature::METAL ^ "
@@ -231,14 +231,9 @@ public class LevelContract extends LevelDecorator {
             throw new PreconditionError("!(getNature(h1, w1) == Nature.EMPTY ^ getNature(h1 - 1, w1) == Nature.EMPTY ^ getNature(h1 + 1, w1) == Nature.EMPTY)");
         }
         
-        // \pre: getNature(h2, w2) == Nature::EMPTY ^ getNature(h2 - 1, w2) == Nature::EMPTY ^ getNature(h2 + 1, w2) == Nature::EMPTY 
-        if (!(getNature(h2, w2) == Nature.EMPTY && getNature(h2 - 1, w2) == Nature.EMPTY && getNature(h2 + 1, w2) == Nature.EMPTY)) {
-            throw new PreconditionError("!(getNature(h2, w2) == Nature.EMPTY ^ getNature(h2 - 1, w2) == Nature.EMPTY ^ getNature(h2 + 1, w2) == Nature.EMPTY)");
-        }
-        
-        // \pre: h1 != h2 v w1 != w2
-        if (!(h1 != h2 || w1 != w2)) {
-            throw new PreconditionError("!(h1 != h2 v w1 != w2)");
+        // \pre: getNature(h2, w2) == Nature::EMPTY ^ getNature(h2 - 1, w2) == Nature::EMPTY ^ getNature(h2 + 1, w2) == Nature::METAL 
+        if (!(getNature(h2, w2) == Nature.EMPTY && getNature(h2 - 1, w2) == Nature.EMPTY && getNature(h2 + 1, w2) == Nature.METAL)) {
+            throw new PreconditionError("!(getNature(h2, w2) == Nature.EMPTY ^ getNature(h2 - 1, w2) == Nature.EMPTY ^ getNature(h2 + 1, w2) == Nature.METAL)");
         }
         
         /* Processing */

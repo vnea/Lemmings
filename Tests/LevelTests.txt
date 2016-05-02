@@ -1,0 +1,99 @@
+///////// Test preconditions /////////
+
+Cas de test : testInitPre1
+
+Couverture : preconditions
+Objectif : precondition resolved
+Conditions initiales : empty
+Opérations : C0 := init(30, 30)
+Oracle :
+	No exception
+Rapport :
+	A PreconditionError was raised :
+		"No exception must be raised."
+
+
+Cas de test : testInitPre2
+
+Couverture : preconditions
+Objectif : precondition unresolved
+Conditions initiales : empty
+Opérations : C0 := init(MIN_HEIGHT-1, 30)
+Oracle :
+	A PreconditionError must be raised
+Rapport :
+	No exception :
+		"A PreconditionError must be raised."
+		
+
+Cas de test : testInitPre3
+
+Couverture : preconditions
+Objectif : precondition unresolved
+Conditions initiales : empty
+Opérations : C0 := init(30, MIN_WIDTH-1)
+Oracle :
+	A PreconditionError must be raised
+Rapport :
+	No exception :
+		"A PreconditionError must be raised."
+		
+
+Cas de test : testInitPre4
+
+Couverture : preconditions
+Objectif : precondition unresolved
+Conditions initiales : empty
+Opérations : C0 := init(MAX_HEIGHT+1, 30)
+Oracle :
+	A PreconditionError must be raised
+Rapport :
+	No exception :
+		"A PreconditionError must be raised."
+		
+		
+Cas de test : testInitPre5
+
+Couverture : preconditions
+Objectif : precondition unresolved
+Conditions initiales : empty
+Opérations : C0 := init(30, MAX_WIDTH+1)
+Oracle :
+	A PreconditionError must be raised
+Rapport :
+	No exception :
+		"A PreconditionError must be raised."
+		
+
+Cas de test : testGetNaturePre1
+
+Couverture : preconditions
+Objectif : precondition resolved
+Conditions initiales : C0 = init(30, 30)
+Opérations : C1 := nature(C0, 30, 30);
+Oracle :
+	No exception
+Rapport :
+	A PreconditionError was raised :
+		"No exception must be raised"		
+		
+
+Cas de test : testGetNaturePre2
+
+Couverture : preconditions
+Objectif : precondition unresolved
+Conditions initiales : C0 = init(30, 30)
+Opérations : C1 := nature(C0, 20, 20);
+Oracle :
+	No exception
+Rapport :
+	A PreconditionError was raised :
+		"No exception must be raised"	
+		
+		
+		
+		
+
+
+
+///////// Test transitions /////////

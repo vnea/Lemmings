@@ -66,8 +66,7 @@ Observations:
 			 		lemming(newLemming(G,num),num) = Lemming::init(num, Level::hEntrance(level(newLemming(G,num))), Level::wEntrance(level(newLemming(G,num))), newLemming(G,num))
 			 		∀ n ∈ numLemmingsActive(G), lemming(newLemming(G,num),n) = lemming(G,n)
 			 [checkSaved]
-			 		∀ num ∈ numLemmingsActive(G) if Lemming::hPos(lemming(G,num)) = Level::hExit(level(checkSaved(G))) ^
-			 		                                Lemming::wPos(lemming(G,num)) = Level::wExit(level(checkSaved(G))) then:
+			 		∀ num ∈ numLemmingsActive(G) if Level::nature(Level(checkSaved(G)), Lemming::hPos(lemming(G,num)),  Lemming::wPos(lemming(G,num))) = Level::Nature::EXIT then:
 			 		   									 numLemmingsActive(checkSaved(G)) = numLemmingsActive(G) \ {num}
 			 		nbLemmingSaved(checkSaved(G)) = nbLemmingsCreated(checkSaved(G)) - (nbLemmingsActive(checkSaved(G))	+ nbLemmingsDead(checkSaved(G)))	
 			 [checkDead]

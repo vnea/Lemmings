@@ -47,10 +47,10 @@ Observations:
 			 [useToken]
 			       if tokenSelected(P)=X, X ∈  {WALKER, FALLER, DIGGER, BUILDER, STOPPER, BASHER}) then: 
 										 	   nbToken(useToken(P, numLemming),X) = nbToken(P,X)-1 ^
-										 	   Lemming::Behaviour(GameEng::Lemming(gameEngine(useToken(P, numLemming)),numLemming)) = X
+										 	   Lemming::behaviour(GameEng::Lemming(gameEngine(useToken(P, numLemming)),numLemming)) = X
 				   else tokenSelected(P)=X, X ∈  {BASIC, CLIMBER, FLOATER, BOMBER}) then:
 				   							   nbToken(useToken(P, numLemming),X) = nbToken(P,X)-1 ^
-										 	   Lemming::State(GameEng::Lemming(gameEngine(useToken(P, numLemming)),numLemming)) = X
+										 	   Lemming::state(GameEng::Lemming(gameEngine(useToken(P, numLemming)),numLemming)) = X
 			 [resetGame]
 			 	   gameEngine(resetGame(P)) = GameEng::init(GameEng::getSizeColony(gameEngine(P)),GameEng::getSpawnS(gameEngine(P)),GameEng::getLevel(gameEngine(P)))
 			 	          ∀ X ∈  TokenType, nbToken(resetGame(P),X) = nbTokenInit(P,X) 
