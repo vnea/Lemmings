@@ -184,6 +184,32 @@ Report :
 	No exception :
 		"A PreconditionError must be raised."
 		
+
+Test : testSetNaturePre4
+
+Coverage : preconditions
+Goal : precondition unresolved
+Initial conditions : C0 := init(30, 30)  
+Operations : C1 := setNature(C0, 10, 10, ENTRANCE);
+Oracle :
+	A PreconditionError must be raised
+Report :
+	No exception :
+		"A PreconditionError must be raised."
+		
+
+Test : testSetNaturePre5
+
+Coverage : preconditions
+Goal : precondition unresolved
+Initial conditions : C0 := init(30, 30)  
+Operations : C1 := setNature(C0, 10, 10, EXIT);
+Oracle :
+	A PreconditionError must be raised
+Report :
+	No exception :
+		"A PreconditionError must be raised."
+		
 		
 Test : testRemovePre1
 
