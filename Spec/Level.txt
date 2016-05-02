@@ -8,6 +8,8 @@ Observators:
              editing: [Level] -> bool
              nature: [Level] * int * int -> Nature
                  pre nature(L,h,w) require squareExist(L,h,w)
+             obstacle: [Level] * int * int -> bool
+             	 pre obstacle(L,h,w) require squareExist(L,h,w)
              squareExist: [Level] * int * int -> bool
              hEntrance: [Level] -> int
              	 pre hEntrance(L) require editing(L) = false 
@@ -15,8 +17,8 @@ Observators:
              	 pre wEntrance(L) require editing(L) = false 
             
 Constructors: 
-			  init: int * int -> [Level]
-                   pre init(h,w) require 20 <= h <= 50  ^  20 <= w <= 50
+			 init: int * int -> [Level]
+                 pre init(h,w) require 20 <= h <= 50  ^  20 <= w <= 50
  
 Operators: 
 		    setNature: [Level] * int * int * Nature -> [Level]

@@ -937,5 +937,23 @@ public class LevelTest {
 	
 	
 	///////// Test remarkable state /////////
+	// OK
+	public void testSetDirtTwice() {
+		// init
+		level.init(30, 30);
+		
+		
+		level.setNature(10, 10, Nature.DIRT);
+		level.setNature(10, 10, Nature.DIRT);
+		
+		// operation
+		try{
+			level.goPlay(5, 5, 8, 8);
+		}
+		catch(PostconditionError | InvariantError e){
+			assertTrue("No exception must be raised.", false);
+		}
+		catch(PreconditionError e){}
+	}
 	
 }

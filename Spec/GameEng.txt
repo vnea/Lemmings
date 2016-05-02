@@ -6,9 +6,6 @@ Observators:
 			 score: [GameEng] -> int
 			 	   pre score(G) require gameOver(G)
 			 turn: [GameEng] -> int
-			 obstacle: [GameEng] * int * int -> bool
-			 dirtObstacle: [GameEng] * int * int -> bool
-			 metalObstacle: [GameEng] * int * int -> bool
 			 const sizeColony: [GameEng] -> int
 			 nbLemmingsDead: [GameEng] -> int
 			 nbLemmingsSaved: [GameEng] -> int 
@@ -65,7 +62,7 @@ Observations:
 			        turn(callStepLemmings(G)) = turn(G) + 1	
 			 [newLemming]
 			 		numLemmingsActive(newLemming(G,num)) = numLemmingsActive U {num}
-			 		lemming(newLemming(G,num),num) = Lemming::init(num, Level::hEntrance(level(newLemming(G,num))), Level::wEntrance(level(newLemming(G,num))), newLemming(G,num))
+			 		lemming(newLemming(G,num),num) = Lemming::init(num, Level::hEntrance(level(newLemming(G,num))), Level::wEntrance(level(newLemming(G,num))), level(newLemming(G,num)))
 			 		∀ n ∈ numLemmingsActive(G), lemming(newLemming(G,num),n) = lemming(G,n)
 			 [checkSaved]
 			 		∀ num ∈ numLemmingsActive(G) if Level::nature(Level(checkSaved(G)), Lemming::hPos(lemming(G,num)),  Lemming::wPos(lemming(G,num))) = Level::Nature::EXIT then:

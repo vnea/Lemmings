@@ -50,7 +50,7 @@ Observations:
 				   							   nbToken(useToken(P, numLemming),X) = nbToken(P,X)-1 ^
 										 	   Lemming::state(GameEng::Lemming(gameEngine(useToken(P, numLemming)),numLemming)) = X
 			 [resetGame]
-			 	   gameEngine(resetGame(P)) = GameEng::init(GameEng::getSizeColony(gameEngine(P)),GameEng::getSpawnS(gameEngine(P)),GameEng::getLevel(gameEngine(P)))
+			 	   gameEngine(resetGame(P)) = GameEng::init(GameEng::getSizeColony(gameEngine(P)),GameEng::getSpawnS(gameEngine(P)),GameEng::level(gameEngine(P)))
 			 	          ∀ X ∈  TokenType, nbToken(resetGame(P),X) = nbTokenInit(P,X) 
 			 	          ∀ X ∈  TokenType, nbTokenInit(resetGame(P),X) = nbTokenInit(P,X) 
 			 	   tokenSelected(resetGame(P)) = TokenType::WALKER
