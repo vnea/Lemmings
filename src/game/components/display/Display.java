@@ -1,14 +1,20 @@
 package game.components.display;
 
 import game.enums.Nature;
+import game.enums.TokenType;
 import game.services.GameEngService;
 import game.services.LemmingService;
 import game.services.LevelService;
+import game.services.PlayerService;
 
 import java.awt.BorderLayout;
+import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.ComponentAdapter;
+import java.awt.event.ComponentEvent;
 import java.util.List;
+import java.util.Map;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -19,8 +25,11 @@ public class Display {
     
     private GameEngService gameEngine;
     private LevelService level;
+    private PlayerService player;
     
     private Nature currentNature = Nature.EMPTY;
+    private TokenType currentTokenType = null;
+    
     private boolean editing = true;
     private boolean selectingDoors = false;
     
@@ -29,18 +38,21 @@ public class Display {
     private TileLevel entrance = null;
     private TileLevel exit = null;
     private TileLevel [][]tiles;
+    private Map<TokenType, TileToken> mapToken;
     
     private JButton jButtonPlay;
     private JButton jButtonValidate;
     private JButton jButtonStart;
     private JButton jbuttonNextTurn;
     
-    private int i = 7;
-
+    private int idLemming = 0;
+    private Integer initWidth = null;
     
-    public Display(GameEngService gameEngine) {
-        this.gameEngine = gameEngine;
-        level = this.gameEngine.getLevel();
+    
+    public Display(GameEngService gameEngine, LevelService level, PlayerService player) {
+        this.gameEngine = gameEngine; 
+        this.level = level;
+        this.player = player;
         
         // Panel Level
         PanelLevel panelLevel = new PanelLevel(level.getHeight(),
@@ -56,7 +68,7 @@ public class Display {
         PanelInitGameEngine panelInitGameEngine = new PanelInitGameEngine();
         
         // Panel select token
-        PanelSelectToken panelSelectToken = new PanelSelectToken();
+        PanelSelectToken panelSelectToken = new PanelSelectToken(this);
         
         // Play button
         jButtonPlay = new JButton("Jouer");
@@ -110,8 +122,9 @@ public class Display {
                 
                 mainFrame.add(panelSelectToken, BorderLayout.CENTER);
                 mainFrame.add(jbuttonNextTurn, BorderLayout.SOUTH);
-                gameEngine.newLemming(i++);
+                gameEngine.newLemming(idLemming++);
                 refreshMainFrame();
+                mainFrame.pack();
             }
         });
 
@@ -148,7 +161,7 @@ public class Display {
                     if (!gameEngine.isGameOver() && 
                         gameEngine.getNbLemmingsCreated() < gameEngine.getSizeColony() &&
                         gameEngine.getTurn() % gameEngine.getSpawnSpeed() == 0) {
-                        gameEngine.newLemming(i++);
+                        gameEngine.newLemming(idLemming++);
                     }
                 }
                 if (gameEngine.isGameOver()) {
@@ -174,6 +187,17 @@ public class Display {
         mainFrame.setResizable(false);
         mainFrame.pack();
         mainFrame.setVisible(true);
+        initWidth = mainFrame.getWidth();
+        mainFrame.addComponentListener(new ComponentAdapter() {
+            @Override
+            public void componentResized(ComponentEvent e) {
+                if (initWidth != null) {
+                    mainFrame.setSize(new Dimension(initWidth, mainFrame.getPreferredSize().height));
+                }
+                super.componentResized(e);
+            }
+
+        });
     }
     
     public Nature getCurrentNature() {
@@ -226,12 +250,24 @@ public class Display {
         return level;
     }
     
+    public PlayerService getPlayer() {
+        return player;
+    }
+    
     public GameEngService getGameEngine() {
         return gameEngine;
     }
     
     public boolean isSelectingDoors() {
         return selectingDoors;
+    }
+    
+    public TokenType getCurrentTokenType() {
+        return currentTokenType;
+    }
+    
+    public void setCurrentTokenType(TokenType tokenType) {
+        currentTokenType = tokenType;
     }
     
     // To update

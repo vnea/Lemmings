@@ -82,13 +82,13 @@ public class Level implements
     @Override
     public void goPlay(int h1, int w1, int h2, int w2) {
         defEntrace(h1, w1);
-        setNature(h2, w2, Nature.EXIT);
+        squares[h2][w2] = Nature.EXIT;
         editing = false;
     }
     
     private void defEntrace(int h, int w) {
         hEntrance = h;
         wEntrance = w;
-        setNature(h, w, Nature.ENTRANCE);
+        squares[h][w] = Nature.ENTRANCE;
     }
 }

@@ -2,6 +2,7 @@ package game.components.display;
 
 import game.enums.Direction;
 import game.enums.Nature;
+import game.enums.TokenType;
 import game.services.LemmingService;
 import game.services.display.TileService;
 
@@ -58,6 +59,13 @@ public class TileLevel extends JLabel implements TileService {
                                 display.setExit(ref);
                                 setIcon(exitImg);
                             }
+                        }
+                    }
+                    else {
+                        TokenType tokenType = display.getCurrentTokenType();
+                        if (lemming != null && tokenType != null) {
+                            System.out.println(tokenType);
+                            display.getPlayer().useToken(lemming.getNum());
                         }
                     }
                 }

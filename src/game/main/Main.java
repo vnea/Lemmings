@@ -14,15 +14,14 @@ public class Main {
         
         // Initialisation(s)
         //gameEngine.init(10, 1);
-        level.init(12, 10);
-        player.init(5, 5, 5, 5, 5, 5, 5, 5, 5, 5);
+        level.init(10, 12);
+        player.init(5, 5, 5, 5, 0, 5, 5, 5, 5, 0);
         
         // Binding(s)
         gameEngine.bindLevelService(level);
         player.bindGameEngService(gameEngine);
         
-        Display display = new Display(gameEngine);
-
-        
+        @SuppressWarnings("unused")
+        Display display = new Display(gameEngine, level, player);
     }
 }
