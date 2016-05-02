@@ -76,6 +76,7 @@ public interface LevelService {
     /** Set a new nature
      * \pre: isEditing()
      * \pre: squareExist(h, w)
+     * \pre: n != Nature::Entrance ^ n != Nature::Exit
      */
     public void setNature(int h, int w, Nature n);
     

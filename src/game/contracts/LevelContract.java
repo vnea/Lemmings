@@ -108,6 +108,11 @@ public class LevelContract extends LevelDecorator {
             throw new PreconditionError("!squareExist(h, w)");
         }
         
+        // \pre: n != Nature::ENTRANCE ^ n != Nature::EXIT
+        if (!(n != Nature.ENTRANCE && n != Nature.EXIT)) {
+            throw new PreconditionError("!(n != Nature::ENTRANCE ^ n != Nature::EXIT)");
+        }
+        
         /* Processing */
         super.setNature(h, w, n);
         
