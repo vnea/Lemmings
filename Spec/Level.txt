@@ -21,6 +21,7 @@ Constructors:
 Operators: 
 		    setNature: [Level] * int * int * Nature -> [Level]
  				pre setNature(L,h,w,n) require editing(L) ^ squareExist(L,h,w)
+ 														  ^ n != Nature::Entrance ^ n != Nature::Exit
  			remove: [Level] * int * int -> [Level]
             	pre remove(L,h,w) require editing(L)=false ^ nature(L,h,w)=Nature::DIRT
             build: [Level] * int * int -> [Level]          

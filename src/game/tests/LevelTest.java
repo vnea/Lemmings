@@ -785,4 +785,119 @@ public class LevelTest {
 		assertTrue("A PreconditionError must be raised.", excpt);
 	}
 	
+	
+	
+	
+	///////// Test transitions /////////
+	
+	@Test
+	// OK
+	public void testInitTrans1(){
+		// operation
+		try {
+			level.init(LevelService.MAX_HEIGHT, LevelService.MAX_WIDTH);
+		}
+		catch(PostconditionError | InvariantError e){
+			assertTrue("No exception must be raised.", false);
+		}
+		catch(PreconditionError e){}
+	}
+	
+	@Test
+	// OK
+	public void testSetNatureTrans1() {
+		// init
+		level.init(30, 30);
+		
+		// operation
+		try{
+			level.setNature(0, 0, Nature.DIRT);
+		}
+		catch(PostconditionError | InvariantError e){
+			assertTrue("No exception must be raised.", false);
+		}
+		catch(PreconditionError e){}
+	}
+	
+	@Test
+	// OK
+	public void testRemoveTrans1() {
+		// init
+		level.init(30, 30);
+		for(int i=0; i < level.getHeight(); i++){
+			level.setNature(i, 0, Nature.METAL);
+			level.setNature(i, level.getWidth()-1, Nature.METAL);
+		}
+		for(int i=0; i < level.getWidth(); i++){
+			level.setNature(0, i, Nature.METAL);
+			level.setNature(level.getHeight()-1, i, Nature.METAL);
+		}
+		level.setNature(9, 8, Nature.METAL);
+		level.setNature(10, 10, Nature.DIRT);
+		level.goPlay(5, 5, 8, 8);
+		
+		// operation
+		try{
+			level.remove(10, 10);
+		}
+		catch(PostconditionError | InvariantError e){
+			assertTrue("No exception must be raised.", false);
+		}
+		catch(PreconditionError e){}
+	}
+	
+	@Test
+	// OK
+	public void testBuildTrans1() {
+		// init
+		level.init(30, 30);
+		for(int i=0; i < level.getHeight(); i++){
+			level.setNature(i, 0, Nature.METAL);
+			level.setNature(i, level.getWidth()-1, Nature.METAL);
+		}
+		for(int i=0; i < level.getWidth(); i++){
+			level.setNature(0, i, Nature.METAL);
+			level.setNature(level.getHeight()-1, i, Nature.METAL);
+		}
+		level.setNature(9, 8, Nature.METAL);
+		level.goPlay(5, 5, 8, 8);
+		
+		// operation
+		try{
+			level.build(10, 10);
+		}
+		catch(PostconditionError | InvariantError e){
+			assertTrue("No exception must be raised.", false);
+		}
+		catch(PreconditionError e){}
+	}
+	
+	@Test
+	// OK
+	public void testGoPlayTrans1() {
+		// init
+		level.init(30, 30);
+		for(int i=0; i < level.getHeight(); i++){
+			level.setNature(i, 0, Nature.METAL);
+			level.setNature(i, level.getWidth()-1, Nature.METAL);
+		}
+		for(int i=0; i < level.getWidth(); i++){
+			level.setNature(0, i, Nature.METAL);
+			level.setNature(level.getHeight()-1, i, Nature.METAL);
+		}
+		level.setNature(9, 8, Nature.METAL);
+		
+		// operation
+		try{
+			level.goPlay(5, 5, 8, 8);
+		}
+		catch(PostconditionError | InvariantError e){
+			assertTrue("No exception must be raised.", false);
+		}
+		catch(PreconditionError e){}
+	}
+	
+	
+	///////// Test remarkable state /////////
+	
 }

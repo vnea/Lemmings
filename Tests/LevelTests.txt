@@ -1,3 +1,6 @@
+///////// indication /////////
+*conditions_for_goPlay  = all preconditions of goPlay are respected
+
 ///////// Test preconditions /////////
 
 Test : testInitPre1
@@ -418,3 +421,83 @@ Report :
 
 
 ///////// Test transitions /////////
+
+Test : testInitTrans1
+
+Coverage : transitions
+Goal : init transition
+Initial conditions : empty
+Operations : C0 := init(MAX_HEIGHT, MAX_WIDTH)
+Oracle :
+	No exception
+Report :
+	A PostconditionError was raised :
+		"No exception must be raised."
+	A InvariantError was raised :
+		"No exception must be raised."
+		
+		
+Test : testSetNatureTrans1
+
+Coverage : transitions
+Goal : setNature transition
+Initial conditions : C0 := init(30, 30)
+Operations : C1 := setNature(C0, 0, 0, DIRT);
+Oracle :
+	No exception
+Report :
+	A PostconditionError was raised :
+		"No exception must be raised."
+	A InvariantError was raised :
+		"No exception must be raised."
+		
+		
+Test : testRemoveTrans1
+
+Coverage : transitions
+Goal : remove transition
+Initial conditions : C0 := goPlay(setNature(conditions_for_goPlay,10,10,DIRT),5,5,8,8)
+Operations : C1 := remove(C0, 10, 10)
+Oracle :
+	No exception
+Report :
+	A PostconditionError was raised :
+		"No exception must be raised."
+	A InvariantError was raised :
+		"No exception must be raised."
+		
+		
+Test : testBuildTrans1
+
+Coverage : transitions
+Goal : build transitions
+Initial conditions : C0 := goPlay(conditions_for_goPlay,5,5,8,8)
+Operations : C1 := build(C0, 10, 10)
+Oracle :
+	No exception
+Report :
+	A PostconditionError was raised :
+		"No exception must be raised."
+	A InvariantError was raised :
+		"No exception must be raised."
+		
+
+Test : testGoPlayTrans1
+
+Coverage : transitions
+Goal : goPlay transition
+Initial conditions : C0 := conditions_for_goPlay
+Operations : C1 := goPlay(C0,5,5,8,8)
+Oracle :
+	No exception
+Report :
+	A PostconditionError was raised :
+		"No exception must be raised."
+	A InvariantError was raised :
+		"No exception must be raised."
+		
+		
+///////// Test transitions /////////
+		
+		
+		
