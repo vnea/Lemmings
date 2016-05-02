@@ -2,5 +2,9 @@ package game.enums;
 
 public enum Behaviour {
     WALKER,
-    FALLER
+    FALLER,
+    DIGGER,
+    BUILDER,
+    STOPPER,
+    BASHER
 }

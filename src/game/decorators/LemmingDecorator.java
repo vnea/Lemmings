@@ -42,6 +42,11 @@ public class LemmingDecorator implements LemmingService {
     public int getWPos() {
         return delegate.getWPos();
     }
+    
+    @Override
+    public int getCounterFaller() {
+        return delegate.getCounterFaller();
+    }
 
     @Override
     public boolean isDead() {
@@ -58,6 +63,16 @@ public class LemmingDecorator implements LemmingService {
         delegate.init(num, h, w);
     }
 
+    @Override
+    public void setBehaviour(Behaviour b) {
+        delegate.setBehaviour(b);
+    }
+    
+    @Override
+    public void setState(State s) {
+        delegate.setState(s);
+    }
+    
     @Override
     public void step() {
         delegate.step();

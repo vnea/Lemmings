@@ -8,10 +8,13 @@ public interface LemmingService {
     //**CONSTANT(S)**********************************************************//
     
     /** Minimum vertical position of the Lemming */
-    final static int MIN_H_POS = 19;
+    final static int MIN_H_POS = 2;
     
     /** Minimum horitontal position of the Lemming */
-    final static int MIN_W_POS = 51;
+    final static int MIN_W_POS = 1;
+    
+    /** Maximum counter of a faller before he dies */
+    final static int MAX_COUNTER_FALLER_BEFORE_DEATH = 8;
     
     //***********************************************************************//
 
@@ -35,6 +38,9 @@ public interface LemmingService {
     
     /** Horitontal position of the Lemming */
     public int getWPos();
+    
+    /** Counter of a faller */
+    public int getCounterFaller();
     
     /** Tells is the Lemming is dead */
     public boolean isDead();
@@ -62,6 +68,7 @@ public interface LemmingService {
      * \post: getDirection() == Direction::RIGHT
      * \post: getBehaviour() == Behaviour::FALLER
      * \post: !isDead()
+     * \post: getCounterFaller() == 0
      */
     public void init(int num, int h, int w);
     
@@ -69,6 +76,16 @@ public interface LemmingService {
 
     
     //**OPERATOR(S)**********************************************************//
+    
+    /** Set a new behaviour
+     * \post: getBehaviour() == b
+     */
+    public void setBehaviour(Behaviour b);
+    
+    /** Set a new state
+     * \post: getState() == s
+     */
+    public void setState(State s);
     
     /** Run Lemming action
      * \post: if getBehaviour() == Behaviour::WALKER then
@@ -101,16 +118,13 @@ public interface LemmingService {
      *        else if getBehaviour() == Behaviour::FALLER then
      *              if !getGameEngine().isAnObstacle(getHPos() + 1, getWPos()) then
      *                  getHPos() == getHPos()@pre + 1
+     *                  getCounterFaller() == getCounterFaller()@pre + 1
      *              else
-     *                  if getDirection() == Direction::RIGHT then
-     *                      if \forall i \in ]0, 8[, !getGameEngine().isAnObstacle(getHPos() - i, getWPos() - 1) then:
-     *                          isDead()
-     *                  else if getDirection() == Direction::LEFT
-     *                      if \forall i \in ]0, 8[, !getGameEngine().isAnObstacle(getHPos() - i, getWPos() + 1) then:
-     *                          isDead()
-     *                          
-     *                  if !isDead() then:
+     *                  if getCounterFaller() > MAX_COUNTER_FALLER_BEFORE_DEATH
+     *                      isDead()
+     *                  else
      *                      getBehaviour() == Behaviour::WALKER
+     *                      getCounterFaller() == 0
      */
     public void step();
     

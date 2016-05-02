@@ -13,8 +13,8 @@ public class Main {
         Player player = new Player();
         
         // Initialisation(s)
-        gameEngine.init(10, 1);
-        level.init(10, 10);
+        //gameEngine.init(10, 1);
+        level.init(12, 10);
         player.init(5, 5, 5, 5, 5, 5, 5, 5, 5, 5);
         
         // Binding(s)

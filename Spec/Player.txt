@@ -15,7 +15,7 @@ Constructors:
 Operators:
 			 useToken: [Player] * int -> [Player]
 				   pre useToken(P, numLemming) require 
-				   						tokenSelected(P)=X => nbToken(P,X) > 0
+				   						tokenSelected(P)=X => nbToken(P,X) > 0, X  ∈ TokenType
 			 resetGame: [Player] -> [Player]
 			 selectToken: [Player] * TokenType -> [Player]
 Observations:

@@ -9,7 +9,7 @@ Observators:
 			 state: [Lemming] -> State
 			 hPos: [Lemming] -> int
 			 wPos: [Lemming] -> int
-			 cptFaller: [Lemming] -> int
+			 counterFaller: [Lemming] -> int
 			 dead: [Lemming] -> bool
 			 gameEngine: [Lemming] -> GameEng
 
@@ -24,7 +24,7 @@ Operators:
 Observations:
 			 [invariants] 
 			 	   GameEng::obstacle(gameEngine(L),hPos(L)-1,wPos(L)) = false
-			 	   cptFaller > -1
+			 	   counterFaller > -1
 			 [init]
 			 		num(init(num,h,w,G)) = num
 			 		hPos(init(num,h,w,G)) = h
@@ -33,11 +33,11 @@ Observations:
 			 		behaviour(init(num,h,w,G)) = Behaviour::FALLER
 			 		state(init(num,h,w,G)) = State::BASIC
 			 		dead(init(num,h,w,G)) = false
-			 		cptFaller(init(num,h,w,G)) = 0
+			 		counterFaller(init(num,h,w,G)) = 0
 			 [setBehaviour]
-			 		Behaviour(setBehaviour(L,b)) = b
+			 		behaviour(setBehaviour(L,b)) = b
 		 	 [setState]
-		 		    State(setState(L,s)) = s
+		 		    state(setState(L,s)) = s
 			 [step]
 			 		if behaviour(L)=Behaviour::WALKER then:
 			 			if direction(L)=Direction::RIGHT then:
@@ -68,12 +68,12 @@ Observations:
 			 		else if behaviour(L)=Behaviour::FALLER then:
 			 			if GameEng::obstacle(gameEngine(L),hPos(L)+1,wPos(L))=false then:
 		 					hPos(step(L)) = hPos(L)+1
-		 					cptFaller(step(L)) = cptFaller(L)+1
+		 					counterFaller(step(L)) = counterFaller(L)+1
 			 			else: 
-			 				if cptFaller(L) > 8 then:
+			 				if counterFaller(L) > 8 then:
 				 				dead(step(l)) = true
 			 				else:
 			 					behaviour(step(L)) = Behaviour::WALKER	
-			 					cptFaller(step(L)) = 0		
+			 					counterFaller(step(L)) = 0		
 			 			
 		 	

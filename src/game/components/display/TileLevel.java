@@ -15,7 +15,9 @@ public class TileLevel extends JLabel implements TileService {
     
     private int h;
     private int w;
-    private boolean isADoor = false;
+    private boolean isEntrance = false;
+    private boolean isExit = false;
+
     
     private Nature nature;
     private LemmingService lemming = null;
@@ -45,12 +47,15 @@ public class TileLevel extends JLabel implements TileService {
                     }
                     else {
                         if (ref.nature == Nature.EMPTY) {
-                            isADoor = true;
                             if (display.isSelectingEntrance()) {
+                                isEntrance = true;
+                                isExit = false;
                                 display.setEntrance(ref);
                                 setIcon(entranceImg);
                             }
                             else {
+                                isExit = true;
+                                isEntrance = false;
                                 display.setExit(ref);
                                 setIcon(exitImg);
                             }
@@ -69,7 +74,8 @@ public class TileLevel extends JLabel implements TileService {
     }
     
     public void removeDoor() {
-        isADoor = false;
+        isExit = false;
+        isEntrance = false;
         updateNature(this.nature);
     }
     
@@ -92,14 +98,13 @@ public class TileLevel extends JLabel implements TileService {
     }
     
     public void update() {
-        // Show the door
-        if (isADoor) {
-            if (display.isSelectingEntrance()) {
-                setIcon(entranceImg);
-            }
-            else {
-                setIcon(exitImg);
-            }
+        // Show entrance
+        if (isEntrance) {
+            setIcon(entranceImg);
+        }
+        // Show entrance
+        else if (isExit) {
+            setIcon(exitImg);
         }
         // Show the Lemming
         else if (lemming != null) {

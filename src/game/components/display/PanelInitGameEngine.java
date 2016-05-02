@@ -20,7 +20,7 @@ public class PanelInitGameEngine extends JPanel {
         
         JLabel jLabelSizeColony = new JLabel("Nb lemmings:");
         add(jLabelSizeColony);
-        jSpinnerSizeColony = new JSpinner(new SpinnerNumberModel(10, 1, 20, 1));
+        jSpinnerSizeColony = new JSpinner(new SpinnerNumberModel(2, 1, 20, 1));
         add(jSpinnerSizeColony);
         
         JLabel jLabelSpawnSpeed = new JLabel("Vitesse:");

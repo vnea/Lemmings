@@ -62,13 +62,10 @@ public interface PlayerService {
     //**OPERATOR(S)**********************************************************//
     
     /** Use a token
-     * \pre: if getTokenSelected() == X, X ∈  {WALKER, FALLER, DIGGER, BUILDER, STOPPER, BASHER}) then: 
-     *          getGameEngine().getLemming(numLemming).getBehaivour() != X ^ getNbToken(X) > 0
-     *       else if getTokenSelected() == X, X ∈ {BASIC, CLIMBER, FLOATER, BOMBER}) then:
-     *          getGameEngine().getLemming(numLemming).getState() != X ^ getNbToken(X) > 0
-     * \post: if getTokenSelected() == X, X ∈ {WALKER, FALLER, DIGGER, BUILDER, STOPPER, BASHER}) then:
+     * \pre: getTokenSelected() == X => getNbToken(X) > 0, X  ∈ TokenType
+     * \post: if getTokenSelected() == X, X ∈ {WALKER, FALLER, DIGGER, BUILDER, STOPPER, BASHER} then:
      *           getNbToken(X) == getNbToken(X)@pre - 1 ^ getGameEngine().getLemming(numLemming).getBehaviour() == X
-     *        else getTokenSelected() == X, X ∈  {BASIC, CLIMBER, FLOATER, BOMBER}) then:
+     *        else getTokenSelected() == X, X ∈  {BASIC, CLIMBER, FLOATER, BOMBER} then:
      *           getNbToken(X) == getNbToken(X)@pre - 1 ^ getGameEngine().getLemming(numLemming).getState() == X
      */
     public void useToken(int numLemming);

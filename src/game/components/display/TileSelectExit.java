@@ -21,7 +21,7 @@ public class TileSelectExit extends JLabel implements TileService {
         this.display = display;
         addMouseListener(new MouseAdapter() {
             @Override
-            public void mouseClicked(MouseEvent e) {
+            public void mousePressed(MouseEvent e) {
                 display.setSelectingEntrance(false);
             }
         });

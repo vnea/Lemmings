@@ -33,7 +33,7 @@ public class Display {
     private JButton jButtonStart;
     private JButton jbuttonNextTurn;
     
-    private int i = 0;
+    private int i = 7;
 
     
     public Display(GameEngService gameEngine) {
@@ -119,12 +119,19 @@ public class Display {
             public void actionPerformed(ActionEvent e) {
                 gameEngine.callStepLemmings();
                 
+                for (int h = 0; h < level.getHeight(); ++h) {
+                    for (int w = 0; w < level.getWidth(); ++w) {
+                        tiles[h][w].setLemming(null);
+                    }
+                }
+                
                 List<Integer> numLemmings = gameEngine.getNumLemmingsActive();
-                System.out.println(numLemmings.size());
+                //System.out.println(numLemmings.size());
+               // System.out.println(gameEngine.getNbLemmingsActive());
                 for (Integer numLemming : numLemmings) {
+                    //System.out.println(numLemming);
                     LemmingService lemming = gameEngine.getLemming(numLemming);
                     tiles[lemming.getHPos()][lemming.getWPos()].setLemming(lemming);
-                    System.out.println("ok");
                 }
                 
                 for (int h = 0; h < level.getHeight(); ++h) {
@@ -132,10 +139,14 @@ public class Display {
                         tiles[h][w].update();
                     }
                 }
-                
+
                 gameEngine.checkSaved();
                 gameEngine.checkDead();
                 gameEngine.checkWin();
+                
+                if (gameEngine.getNbLemmingsCreated() < gameEngine.getSizeColony()) {
+                    gameEngine.newLemming(i++);
+                }
             }
         });
         

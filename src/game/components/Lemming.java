@@ -22,6 +22,7 @@ public class Lemming implements
     
     private int hPos;
     private int wPos;
+    private int counterFaller;
     private boolean dead;
     
     private GameEngService gameEngine;
@@ -57,6 +58,11 @@ public class Lemming implements
     }
 
     @Override
+    public int getCounterFaller() {
+        return counterFaller;
+    }
+    
+    @Override
     public boolean isDead() {
         return dead;
     }
@@ -74,13 +80,24 @@ public class Lemming implements
         direction = Direction.RIGHT;
         behaviour = Behaviour.FALLER;
         dead = false;
+        resetCounterFaller();
     }
 
+    @Override
+    public void setBehaviour(Behaviour b) {
+        behaviour = b;
+    }
+    
+    @Override
+    public void setState(State s) {
+        state = s;
+    }
+    
     @Override
     public void step() {
         try {
             // Call method stepXXX(), where XXX = WALKER, FALLER, ...
-            getClass().getMethod("step" + behaviour).invoke(this);
+            getClass().getDeclaredMethod("step" + behaviour).invoke(this);
         }
         catch (IllegalAccessException | IllegalArgumentException
                 | InvocationTargetException | NoSuchMethodException
@@ -103,7 +120,7 @@ public class Lemming implements
             else if (gameEngine.isAnObstacle(hPos - 1, wPos + 1)) {
                 direction = Direction.LEFT;
             }
-            else if (!gameEngine.isAnObstacle(hPos, wPos + 1)) {
+            else if (gameEngine.isAnObstacle(hPos, wPos + 1)) {
                 if (gameEngine.isAnObstacle(hPos - 2,  wPos + 1)) {
                     direction = Direction.LEFT;
                 }
@@ -142,22 +159,20 @@ public class Lemming implements
     private void stepFALLER() {
         if (!gameEngine.isAnObstacle(hPos + 1, wPos)) {
             ++hPos;
+            ++counterFaller;
         }
         else {
-            if (direction == Direction.RIGHT) {
-                for (int i = 0; i < 8 && !dead; ++i) {
-                    dead = gameEngine.isAnObstacle(hPos - i, wPos - 1);
-                }
+            if (counterFaller > MAX_COUNTER_FALLER_BEFORE_DEATH) {
+                dead = true;
             }
-            else if (direction == Direction.LEFT) {
-                for (int i = 0; i < 8 && !dead; ++i) {
-                    dead = gameEngine.isAnObstacle(hPos - i, wPos + 1);
-                }
-            }
-
-            if (!dead) {
+            else {
                 behaviour = Behaviour.WALKER;
+                resetCounterFaller();
             }
         }
+    }
+    
+    private void resetCounterFaller() {
+        counterFaller = 0;
     }
 }

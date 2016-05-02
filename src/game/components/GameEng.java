@@ -8,6 +8,7 @@ import game.services.RequireLevelService;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class GameEng implements
     /* require */
@@ -70,12 +71,15 @@ public class GameEng implements
 
     @Override
     public LemmingService getLemming(int num) {
-        return lemmingsActive.get(num);
+        return (lemmingsActive.stream().filter(lemming -> 
+                                lemming.getNum() == num))
+               .collect(Collectors.toList()).get(0);
     }
 
     @Override
     public boolean isActive(int num) {
-        return num < lemmingsActive.size();
+        return lemmingsActive.stream().anyMatch(lemming ->
+                                                lemming.getNum() == num);
     }
 
     @Override
@@ -84,6 +88,7 @@ public class GameEng implements
                                              (lemmingsActive.size());
         lemmingsActive.forEach(lemming ->
                 numLemmingsActive.add(lemming.getNum()));
+        System.out.println("getNumLemmingsActive: " + lemmingsActive.size());
 
         return numLemmingsActive;
     }
@@ -116,9 +121,9 @@ public class GameEng implements
 
     @Override
     public void newLemming(int num) {
-        LemmingService lemming = new Lemming();
+        Lemming lemming = new Lemming();
         lemming.init(num, level.getHEntrance(), level.getWEntrance());
-        
+        lemming.bindGameEngService(this);
         lemmingsActive.add(lemming);
     }
 
@@ -133,6 +138,7 @@ public class GameEng implements
         lemmingsActive.removeIf(lemming ->
                     lemming.getHPos() == level.getHExit() &&
                     lemming.getWPos() == level.getWExit());
+        System.out.println("checkSaved: " + lemmingsActive.size());
 
         nbLemmingsSaved = getNbLemmingsCreated() - lemmingsActive.size() +
                           nbLemmingsDead;

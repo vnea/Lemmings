@@ -1,5 +1,7 @@
 package game.components;
 
+import game.enums.Behaviour;
+import game.enums.State;
 import game.enums.TokenType;
 import game.services.GameEngService;
 import game.services.LemmingService;
@@ -22,6 +24,23 @@ public class Player implements
     
     private GameEngService gameEngine;
 
+    private Map<TokenType, Behaviour> mapTokenTypeBehaviour = new HashMap<>();
+    private Map<TokenType, State> mapTokenTypeState = new HashMap<>();
+    
+    public Player() {
+        mapTokenTypeBehaviour.put(TokenType.WALKER, Behaviour.WALKER);
+        mapTokenTypeBehaviour.put(TokenType.FALLER, Behaviour.FALLER);
+        mapTokenTypeBehaviour.put(TokenType.DIGGER, Behaviour.DIGGER);
+        mapTokenTypeBehaviour.put(TokenType.BUILDER, Behaviour.BUILDER);
+        mapTokenTypeBehaviour.put(TokenType.STOPPER, Behaviour.STOPPER);
+        mapTokenTypeBehaviour.put(TokenType.BASHER, Behaviour.BASHER);
+
+        mapTokenTypeState.put(TokenType.BASIC, State.BASIC);
+        mapTokenTypeState.put(TokenType.CLIMBER, State.CLIMBER);
+        mapTokenTypeState.put(TokenType.FLOATER, State.FLOATER);
+        mapTokenTypeState.put(TokenType.BOMBER, State.BOMBER);
+    }
+    
     @Override
     public int getNbTokenInit(TokenType tokenType) {
         return mapNbInitToken.get(tokenType);
@@ -94,14 +113,13 @@ public class Player implements
         mapNbToken.put(tokenSelected, mapNbToken.get(tokenSelected) - 1);
 
         LemmingService lemming = gameEngine.getLemming(numLemming);
-        // Behvaiour case
+        // Behaviour case
         if (tokenSelected.isABehaviour()) {
-            // change behaviour lemming
-            
+            lemming.setBehaviour(mapTokenTypeBehaviour.get(tokenSelected));
         }
         // State case
         else {
-            // change state lemming
+            lemming.setState(mapTokenTypeState.get(tokenSelected));
         }
     }
 
