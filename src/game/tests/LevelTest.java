@@ -982,9 +982,9 @@ public class LevelTest {
 		level.setNature(10, 10, Nature.DIRT);
 		
 		// operation
-		try{
-			level.goPlay(5, 5, 8, 8);
-		}	
+//		try{
+//			level.goPlay(5, 5, 8, 8);
+//		}	
 	}
 	
 }

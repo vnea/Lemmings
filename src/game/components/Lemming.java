@@ -191,6 +191,7 @@ public class Lemming implements
             if (level.getNature(POS_BELOW, wPos + 1)  == Nature.DIRT) {
                 level.remove(POS_BELOW, wPos + 1);
             }
+            ++hPos;
         }
     }
     

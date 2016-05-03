@@ -87,4 +87,5 @@ Observations:
                                  Level::nature(level(L),hPos(L)+1,wPos(L)-1)=Nature::EMPTY
                              if Level::nature(level(L),hPos(L)+1,wPos(L)+1)=Nature::DIRT then:
                                  Level::nature(level(L),hPos(L)+1,wPos(L)+1)=Nature::EMPTY
+                             hPos(step(L)) = hPos(L)+1
  

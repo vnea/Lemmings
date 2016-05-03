@@ -139,6 +139,7 @@ public interface LemmingService {
      *                      getLevel().getNature(getHPos() + 1, getWPos() - 1) == Nature.EMPTY
      *                  if getLevel().getNature(getHPos() + 1, getWPos() + 1) == Nature.DIRT then
      *                      getLevel().getNature(getHPos() + 1, getWPos() + 1) == Nature.EMPTY
+     *                  getHPos() = getHPos()@pre + 1
      *                  
      */
     public void step();
