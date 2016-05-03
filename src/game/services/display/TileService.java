@@ -15,9 +15,9 @@ public interface TileService {
     final static Dimension dim = new Dimension(40, 40);
     
     /** String for natures */
-    final static String emptyStr = "Vide";
-    final static String dirtStr = "Boue";
-    final static String metalStr = "Métal";
+    final static String emptyStr = "Empty";
+    final static String dirtStr = "Dirt";
+    final static String metalStr = "Metal";
 
     /** Images for natures */
     final static ImageIcon emptyImg = new ImageIcon("res/tiles/EMPTY.png");

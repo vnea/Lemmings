@@ -88,7 +88,7 @@ public class Display {
             PanelSelectToken panelSelectToken = new PanelSelectToken(this);
             
             // Play button
-            jButtonPlay = new JButton("Jouer");
+            jButtonPlay = new JButton("Choose entrance/exit");
             jButtonPlay.setEnabled(false);
             jButtonPlay.addActionListener(new ActionListener() {
                 @Override
@@ -108,7 +108,7 @@ public class Display {
             });
             
             // Return button
-            jButtonReturn = new JButton("Retour");
+            jButtonReturn = new JButton("Back");
             jButtonReturn.addActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent e) {
@@ -138,7 +138,7 @@ public class Display {
             });
             
             // Validate button
-            jButtonValidate = new JButton("Valider");
+            jButtonValidate = new JButton("Go play");
             jButtonValidate.setEnabled(false);
             jButtonValidate.addActionListener(new ActionListener() {
                 @Override
@@ -159,7 +159,7 @@ public class Display {
             });
             
             // Start button
-            jButtonStart = new JButton("Commencer");
+            jButtonStart = new JButton("Start");
             jButtonStart.addActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent e) {
@@ -180,7 +180,7 @@ public class Display {
             });
     
             // Next turn button
-            jbuttonNextTurn = new JButton("Tour suivant");
+            jbuttonNextTurn = new JButton("Next turn");
             jbuttonNextTurn.addActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent e) {
@@ -214,14 +214,14 @@ public class Display {
                         
                         JOptionPane.showMessageDialog(mainFrame,
                                 "Score : " + gameEngine.getScore(),
-                                "Fin du jeu",
+                                "End of game",
                                 JOptionPane.PLAIN_MESSAGE);
                     }
                 }
             });
             
             // Reset button
-            jButtonResetGame = new JButton("Init");
+            jButtonResetGame = new JButton("Reset");
             jButtonResetGame.addActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent e) {
@@ -273,13 +273,13 @@ public class Display {
         JSpinner spinnerWidth = new JSpinner(sModelWidth);
 
         JPanel jPanel = new JPanel();
-        jPanel.add(new JLabel("Hauteur: "));
+        jPanel.add(new JLabel("Height: "));
         jPanel.add(spinnerHeight);
         
-        jPanel.add(new JLabel("Largeur: "));
+        jPanel.add(new JLabel("Width: "));
         jPanel.add(spinnerWidth);
  
-        int option = JOptionPane.showOptionDialog(null, jPanel, "Entrez la hauteur et la largeur", JOptionPane.OK_CANCEL_OPTION, JOptionPane.INFORMATION_MESSAGE, null, null, null);
+        int option = JOptionPane.showOptionDialog(null, jPanel, "Select height and width", JOptionPane.OK_CANCEL_OPTION, JOptionPane.INFORMATION_MESSAGE, null, null, null);
         if (option == JOptionPane.OK_OPTION) {
             level.init((Integer) spinnerHeight.getValue(), (Integer) spinnerWidth.getValue());
             return true;
