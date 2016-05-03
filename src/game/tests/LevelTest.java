@@ -984,11 +984,7 @@ public class LevelTest {
 		// operation
 		try{
 			level.goPlay(5, 5, 8, 8);
-		}
-		catch(PostconditionError | InvariantError e){
-			assertTrue("No exception must be raised.", false);
-		}
-		catch(PreconditionError e){}
+		}	
 	}
 	
 }
