@@ -6,11 +6,11 @@ public interface LevelService {
     //**CONSTANT(S)**********************************************************//
     
     /** Min and max height of the level */
-    final static int MIN_HEIGHT = 6;
+    final static int MIN_HEIGHT = 20;
     final static int MAX_HEIGHT = 50;
     
     /** Min and max width of the level */
-    final static int MIN_WIDTH = 6;
+    final static int MIN_WIDTH = 20;
     final static int MAX_WIDTH = 50;
     
     //***********************************************************************//
@@ -32,6 +32,11 @@ public interface LevelService {
      * */
     public Nature getNature(int h, int w);
     
+    /** Check if the square(h, w) is an obstacle
+     * \pre: squareExist(h, w)
+     * */
+    public boolean isAnObstacle(int h, int w);
+    
     /** Tells if the square exists */
     public boolean squareExist(int h, int w);
     
@@ -50,8 +55,13 @@ public interface LevelService {
     
     //**INVARIANT(S)*********************************************************// 
     
-    /**\inv: \forall i \in [0, getHeight()[ ^ \forall j in [0, getWidth()[,
+    /** \inv: \forall i \in [0, getHeight()[ ^ \forall j \in [0, getWidth()[,
      *         squareExist(i, j) */
+   
+    /** \inv: \forall i \in [0 ≤ i < getHeight()[ ^ \forall j \in [0, getWidth()[,
+     *       isAnObstacle(i, j) = (getNature(i, j) == Nature::DIRT or getNature(i, j) = Nature::METAL)
+     *                            (minimisation)
+     */
     
     //***********************************************************************//
 

@@ -36,6 +36,11 @@ public class Level implements
     }
 
     @Override
+    public boolean isAnObstacle(int h, int w) {
+        return squares[h][w] == Nature.EMPTY || squares[h][w] == Nature.METAL;
+    }
+    
+    @Override
     public boolean squareExist(int h, int w) {
         return 0 <= h && h < height && 0 <= w && w < width;
     }

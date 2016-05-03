@@ -31,6 +31,11 @@ public class LevelDecorator implements LevelService {
     }
 
     @Override
+    public boolean isAnObstacle(int h, int w) {
+        return delegate.isAnObstacle(h, w);
+    }
+    
+    @Override
     public boolean squareExist(int h, int w) {
         return delegate.squareExist(h, w);
     }

@@ -11,13 +11,27 @@ public class LevelContract extends LevelDecorator {
     
     private void checkInvariant() {
         // \inv: \forall i \in [0, getHeight()[ ^ \forall j in [0, getWidth()[,
-        //         squareExist(i, j) */
+        //         squareExist(i, j)
         for (int h = 0; h < getHeight(); ++h) {
             for (int w = 0; w < getWidth(); ++w) {
                 if (!squareExist(h, w)) {
                     throw new InvariantError("\\forall i \\in [0, getHeight()["
                             + " ^ \forall j in [0, getWidth()[,"
                             + " !squareExist(i, j)");
+                }
+            }
+        }
+        
+        // \inv: \forall i \in [0 ≤ i < getHeight()[ ^ \forall j \in [0, getWidth()[,
+        //       isAnObstacle(i, j) = (getNature(i, j) == Nature::DIRT or getNature(i, j) = Nature::METAL)
+        //                            (minimisation)
+        //
+        for (int h = 0; h < getHeight(); ++h) {
+            for (int w = 0; w < getWidth(); ++w) {
+                if (!(isAnObstacle(h, w) == (getNature(h, w) == Nature.DIRT || getNature(h, w) == Nature.METAL))) {
+                    throw new InvariantError("\\forall i \\in [0, getHeight()["
+                            + " ^ \forall j in [0, getWidth()[,"
+                            + " !(isAnObstacle(i, j) = (getNature(i, j) == Nature::DIRT or getNature(i, j) = Nature::METAL))");
                 }
             }
         }
@@ -32,6 +46,17 @@ public class LevelContract extends LevelDecorator {
         }
         
         return super.getNature(h, w);
+    }
+    
+    @Override
+    public boolean isAnObstacle(int h, int w) {
+        /* Pre-condition(s) */
+        // \pre: squareExist(h, w)
+        if (!squareExist(h, w)) {
+            throw new PreconditionError("!squareExist(h, w)");
+        }
+        
+        return super.isAnObstacle(h, w);
     }
     
     @Override
