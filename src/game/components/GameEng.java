@@ -28,6 +28,7 @@ public class GameEng implements
     
     private List<LemmingService> lemmingsActive;
     private LevelService level;
+    private LevelService levelInit;
     
     @Override
     public int getScore() {
@@ -101,6 +102,11 @@ public class GameEng implements
     public LevelService getLevel() {
         return level;
     }
+    
+    @Override
+    public LevelService getLevelInit() {
+    	return levelInit;
+    }
 
     @Override
     public void init(int sizeC, int spawnS) {
@@ -112,6 +118,8 @@ public class GameEng implements
         nbLemmingsCreated = 0;
         nbLemmingsSaved = 0;
         nbLemmingsDead = 0;
+        
+        levelInit = new Level(level);        
     }
 
     public void executeTurn() {

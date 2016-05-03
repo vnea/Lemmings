@@ -120,6 +120,7 @@ public class Player implements
 
     @Override
     public void resetGame() {
+    	((GameEng) gameEngine).bindLevelService(gameEngine.getLevelInit());
         gameEngine.init(gameEngine.getSizeColony(), gameEngine.getSpawnSpeed());
         mapNbInitToken.entrySet().forEach(entry ->
                               mapNbToken.put(entry.getKey(), entry.getValue()));

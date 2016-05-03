@@ -69,7 +69,7 @@ public interface PlayerService {
     public void useToken(int numLemming);
     
     /** Reset the game
-     * \post: getGameEngine() == getGameEngine()@pre.init(getGameEngine()@pre.getSizeColony(), getGameEngine()@pre.getSpawnSpeed()) <----- TO CHANGE
+     * \post: getGameEngine() == getGameEngine()@pre.init(getGameEngine()@pre.getSizeColony(), getGameEngine()@pre.getSpawnSpeed(), getGameEngine()@pre.getLevelInit()) 
      * \post: \forall X \in TokenType, getNbToken(X) == getNbTokenInit(X)@pre()
      * \post: \forall X \in TokenType, getNbTokenInit(X) == getNbTokenInit(X)@pre() 
      * \post: getTokenSelected() == TokenType::WALKER

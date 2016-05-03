@@ -77,6 +77,11 @@ public class GameEngDecorator implements GameEngService {
     public LevelService getLevel() {
         return delegate.getLevel();
     }
+    
+    @Override
+    public LevelService getLevelInit() {
+    	return delegate.getLevelInit();
+    }
 
     @Override
     public void init(int sizeC, int spawnS) {

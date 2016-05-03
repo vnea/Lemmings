@@ -48,15 +48,13 @@ public interface GameEngService {
     /** Level of the game */
     public LevelService getLevel();
     
+    /** Level init for reset game */
+    public LevelService getLevelInit();
+    
     //***********************************************************************//
 
     
     //**INVARIANT(S)*********************************************************//
-    
-    /** \inv: isAnObstacle(h, w) = 
-     *         getLevel().getNature(h, w) == Nature::DIRT v 
-     *           getLevel().getNature(h, w) == Nature::METAL (minimisation)
-     */
     
     /** \inv: isActive(num) = num \in getNumLemmingsActive() (minimisation) */
     
@@ -118,51 +116,6 @@ public interface GameEngService {
      *          getScore() = (getNbLemmingsSaved() / getTurn()) * 100                
      */
     public void executeTurn();
-    
-//    /** Call step operator for each Lemming
-//     * \pre: !isGameOver()
-//     * \post: getTurn() == getTurn()@pre + 1    
-//     */
-//    public void callStepLemmings();
-//    
-//    /** Create a new Lemming
-//     * \pre: !isActive(num)
-//     * \pre: getNbLemmingsCreated() < getSizeColony()
-//     * \pre: getNbLemmingsCreated() * getSpawnSpeed() == getTurn()
-//     * \pre: !isGameOver()
-//     * \post: getNumLemmingsActive() = getNumLemmingsActive()@pre U {num}
-//     * \post: getLemming(num) == Lemming::init(num, h, w)
-//     * \post: \forall n \in getNumLemmingsActive@pre(),
-//     *         getLemming(n) == getLemming(n)@pre
-//     */
-//    public void newLemming(int num);
-//    
-//    /**
-//     * \pre: !isGameOver()
-//     * \post: \forall num \in getNumLemmingsActive()@pre(),
-//     *           if getNature(getLemming(num)@pre().getHPos(), getLemming(num)@pre().getWPos()) == Nature::EXIT then:
-//     *                getNumLemmingsActive() == getNumLemmingsActive()@pre() \ {num}
-//     * \post: getNbLemmingSaved() == getNbLemmingsCreated() -
-//     *                              getNbLemmingsActive() + getNbLemmingsDead()    
-//     */
-//    public void checkSaved();
-//    
-//    /**
-//     * \pre: !isGameOver()
-//     * \post: \forall num \in getNumLemmingsActive()@pre(),
-//     *          if getLemming(num)@pre().isDead() then
-//     *                getNumLemmingsActive() = getNumLemmingsActive()@pre \ {num}
-//     * \post: getNbLemmingsDead() == getNbLemmingsCreated() -
-//     *                             getNbLemmingsActive() + getNbLemmingsSaved()
-//     */
-//    public void checkDead();
-//    
-//    /**
-//     * \pre: !isGameOver()
-//     * \post: if isGameOver() then
-//     *          getScore() == (getNbLemmingsSaved() / getTurn()) * 100
-//     */
-//    public void checkWin();
     
     //***********************************************************************//
 }

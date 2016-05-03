@@ -62,9 +62,11 @@ public class Display {
         this.gameEngine = gameEngine; 
         this.level = level;
         this.player = player;
+        Display ref = this;
         
-        player.init(5, 5, 0, 0, 0, 0, 0, 0, 0);
+        
         player.bindGameEngService(gameEngine);
+        player.init(5, 5, 0, 0, 0, 0, 0, 0, 0);
         
         if (!askHeightWidthOk()) {
             mainFrame.dispose();
@@ -152,7 +154,7 @@ public class Display {
                     mainFrame.add(panelInitGameEngine, BorderLayout.CENTER);
                     mainFrame.add(jButtonStart, BorderLayout.SOUTH);
                                     
-                    level.goPlay(entrance.getH(), entrance.getW(),
+                    ref.level.goPlay(entrance.getH(), entrance.getW(),
                                  exit.getH(), exit.getW());
                     refreshMainFrame();
                 }
@@ -163,9 +165,9 @@ public class Display {
             jButtonStart.addActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent e) {
+                    gameEngine.bindLevelService(ref.level);
                     gameEngine.init(panelInitGameEngine.getSizeColony(),
                                     panelInitGameEngine.getSpawnSpeed());
-                    gameEngine.bindLevelService(level);
     
                     mainFrame.remove(panelInitGameEngine);
                     mainFrame.remove(jButtonStart);
@@ -187,8 +189,8 @@ public class Display {
                     if (!gameEngine.isGameOver()) {
                         gameEngine.executeTurn();
                         
-                        for (int h = 0; h < level.getHeight(); ++h) {
-                            for (int w = 0; w < level.getWidth(); ++w) {
+                        for (int h = 0; h < ref.level.getHeight(); ++h) {
+                            for (int w = 0; w < ref.level.getWidth(); ++w) {
                                 tiles[h][w].setLemming(null);
                             }
                         }
@@ -199,9 +201,9 @@ public class Display {
                             tiles[lemming.getHPos()][lemming.getWPos()].setLemming(lemming);
                         }
                         
-                        for (int h = 0; h < level.getHeight(); ++h) {
-                            for (int w = 0; w < level.getWidth(); ++w) {
-                                tiles[h][w].setNature(level.getNature(h, w));
+                        for (int h = 0; h < ref.level.getHeight(); ++h) {
+                            for (int w = 0; w < ref.level.getWidth(); ++w) {
+                                tiles[h][w].setNature(ref.level.getNature(h, w));
                                 tiles[h][w].update();
                             }
                         }
@@ -226,9 +228,11 @@ public class Display {
                 @Override
                 public void actionPerformed(ActionEvent e) {
                     player.resetGame();
-                    for (int h = 0; h < level.getHeight(); ++h) {
-                        for (int w = 0; w < level.getWidth(); ++w) {
+                    ref.level = (Level) gameEngine.getLevel();
+                    for (int h = 0; h < ref.level.getHeight(); ++h) {
+                        for (int w = 0; w < ref.level.getWidth(); ++w) {
                             tiles[h][w].setLemming(null);
+                            tiles[h][w].setNature(ref.level.getNature(h, w));
                             tiles[h][w].update();
                         }
                     }

@@ -15,6 +15,25 @@ public class Level implements
     private int hEntrance;
     private int wEntrance;
     
+    public Level() {
+    }
+    
+    public Level(LevelService level) {
+    	height = level.getHeight();
+    	width = level.getWidth();
+    	editing = level.isEditing();
+    	
+    	squares = new Nature[height][width];
+        for (int h = 0; h < height; ++h) {
+            for (int w = 0; w < width; ++w) {
+                squares[h][w] = level.getNature(h, w);
+            }
+        }
+        
+        hEntrance = level.getHEntrance();
+        wEntrance = level.getWEntrance();
+    }
+    
     @Override
     public int getHeight() {
         return height;
