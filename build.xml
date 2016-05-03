@@ -1,4 +1,4 @@
-<project name="projet" default="compile" basedir=".">
+<project name="Lemming" default="compile" basedir=".">
     <description>
        Fichier de construction pour le projet "Lemmings" de CPS
     </description>
@@ -24,7 +24,7 @@
     <javac debug="true" srcdir="${src}" excludes="" destdir="${build}" includeantruntime="false" />
   </target>
 	
-	<target name="run" depends="compile"
+	<target name="run1" depends="compile"
 	          description="run application in release mode">
 	    <echo>================ Run Object Main ================</echo>
 	    <java classname="game.main.Main"

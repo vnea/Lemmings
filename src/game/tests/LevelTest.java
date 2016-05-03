@@ -8,11 +8,9 @@ import game.contracts.PreconditionError;
 import game.contracts.InvariantError;
 import game.enums.Nature;
 
-import org.junit.After;
-import org.junit.Assert;
+import static org.junit.Assert.assertTrue;
 import org.junit.Before;
 import org.junit.Test;
-import org.junit.rules.ExpectedException;
 
 public class LevelTest {
 	private LevelService level;
@@ -33,7 +31,7 @@ public class LevelTest {
 		}
 		catch(PostconditionError | InvariantError e){}
 		catch(PreconditionError e){
-			Assert.assertTrue("No exception must be raised.", false);
+			assertTrue("No exception must be raised.", false);
 		}
 	}
 	
@@ -49,7 +47,7 @@ public class LevelTest {
 		catch(PreconditionError e){
 			excpt = true;
 		}
-		Assert.assertTrue("A PreconditionError must be raised.", excpt);
+		assertTrue("A PreconditionError must be raised.", excpt);
 	}
 	
 	@Test
@@ -64,7 +62,7 @@ public class LevelTest {
 		catch(PreconditionError e){
 			excpt = true;
 		}
-		Assert.assertTrue("A PreconditionError must be raised.", excpt);
+		assertTrue("A PreconditionError must be raised.", excpt);
 	}
 	
 	@Test
@@ -79,7 +77,7 @@ public class LevelTest {
 		catch(PreconditionError e){
 			excpt = true;
 		}
-		Assert.assertTrue("A PreconditionError must be raised.", excpt);
+		assertTrue("A PreconditionError must be raised.", excpt);
 	}
 	
 	@Test
@@ -94,7 +92,7 @@ public class LevelTest {
 		catch(PreconditionError e){
 			excpt = true;
 		}
-		Assert.assertTrue("A PreconditionError must be raised.", excpt);
+		assertTrue("A PreconditionError must be raised.", excpt);
 	}
 	
 	@Test
@@ -109,7 +107,7 @@ public class LevelTest {
 		}
 		catch(PostconditionError | InvariantError e){}
 		catch(PreconditionError e){
-			Assert.assertTrue("No exception must be raised.", false);
+			assertTrue("No exception must be raised.", false);
 		}
 	}
 	
@@ -129,7 +127,7 @@ public class LevelTest {
 		catch(PreconditionError e){
 			excpt = true;
 		}
-		Assert.assertTrue("A PreconditionError must be raised.", excpt);
+		assertTrue("A PreconditionError must be raised.", excpt);
 	}
 	
 	@Test
@@ -144,7 +142,7 @@ public class LevelTest {
 		}
 		catch(PostconditionError | InvariantError e){}
 		catch(PreconditionError e){
-			Assert.assertTrue("No exception must be raised.", false);
+			assertTrue("No exception must be raised.", false);
 		}
 	}
 	
@@ -164,7 +162,7 @@ public class LevelTest {
 		catch(PreconditionError e){
 			excpt = true;
 		}
-		Assert.assertTrue("A PreconditionError must be raised.", excpt);
+		assertTrue("A PreconditionError must be raised.", excpt);
 	}
 	
 	@Test
@@ -189,7 +187,7 @@ public class LevelTest {
 		}
 		catch(PostconditionError | InvariantError e){}
 		catch(PreconditionError e){
-			Assert.assertTrue("No exception must be raised.", false);
+			assertTrue("No exception must be raised.", false);
 		}
 	}
 	
@@ -209,7 +207,7 @@ public class LevelTest {
 		catch(PreconditionError e){
 			excpt = true;
 		}
-		Assert.assertTrue("A PreconditionError must be raised.", excpt);
+		assertTrue("A PreconditionError must be raised.", excpt);
 	}
 	
 	@Test
@@ -234,7 +232,7 @@ public class LevelTest {
 		}
 		catch(PostconditionError | InvariantError e){}
 		catch(PreconditionError e){
-			Assert.assertTrue("No exception must be raised.", false);
+			assertTrue("No exception must be raised.", false);
 		}
 	}
 	
@@ -254,7 +252,7 @@ public class LevelTest {
 		catch(PreconditionError e){
 			excpt = true;
 		}
-		Assert.assertTrue("A PreconditionError must be raised.", excpt);
+		assertTrue("A PreconditionError must be raised.", excpt);
 	}
 	
 	@Test
@@ -269,7 +267,7 @@ public class LevelTest {
 		}
 		catch(PostconditionError | InvariantError e){}
 		catch(PreconditionError e){
-			Assert.assertTrue("No exception must be raised.", false);
+			assertTrue("No exception must be raised.", false);
 		}
 	}
 	
@@ -289,7 +287,7 @@ public class LevelTest {
 		catch(PreconditionError e){
 			excpt = true;
 		}
-		Assert.assertTrue("A PreconditionError must be raised.", excpt);
+		assertTrue("A PreconditionError must be raised.", excpt);
 	}
 	
 	@Test
@@ -318,7 +316,7 @@ public class LevelTest {
 		catch(PreconditionError e){
 			excpt = true;
 		}
-		Assert.assertTrue("A PreconditionError must be raised.", excpt);
+		assertTrue("A PreconditionError must be raised.", excpt);
 	}
 	
 	@Test
@@ -337,7 +335,7 @@ public class LevelTest {
 		catch(PreconditionError e){
 			excpt = true;
 		}
-		Assert.assertTrue("A PreconditionError must be raised.", excpt);
+		assertTrue("A PreconditionError must be raised.", excpt);
 	}
 	
 	@Test
@@ -356,7 +354,7 @@ public class LevelTest {
 		catch(PreconditionError e){
 			excpt = true;
 		}
-		Assert.assertTrue("A PreconditionError must be raised.", excpt);
+		assertTrue("A PreconditionError must be raised.", excpt);
 	}
 	
 	@Test
@@ -382,7 +380,7 @@ public class LevelTest {
 		}
 		catch(PostconditionError | InvariantError e){}
 		catch(PreconditionError e){
-			Assert.assertTrue("No exception must be raised.", false);
+			assertTrue("No exception must be raised.", false);
 		}
 	}
 	
@@ -412,7 +410,7 @@ public class LevelTest {
 		catch(PreconditionError e){
 			excpt = true;
 		}
-		Assert.assertTrue("A PreconditionError must be raised.", excpt);
+		assertTrue("A PreconditionError must be raised.", excpt);
 	}
 	
 	@Test
@@ -431,7 +429,7 @@ public class LevelTest {
 		catch(PreconditionError e){
 			excpt = true;
 		}
-		Assert.assertTrue("A PreconditionError must be raised.", excpt);
+		assertTrue("A PreconditionError must be raised.", excpt);
 	}
 	
 	@Test
@@ -456,7 +454,7 @@ public class LevelTest {
 		}
 		catch(PostconditionError | InvariantError e){}
 		catch(PreconditionError e){
-			Assert.assertTrue("No exception must be raised.", false);
+			assertTrue("No exception must be raised.", false);
 		}
 	}
 	
@@ -487,7 +485,7 @@ public class LevelTest {
 		catch(PreconditionError e){
 			excpt = true;
 		}
-		Assert.assertTrue("A PreconditionError must be raised.", excpt);
+		assertTrue("A PreconditionError must be raised.", excpt);
 	}
 	
 	@Test
@@ -506,7 +504,7 @@ public class LevelTest {
 		catch(PreconditionError e){
 			excpt = true;
 		}
-		Assert.assertTrue("A PreconditionError must be raised.", excpt);
+		assertTrue("A PreconditionError must be raised.", excpt);
 	}
 	
 	@Test
@@ -530,7 +528,7 @@ public class LevelTest {
 		}
 		catch(PostconditionError | InvariantError e){}
 		catch(PreconditionError e){
-			Assert.assertTrue("No exception must be raised.", false);
+			assertTrue("No exception must be raised.", false);
 		}
 	}
 	
@@ -561,7 +559,7 @@ public class LevelTest {
 		catch(PreconditionError e){
 			excpt = true;
 		}
-		Assert.assertTrue("A PreconditionError must be raised.", excpt);
+		assertTrue("A PreconditionError must be raised.", excpt);
 	}
 	
 	@Test
@@ -591,7 +589,7 @@ public class LevelTest {
 		catch(PreconditionError e){
 			excpt = true;
 		}
-		Assert.assertTrue("A PreconditionError must be raised.", excpt);
+		assertTrue("A PreconditionError must be raised.", excpt);
 	}
 	
 	@Test
@@ -621,7 +619,7 @@ public class LevelTest {
 		catch(PreconditionError e){
 			excpt = true;
 		}
-		Assert.assertTrue("A PreconditionError must be raised.", excpt);
+		assertTrue("A PreconditionError must be raised.", excpt);
 	}
 	
 	
@@ -652,7 +650,7 @@ public class LevelTest {
 		catch(PreconditionError e){
 			excpt = true;
 		}
-		Assert.assertTrue("A PreconditionError must be raised.", excpt);
+		assertTrue("A PreconditionError must be raised.", excpt);
 	}
 	
 	@Test
@@ -681,7 +679,7 @@ public class LevelTest {
 		catch(PreconditionError e){
 			excpt = true;
 		}
-		Assert.assertTrue("A PreconditionError must be raised.", excpt);
+		assertTrue("A PreconditionError must be raised.", excpt);
 	}
 	
 	@Test
@@ -710,7 +708,7 @@ public class LevelTest {
 		catch(PreconditionError e){
 			excpt = true;
 		}
-		Assert.assertTrue("A PreconditionError must be raised.", excpt);
+		assertTrue("A PreconditionError must be raised.", excpt);
 	}
 	
 	@Test
@@ -739,7 +737,7 @@ public class LevelTest {
 		catch(PreconditionError e){
 			excpt = true;
 		}
-		Assert.assertTrue("A PreconditionError must be raised.", excpt);
+		assertTrue("A PreconditionError must be raised.", excpt);
 	}
 	
 	
@@ -769,7 +767,7 @@ public class LevelTest {
 		catch(PreconditionError e){
 			excpt = true;
 		}
-		Assert.assertTrue("A PreconditionError must be raised.", excpt);
+		assertTrue("A PreconditionError must be raised.", excpt);
 	}
 	
 	@Test
@@ -798,7 +796,7 @@ public class LevelTest {
 		catch(PreconditionError e){
 			excpt = true;
 		}
-		Assert.assertTrue("A PreconditionError must be raised.", excpt);
+		assertTrue("A PreconditionError must be raised.", excpt);
 	}
 	
 	@Test
@@ -827,7 +825,7 @@ public class LevelTest {
 		catch(PreconditionError e){
 			excpt = true;
 		}
-		Assert.assertTrue("A PreconditionError must be raised.", excpt);
+		assertTrue("A PreconditionError must be raised.", excpt);
 	}
 	
 	@Test
@@ -856,7 +854,7 @@ public class LevelTest {
 		catch(PreconditionError e){
 			excpt = true;
 		}
-		Assert.assertTrue("A PreconditionError must be raised.", excpt);
+		assertTrue("A PreconditionError must be raised.", excpt);
 	}
 	
 	
@@ -872,7 +870,7 @@ public class LevelTest {
 			level.init(LevelService.MAX_HEIGHT, LevelService.MAX_WIDTH);
 		}
 		catch(PostconditionError | InvariantError e){
-			Assert.assertTrue("No exception must be raised.", false);
+			assertTrue("No exception must be raised.", false);
 		}
 		catch(PreconditionError e){}
 	}
@@ -888,7 +886,7 @@ public class LevelTest {
 			level.setNature(0, 0, Nature.DIRT);
 		}
 		catch(PostconditionError | InvariantError e){
-			Assert.assertTrue("No exception must be raised.", false);
+			assertTrue("No exception must be raised.", false);
 		}
 		catch(PreconditionError e){}
 	}
@@ -915,7 +913,7 @@ public class LevelTest {
 			level.remove(10, 10);
 		}
 		catch(PostconditionError | InvariantError e){
-			Assert.assertTrue("No exception must be raised.", false);
+			assertTrue("No exception must be raised.", false);
 		}
 		catch(PreconditionError e){}
 	}
@@ -941,7 +939,7 @@ public class LevelTest {
 			level.build(10, 10);
 		}
 		catch(PostconditionError | InvariantError e){
-			Assert.assertTrue("No exception must be raised.", false);
+			assertTrue("No exception must be raised.", false);
 		}
 		catch(PreconditionError e){}
 	}
@@ -966,7 +964,7 @@ public class LevelTest {
 			level.goPlay(5, 5, 8, 8);
 		}
 		catch(PostconditionError | InvariantError e){
-			Assert.assertTrue("No exception must be raised.", false);
+			assertTrue("No exception must be raised.", false);
 		}
 		catch(PreconditionError e){}
 	}
@@ -987,7 +985,7 @@ public class LevelTest {
 		}
 		catch(PostconditionError | InvariantError | PreconditionError e){
 		}
-		Assert.assertTrue("Case's nature must be dirt", 
+		assertTrue("Case's nature must be dirt", 
 								level.getNature(10, 10) == Nature.DIRT);
 		
 	}
