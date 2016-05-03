@@ -23,9 +23,17 @@
     <!-- Compile the java code from ${src} into ${build} -->
     <javac debug="true" srcdir="${src}" excludes="" destdir="${build}" includeantruntime="false" />
   </target>
+	
+	<target name="run" depends="compile"
+	          description="run application in release mode">
+	    <echo>================ Run Object Main ================</echo>
+	    <java classname="game.main.Main"
+	          classpath="${build}">
+	    </java>
+	 </target>
 
   <target name="test" depends="compile"
-          description="test of good implementation">
+          description="Run test">
     <echo>================ Run first test ================</echo>
     <junit printsummary="yes">
       <classpath>
@@ -35,26 +43,11 @@
 
       <formatter type="plain"/>
 
-      <test name="Jeu.tests.GoodImplTest" outfile="reportTest"/>
+      <test name="game.tests.LevelTest" outfile="reportTest"/>
 
     </junit>
   </target>
-
-  <target name="testBad" depends="compile"
-          description="test of bad implementation">
-    <echo>================ Run first test ================</echo>
-    <junit printsummary="yes">
-      <classpath>
-        <pathelement location="${build}"/>
-        <pathelement location="${jars}/junit.jar"/>
-      </classpath>
-
-      <formatter type="plain"/>
-
-      <test name="Jeu.tests.BadImplTest" outfile="reportBadTest"/>
-
-    </junit>
-  </target>
+	
 
   <target name="dist" depends="init,clean"
         description="Generer la distribution" >
