@@ -549,7 +549,19 @@ Report :
 		"No exception must be raised."
 		
 		
-///////// Test transitions /////////
+///////// Test remarkable state /////////
+
+Test : testSetDirtTwice
+
+Coverage : remarkable state
+Goal : case's nature is dirt
+Initial conditions : C0 := setNature(init(30,30),10,10,DIRT)
+Operations : C1 := setNature(C0,10,10,DIRT)
+Oracle :
+	getNature(C1,10,10) = DIRT
+Report :
+	Case's nature is not dirt :
+		"Case's nature must be dirt."
 		
 		
 		

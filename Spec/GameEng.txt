@@ -18,6 +18,7 @@ Observators:
 			 const spawnSpeed: [GameEng] -> int
 			 gameOver:[GameEng] -> bool
 			 level: [GameEng] -> Level
+			 const levelInit: [GameEng] -> Level
 			 
 Constructors: 
 			 init: int * int * Level -> [GameEng]
@@ -45,6 +46,8 @@ Observations:
 			 		card(numLemmingsActive(init(sizeC,spawnS,L))) = 0
 			 		spawnSpeed(init(sizeC,spawnS,L)) = spawnS
 			 		level(init(sizeC,spawnS,L)) = L	
+			 		levelInit(init(sizeC,spawnS,L)) = L
+			 		
 			 [executeTurn]
 			 		turn(executeTurn(G)) = turn(G) + 1
 			 		∀ num ∈ numLemmingsActive(G) if Level::nature(Level(executeTurn(G)), Lemming::hPos(lemming(executeTurn(G),num)),  Lemming::wPos(lemming(executeTurn(G),num))) = Level::Nature::EXIT then:

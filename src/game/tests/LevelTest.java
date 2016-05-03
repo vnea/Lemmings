@@ -979,12 +979,16 @@ public class LevelTest {
 		
 		
 		level.setNature(10, 10, Nature.DIRT);
-		level.setNature(10, 10, Nature.DIRT);
 		
 		// operation
-//		try{
-//			level.goPlay(5, 5, 8, 8);
-//		}	
+		try{
+			level.setNature(10, 10, Nature.DIRT);
+		}
+		catch(PostconditionError | InvariantError | PreconditionError e){
+		}
+		assertTrue("Case's nature must be dirt", 
+								level.getNature(10, 10) == Nature.DIRT);
+		
 	}
 	
 }

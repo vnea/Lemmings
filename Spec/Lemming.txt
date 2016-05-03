@@ -26,7 +26,7 @@ Observations:
 			 	   Level::obstacle(level(L),hPos(L)-1,wPos(L)) = false
 			 	   counterFaller > -1
 			 [init]
-			 		num(init(num,h,w,G)) = num
+			 		const num(init(num,h,w,G)) = num
 			 		hPos(init(num,h,w,G)) = h
 			 		wPos(init(num),h,w,G)) = w
 			 		direction(init(num,h,w,G)) = Direction::RIGHT
