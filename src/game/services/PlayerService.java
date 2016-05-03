@@ -30,11 +30,9 @@ public interface PlayerService {
     //**INIT*****************************************************************//
     
     /** Initialisation
-     * \pre: nbTW > 0 nbFA > 0, nbDI > 0, nbBU > 0, nbST > 0, nbBA > 0, nbB > 0, nbCL > 0, nbFL > 0, nbBO > 0
+     * \pre: nbTW > 0, nbDI > 0, nbBU > 0, nbST > 0, nbBA > 0, nbB > 0, nbCL > 0, nbFL > 0, nbBO > 0
      * \post: getNbToken(TokenType::WALKER) == nbTW
      * \post: getNbTokenInit(TokenType::WALKER) == nbTW
-     * \post: getNbToken(TokenType::FALLER) == nbFA
-     * \post: getNbTokenInit(TokenType::FALLER) == nbFA
      * \post: getNbToken(TokenType::DIGGER) == nbDI
      * \post: getNbTokenInit(TokenType::DIGGER) == nbDI
      * \post: getNbToken(TokenType::BUILDER) == nbBU
@@ -53,8 +51,8 @@ public interface PlayerService {
      * \post: getNbTokenInit(TokenType::BOMBER) == nbBO
      * \post: getTokenSelected() == TokenType::WALKER
      */
-    public void init(int nbTW, int nbFA, int nbDI, int nbBU, int nbST, int nbBA,
-                     int nbB, int nbCL, int nbFL, int nbBO);
+    public void init(int nbTW, int nbDI, int nbBU, int nbST, int nbBA, int nbB,
+                     int nbCL, int nbFL, int nbBO);
     
     //***********************************************************************//
 

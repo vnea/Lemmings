@@ -32,9 +32,9 @@ public class PlayerDecorator implements PlayerService {
     }
 
     @Override
-    public void init(int nbTW, int nbFA, int nbDI, int nbBU, int nbST, int nbBA,
-                     int nbB, int nbCL, int nbFL, int nbBO) {
-        delegate.init(nbTW, nbFA, nbDI, nbBU, nbST, nbBA, nbB, nbCL, nbFL, nbBO);
+    public void init(int nbTW, int nbDI, int nbBU, int nbST, int nbBA, int nbB,
+                     int nbCL, int nbFL, int nbBO) {
+        delegate.init(nbTW, nbDI, nbBU, nbST, nbBA, nbB, nbCL, nbFL, nbBO);
     }
 
     @Override

@@ -13,15 +13,6 @@ public interface GameEngService {
     /** Turn of the game */
     public int getTurn();
     
-    /** Check if the square(h, w) is an obstacle */
-    public boolean isAnObstacle(int h, int w);
-    
-    /** Check if the square(h, w) is a dirt obstacle */
-    public boolean isADirtObstacle(int h, int w);
-    
-    /** Check if the square(h, w) is a metal obstacle */
-    public boolean isAMetalObstacle(int h, int w);
-    
     /** Size of the colony */
     public int getSizeColony();
     
@@ -112,50 +103,66 @@ public interface GameEngService {
     
     //**OPERATOR(S)**********************************************************//
 
-    /** Call step operator for each Lemming
+    /** Execute the turn
      * \pre: !isGameOver()
-     * \post: getTurn() == getTurn()@pre + 1    
+     * \post: getTurn() == getTurn()@pre + 1
+     * \post: \forall num \in getNumLemmingsActive()@pre,
+     *              if Level::getNature(Lemming::getHPos(num), Lemming::getWPos(num)) == Nature::EXIT then:
+     *                         {num} ∉  getNumLemmingsActive() ^ getNbLemmingsSaved()++
+     * \post: \forall num \in getNumLemmingsActive()@pre,
+     *              if Lemming::isDead() then:
+     *                  {num} ∉  getNumLemmingsActive() ^ getNbLemmingsDead()++
+     * \post: if getNbLemmingsCreated()@pre * getSpawnSpeed()@pre == getTurn()@pre ^ getNbLemmingsCreated()@pre < getSizeColony() then:
+     *             getLemming(getNbLemmingsCreated()@pre) == Lemming::init(getNbLemmingsCreated(), Level::getHEntrance(), Level::getWEntrance(), getLevel())
+     * \post if isGameOver() then:
+     *          getScore() = (getNbLemmingsSaved() / getTurn()) * 100                
      */
-    public void callStepLemmings();
+    public void executeTurn();
     
-    /** Create a new Lemming
-     * \pre: !isActive(num)
-     * \pre: getNbLemmingsCreated() < getSizeColony()
-     * \pre: getNbLemmingsCreated() * getSpawnSpeed() == getTurn()
-     * \pre: !isGameOver()
-     * \post: getNumLemmingsActive() = getNumLemmingsActive()@pre U {num}
-     * \post: getLemming(num) == Lemming::init(num, h, w)
-     * \post: \forall n \in getNumLemmingsActive@pre(),
-     *         getLemming(n) == getLemming(n)@pre
-     */
-    public void newLemming(int num);
-    
-    /**
-     * \pre: !isGameOver()
-     * \post: \forall num \in getNumLemmingsActive()@pre(),
-     *           if getNature(getLemming(num)@pre().getHPos(), getLemming(num)@pre().getWPos()) == Nature::EXIT then:
-     *                getNumLemmingsActive() == getNumLemmingsActive()@pre() \ {num}
-     * \post: getNbLemmingSaved() == getNbLemmingsCreated() -
-     *                              getNbLemmingsActive() + getNbLemmingsDead()    
-     */
-    public void checkSaved();
-    
-    /**
-     * \pre: !isGameOver()
-     * \post: \forall num \in getNumLemmingsActive()@pre(),
-     *          if getLemming(num)@pre().isDead() then
-     *                getNumLemmingsActive() = getNumLemmingsActive()@pre \ {num}
-     * \post: getNbLemmingsDead() == getNbLemmingsCreated() -
-     *                             getNbLemmingsActive() + getNbLemmingsSaved()
-     */
-    public void checkDead();
-    
-    /**
-     * \pre: !isGameOver()
-     * \post: if isGameOver() then
-     *          getScore() == (getNbLemmingsSaved() / getTurn()) * 100
-     */
-    public void checkWin();
+//    /** Call step operator for each Lemming
+//     * \pre: !isGameOver()
+//     * \post: getTurn() == getTurn()@pre + 1    
+//     */
+//    public void callStepLemmings();
+//    
+//    /** Create a new Lemming
+//     * \pre: !isActive(num)
+//     * \pre: getNbLemmingsCreated() < getSizeColony()
+//     * \pre: getNbLemmingsCreated() * getSpawnSpeed() == getTurn()
+//     * \pre: !isGameOver()
+//     * \post: getNumLemmingsActive() = getNumLemmingsActive()@pre U {num}
+//     * \post: getLemming(num) == Lemming::init(num, h, w)
+//     * \post: \forall n \in getNumLemmingsActive@pre(),
+//     *         getLemming(n) == getLemming(n)@pre
+//     */
+//    public void newLemming(int num);
+//    
+//    /**
+//     * \pre: !isGameOver()
+//     * \post: \forall num \in getNumLemmingsActive()@pre(),
+//     *           if getNature(getLemming(num)@pre().getHPos(), getLemming(num)@pre().getWPos()) == Nature::EXIT then:
+//     *                getNumLemmingsActive() == getNumLemmingsActive()@pre() \ {num}
+//     * \post: getNbLemmingSaved() == getNbLemmingsCreated() -
+//     *                              getNbLemmingsActive() + getNbLemmingsDead()    
+//     */
+//    public void checkSaved();
+//    
+//    /**
+//     * \pre: !isGameOver()
+//     * \post: \forall num \in getNumLemmingsActive()@pre(),
+//     *          if getLemming(num)@pre().isDead() then
+//     *                getNumLemmingsActive() = getNumLemmingsActive()@pre \ {num}
+//     * \post: getNbLemmingsDead() == getNbLemmingsCreated() -
+//     *                             getNbLemmingsActive() + getNbLemmingsSaved()
+//     */
+//    public void checkDead();
+//    
+//    /**
+//     * \pre: !isGameOver()
+//     * \post: if isGameOver() then
+//     *          getScore() == (getNbLemmingsSaved() / getTurn()) * 100
+//     */
+//    public void checkWin();
     
     //***********************************************************************//
 }

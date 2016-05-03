@@ -38,22 +38,6 @@ public class GameEng implements
     public int getTurn() {
         return turn;
     }
-
-    @Override
-    public boolean isAnObstacle(int h, int w) {
-        final Nature n = level.getNature(h, w);
-        return n == Nature.DIRT || n == Nature.METAL;
-    }
-
-    @Override
-    public boolean isADirtObstacle(int h, int w) {
-        return level.getNature(h, w) == Nature.DIRT;
-    }
-    
-    @Override
-    public boolean isAMetalObstacle(int h, int w) {
-        return  level.getNature(h, w) == Nature.METAL;
-    }
     
     @Override
     public int getSizeColony() {
@@ -130,48 +114,64 @@ public class GameEng implements
         nbLemmingsDead = 0;
     }
 
+    public void executeTurn() {
+        // Call step for each lemming
+        lemmingsActive.forEach(lemming -> lemming.step());
+
+        // Checkers
+        checkSaved();
+        checkDead();
+        checkWin();
+        
+        // Create new lemming if needed
+        if (nbLemmingsCreated * spawnSpeed == turn &&
+            nbLemmingsCreated < sizeColony) {
+            newLemming();
+        }
+        
+        // Next turn
+        ++turn;
+    }
+    
     @Override
-    public void newLemming(int num) {
+    public void bindLevelService(LevelService service) {
+        level = service;
+    }
+    
+    private void newLemming() {
         Lemming lemming = new Lemming();
-        lemming.init(num, level.getHEntrance(), level.getWEntrance());
-        lemming.bindGameEngService(this);
+        lemming.init(nbLemmingsCreated, level.getHEntrance(), level.getWEntrance());
+        lemming.bindLevelService(level);
         
         lemmingsActive.add(lemming);
         ++nbLemmingsCreated;
     }
 
-    @Override
-    public void callStepLemmings() {
-        lemmingsActive.forEach(lemming -> lemming.step());
-        ++turn;
+    private void checkSaved() {
+        lemmingsActive.removeIf(lemming -> {
+                if (level.getNature(lemming.getHPos(), lemming.getWPos()) == Nature.EXIT) {
+                    ++nbLemmingsSaved;
+                    return true;
+                }
+                
+                return false;
+        });
     }
 
-    @Override
-    public void checkSaved() {
-        lemmingsActive.removeIf(lemming ->
-          level.getNature(lemming.getHPos(), lemming.getWPos()) == Nature.EXIT);
-
-        nbLemmingsSaved = nbLemmingsCreated - (lemmingsActive.size() +
-                          nbLemmingsDead);
+    private void checkDead() {
+        lemmingsActive.removeIf(lemming -> {
+            if (lemming.isDead()) {
+                ++nbLemmingsDead;
+                return true;
+            }
+            
+            return false;
+        });
     }
 
-    @Override
-    public void checkDead() {
-        lemmingsActive.removeIf(lemming -> lemming.isDead());
-        
-        nbLemmingsDead = nbLemmingsCreated - (lemmingsActive.size() +
-                         nbLemmingsSaved);     
-    }
-
-    @Override
-    public void checkWin() {
+    private void checkWin() {
         if (isGameOver()) {
             score = (int) ((double) nbLemmingsSaved / turn * 100);
         }
-    }
-
-    @Override
-    public void bindLevelService(LevelService service) {
-        level = service;
     }
 }

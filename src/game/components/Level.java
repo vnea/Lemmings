@@ -37,7 +37,7 @@ public class Level implements
 
     @Override
     public boolean isAnObstacle(int h, int w) {
-        return squares[h][w] == Nature.EMPTY || squares[h][w] == Nature.METAL;
+        return squares[h][w] == Nature.DIRT || squares[h][w] == Nature.METAL;
     }
     
     @Override

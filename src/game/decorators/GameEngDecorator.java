@@ -22,21 +22,6 @@ public class GameEngDecorator implements GameEngService {
     public int getTurn() {
         return delegate.getTurn();
     }
-
-    @Override
-    public boolean isAnObstacle(int h, int w) {
-        return delegate.isAnObstacle(h, w);
-    }
-
-    @Override
-    public boolean isADirtObstacle(int h, int w) {
-        return delegate.isADirtObstacle(h, w);
-    }
-    
-    @Override
-    public boolean isAMetalObstacle(int h, int w) {
-        return delegate.isAMetalObstacle(h, w);
-    }
     
     @Override
     public int getSizeColony() {
@@ -99,27 +84,7 @@ public class GameEngDecorator implements GameEngService {
     }
 
     @Override
-    public void callStepLemmings() {
-        delegate.callStepLemmings();
-    }
-    
-    @Override
-    public void newLemming(int num) {
-        delegate.newLemming(num);
-    }
-
-    @Override
-    public void checkSaved() {
-        delegate.checkSaved();
-    }
-
-    @Override
-    public void checkDead() {
-        delegate.checkDead();        
-    }
-
-    @Override
-    public void checkWin() {
-        delegate.checkWin();
+    public void executeTurn() {
+        delegate.executeTurn();
     }
 }

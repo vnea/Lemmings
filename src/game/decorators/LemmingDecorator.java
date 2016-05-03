@@ -3,8 +3,8 @@ package game.decorators;
 import game.enums.Behaviour;
 import game.enums.Direction;
 import game.enums.State;
-import game.services.GameEngService;
 import game.services.LemmingService;
+import game.services.LevelService;
 
 public class LemmingDecorator implements LemmingService {
     private final LemmingService delegate;
@@ -54,8 +54,8 @@ public class LemmingDecorator implements LemmingService {
     }
 
     @Override
-    public GameEngService getGameEngine() {
-        return delegate.getGameEngine();
+    public LevelService getLevel() {
+        return delegate.getLevel();
     }
 
     @Override

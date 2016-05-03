@@ -12,15 +12,6 @@ public class Main {
         Level level = new Level();
         Player player = new Player();
         
-        // Initialisation(s)
-        //gameEngine.init(10, 1);
-        level.init(15, 12);
-        player.init(5, 5, 5, 5, 0, 5, 5, 5, 5, 0);
-        
-        // Binding(s)
-        gameEngine.bindLevelService(level);
-        player.bindGameEngService(gameEngine);
-        
         @SuppressWarnings("unused")
         Display display = new Display(gameEngine, level, player);
     }

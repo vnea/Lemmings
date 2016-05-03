@@ -45,15 +45,17 @@ public interface LemmingService {
     /** Tells is the Lemming is dead */
     public boolean isDead();
     
-    /** Game engine */
-    public GameEngService getGameEngine();
+    /** Level */
+    public LevelService getLevel();
     
     //***********************************************************************//
 
     
     //**INVARIANT(S)*********************************************************//
     
-    /** \inv: !getGameEngine().isAnObstacle(getHPos() - 1, getWPos())*/
+    /** \inv: !getLevel().isAnObstacle(getHPos() - 1, getWPos()) */
+    
+    /** \inv: getCounterFaller() > -1 */
     
     //***********************************************************************//
 
@@ -90,12 +92,12 @@ public interface LemmingService {
     /** Run Lemming action
      * \post: if getBehaviour() == Behaviour::WALKER then
      *          if getDirection() == Direction::RIGHT then
-     *              if !getGameEngine().isAnObstacle(getHPos() + 1, getWPos()) then
+     *              if !getLevel().isAnObstacle(getHPos() + 1, getWPos()) then
      *                  getBehaviour() == Behaviour::FALLER
-     *              else if getGameEngine().isAnObstacle(getHPos() - 1, getWPos() + 1) then
+     *              else if getLevel().isAnObstacle(getHPos() - 1, getWPos() + 1) then
      *                  getDirection() == Direction::LEFT
-     *              else if getGameEngine().isAnObstacle(getHPos(), getWPos() + 1) then
-     *                  if getGameEngine().isAnObstacle(getHPos() - 2, getWPos() + 1) then
+     *              else if getLevel().isAnObstacle(getHPos(), getWPos() + 1) then
+     *                  if getLevel().isAnObstacle(getHPos() - 2, getWPos() + 1) then
      *                      getDirection() == Direction::LEFT
      *                  else
      *                      getHPos() == getHPos()@pre - 1 ^
@@ -103,12 +105,12 @@ public interface LemmingService {
      *             else
      *                  getWPos() == getWPos()@pre + 1
      *          else
-     *              if !getGameEngine().isAnObstacle(getHPos() + 1, getWPos()) then
+     *              if !getLevel().isAnObstacle(getHPos() + 1, getWPos()) then
      *                  getBehaviour() == Behaviour::FALLER
-     *              else if getGameEngine().isAnObstacle(getHPos() - 1, getWPos() - 1) then
+     *              else if getLevel().isAnObstacle(getHPos() - 1, getWPos() - 1) then
      *                  getDirection() == Direction::RIGHT
-     *              else if getGameEngine().isAnObstacle(getHPos(), getWPos() - 1) then
-     *                  if getGameEngine().isAnObstacle(getHPos() - 2, getWPos() - 1) then
+     *              else if getLevel().isAnObstacle(getHPos(), getWPos() - 1) then
+     *                  if getLevel().isAnObstacle(getHPos() - 2, getWPos() - 1) then
      *                     getDirection() == Direction::LEFT
      *                  else: 
      *                      getHPos() == getHPos()@pre - 1 ^
@@ -116,7 +118,7 @@ public interface LemmingService {
      *              else:
      *                  getWPos() == getWPos()@pre - 1
      *        else if getBehaviour() == Behaviour::FALLER then
-     *              if !getGameEngine().isAnObstacle(getHPos() + 1, getWPos()) then
+     *              if !getLevel().isAnObstacle(getHPos() + 1, getWPos()) then
      *                  getHPos() == getHPos()@pre + 1
      *                  getCounterFaller() == getCounterFaller()@pre + 1
      *              else
@@ -125,6 +127,19 @@ public interface LemmingService {
      *                  else
      *                      getBehaviour() == Behaviour::WALKER
      *                      getCounterFaller() == 0
+     *        else if getBehaviour() == Behaviour::DIGGER then
+     *              if !getLevel().isAnObstacle(getHPos() + 1, getWPos()) then
+     *                  getBehaviour() == Behaviour::FALLER
+     *              else if getLevel().getNature(getHPos() + 1, getWPos()) == Nature.METAL then
+     *                  getBehaviour() == Behaviour::WALKER
+     *              else if getLevel().getNature(getHPos() + 1, getWPos()) == Nature.DIRT then
+     *                  getLevel().getNature(getHPos() + 1, getWPos()) == Nature.EMPTY
+     *                  
+     *                  if getLevel().getNature(getHPos() + 1, getWPos() - 1) == Nature.DIRT then
+     *                      getLevel().getNature(getHPos() + 1, getWPos() - 1) == Nature.EMPTY
+     *                  if getLevel().getNature(getHPos() + 1, getWPos() + 1) == Nature.DIRT then
+     *                      getLevel().getNature(getHPos() + 1, getWPos() + 1) == Nature.EMPTY
+     *                  
      */
     public void step();
     

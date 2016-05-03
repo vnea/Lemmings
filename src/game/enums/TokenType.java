@@ -3,11 +3,10 @@ package game.enums;
 public enum TokenType {
     /* Behaviour: positive value */
     WALKER(0),
-    FALLER(1),
-    DIGGER(2),
-    BUILDER(3),
-    STOPPER(4),
-    BASHER(5),
+    DIGGER(1),
+    BUILDER(2),
+    STOPPER(3),
+    BASHER(4),
     
     /* State: negative value */
     BASIC(-1),

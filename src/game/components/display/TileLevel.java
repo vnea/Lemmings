@@ -43,20 +43,25 @@ public class TileLevel extends JLabel implements TileService {
                 if (e.getButton() == MouseEvent.BUTTON1) {
                     if (display.isEditing()) {
                         updateNature(display.getCurrentNature());
+                        display.updateStateButtonPlay();
                     }
                     else if (display.isSelectingDoors()) {
                         if (ref.nature == Nature.EMPTY) {
                             if (display.isSelectingEntrance()) {
-                                isEntrance = true;
-                                isExit = false;
-                                display.setEntrance(ref);
-                                setIcon(entranceImg);
+                                if (display.isValidEntrance(ref)) {
+                                    isEntrance = true;
+                                    isExit = false;
+                                    display.setEntrance(ref);
+                                    setIcon(entranceImg);
+                                }
                             }
                             else {
-                                isExit = true;
-                                isEntrance = false;
-                                display.setExit(ref);
-                                setIcon(exitImg);
+                                if (display.isValidExit(ref)) {
+                                    isExit = true;
+                                    isEntrance = false;
+                                    display.setExit(ref);
+                                    setIcon(exitImg);
+                                }
                             }
                         }
                     }
@@ -76,6 +81,7 @@ public class TileLevel extends JLabel implements TileService {
             public void mouseEntered(MouseEvent e) {
                 if (e.getModifiers() == MouseEvent.BUTTON1_MASK && display.isEditing()) {
                     updateNature(display.getCurrentNature());
+                    display.updateStateButtonPlay();
                 }
             }
         });
@@ -87,14 +93,18 @@ public class TileLevel extends JLabel implements TileService {
         updateNature(this.nature);
     }
     
+    public void setNature(Nature nature) {
+        this.nature = nature;
+    }
+    
     @SuppressWarnings("incomplete-switch")
     private void updateNature(Nature nature) {
-        this.nature = nature;
+        setNature(nature);
         
         display.getLevel().setNature(h, w, this.nature);
         switch (this.nature) {
             case EMPTY:
-                    setIcon(emptyImg);
+                setIcon(emptyImg);
             break;
             
             case DIRT:
@@ -111,6 +121,30 @@ public class TileLevel extends JLabel implements TileService {
         // Show entrance
         if (isEntrance) {
             setIcon(entranceImg);
+            if (lemming != null) {
+                switch(lemming.getBehaviour()) {
+                    case WALKER:
+                        showWalkerHead();
+                    break;
+                 
+                    case BASHER:
+                    break;
+                    
+                    case BUILDER:
+                    break;
+                    
+                    case DIGGER:
+                        showDiggerHead();
+                    break;
+                    
+                    case FALLER:
+                        showFallerHead();
+                    break;
+                    
+                    case STOPPER:
+                    break;
+                }
+            }
         }
         // Show entrance
         else if (isExit) {
@@ -123,32 +157,16 @@ public class TileLevel extends JLabel implements TileService {
                     setIcon(lemming.getDirection() == Direction.LEFT
                                             ? walkerBodyLeftImg
                                             : walkerBodyRightImg);
-                    
-                    if (h > 1) {
-                        TileLevel tile = display.getTile(h - 1, w);
-                        if (!tile.isADoor()) {
-                            tile.setIcon(lemming.getDirection() == Direction.LEFT
-                                                    ? walkerHeadLeftImg
-                                                    : walkerHeadRightImg);
-                        }
-                    }
-                    
+                    showWalkerHead();
                 break;
                 
                 case FALLER:
                     setIcon(lemming.getDirection() == Direction.LEFT
                                             ? fallerBodyLeftImg
                                             : fallerBodyRightImg);
-                    if (h > 1) {
-                        TileLevel tile = display.getTile(h - 1, w);
-                        if (!tile.isADoor()) {
-                            tile.setIcon(lemming.getDirection() == Direction.LEFT
-                                                    ? fallerHeadLeftImg
-                                                    : fallerHeadRightImg);
-                        }
-
-                    }
+                    showFallerHead();
                 break;
+                
                 case BASHER:
                 break;
                 
@@ -156,6 +174,10 @@ public class TileLevel extends JLabel implements TileService {
                 break;
                 
                 case DIGGER:
+                    setIcon(lemming.getDirection() == Direction.LEFT
+                                            ? diggerBodyLeftImg
+                                            : diggerBodyRightImg);
+                    showDiggerHead();
                 break;
                 
                 case STOPPER:
@@ -182,5 +204,32 @@ public class TileLevel extends JLabel implements TileService {
     
     public boolean isADoor() {
         return isEntrance || isExit;
+    }
+    
+    private void showWalkerHead() {
+        TileLevel tile = display.getTile(h - 1, w);
+        if (!tile.isADoor()) {
+            tile.setIcon(lemming.getDirection() == Direction.LEFT
+                                    ? walkerHeadLeftImg
+                                    : walkerHeadRightImg);
+        }
+    }
+    
+    private void showFallerHead() {
+        TileLevel tile = display.getTile(h - 1, w);
+        if (!tile.isADoor()) {
+            tile.setIcon(lemming.getDirection() == Direction.LEFT
+                                    ? fallerHeadLeftImg
+                                    : fallerHeadRightImg);
+        }
+    }
+    
+    private void showDiggerHead() {
+        TileLevel tile = display.getTile(h - 1, w);
+        if (!tile.isADoor()) {
+            tile.setIcon(lemming.getDirection() == Direction.LEFT
+                                    ? diggerHeadLeftImg
+                                    : diggerHeadRightImg);
+        }
     }
 }

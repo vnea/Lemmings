@@ -74,6 +74,17 @@ Observations:
 				 				dead(step(l)) = true
 			 				else:
 			 					behaviour(step(L)) = Behaviour::WALKER	
-			 					counterFaller(step(L)) = 0		
-			 			
-		 	
+			 					counterFaller(step(L)) = 0
+                    else if behaviour(L)=Behaviour::DIGGER then:
+			 			if Level::obstacle(level(L),hPos(L)+1,wPos(L))=false then:
+			 			     behaviour(step(L)) = Behaviour::FALLER
+			 			else if Level::nature(level(L),hPos(L)+1,wPos(L))=Nature::METAL then:
+                             behaviour(step(L)) = Behaviour::WALKER
+                        else if Level::nature(level(L),hPos(L)+1,wPos(L))=Nature::DIRT then:
+                             Level::nature(level(L),hPos(L)+1,wPos(L))=Nature::EMPTY
+                             
+                             if Level::nature(level(L),hPos(L)+1,wPos(L)-1)=Nature::DIRT then:
+                                 Level::nature(level(L),hPos(L)+1,wPos(L)-1)=Nature::EMPTY
+                             if Level::nature(level(L),hPos(L)+1,wPos(L)+1)=Nature::DIRT then:
+                                 Level::nature(level(L),hPos(L)+1,wPos(L)+1)=Nature::EMPTY
+ 

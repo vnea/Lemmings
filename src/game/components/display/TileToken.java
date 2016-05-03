@@ -52,10 +52,6 @@ public class TileToken extends JPanel implements TileService {
     
     private void updateImg() {
         switch (tokenType) {
-            case FALLER:
-                img.setIcon(fallerToken);
-            break;
-               
             case BASHER:
                 img.setText("BASHER");
             break;

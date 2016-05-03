@@ -46,6 +46,5 @@ public interface TileService {
     
     /** Tokens */
     final static ImageIcon walkerToken = new ImageIcon("res/walker/WALKER_TOKEN.png");
-    final static ImageIcon fallerToken = new ImageIcon("res/faller/FALLER_TOKEN.png");
     final static ImageIcon diggerToken = new ImageIcon("res/digger/DIGGER_TOKEN.png");
 }

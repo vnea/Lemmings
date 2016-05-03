@@ -29,7 +29,6 @@ public class Player implements
     
     public Player() {
         mapTokenTypeBehaviour.put(TokenType.WALKER, Behaviour.WALKER);
-        mapTokenTypeBehaviour.put(TokenType.FALLER, Behaviour.FALLER);
         mapTokenTypeBehaviour.put(TokenType.DIGGER, Behaviour.DIGGER);
         mapTokenTypeBehaviour.put(TokenType.BUILDER, Behaviour.BUILDER);
         mapTokenTypeBehaviour.put(TokenType.STOPPER, Behaviour.STOPPER);
@@ -62,15 +61,11 @@ public class Player implements
     }
 
     @Override
-    public void init(int nbTW, int nbFA, int nbDI, int nbBU, int nbST, int nbBA,
-                     int nbB, int nbCL, int nbFL, int nbBO) {
+    public void init(int nbTW, int nbDI, int nbBU, int nbST, int nbBA, int nbB,
+                     int nbCL, int nbFL, int nbBO) {
         // Walker
         mapNbToken.put(TokenType.WALKER, nbTW);
         mapNbInitToken.put(TokenType.WALKER, nbTW);
-        
-       // Faller
-        mapNbToken.put(TokenType.FALLER, nbFA);
-        mapNbInitToken.put(TokenType.FALLER, nbFA);
         
         // Digger
         mapNbToken.put(TokenType.DIGGER, nbDI);

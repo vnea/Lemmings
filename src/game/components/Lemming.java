@@ -2,16 +2,17 @@ package game.components;
 
 import game.enums.Behaviour;
 import game.enums.Direction;
+import game.enums.Nature;
 import game.enums.State;
-import game.services.GameEngService;
 import game.services.LemmingService;
-import game.services.RequireGameEngService;
+import game.services.LevelService;
+import game.services.RequireLevelService;
 
 import java.lang.reflect.InvocationTargetException;
 
 public class Lemming implements
     /* require */
-    RequireGameEngService,
+    RequireLevelService,
 
     /* provide */
     LemmingService {
@@ -25,7 +26,7 @@ public class Lemming implements
     private int counterFaller;
     private boolean dead;
     
-    private GameEngService gameEngine;
+    private LevelService level;
     
     @Override
     public int getNum() {
@@ -68,8 +69,8 @@ public class Lemming implements
     }
 
     @Override
-    public GameEngService getGameEngine() {
-        return gameEngine;
+    public LevelService getLevel() {
+        return level;
     }
 
     @Override
@@ -107,21 +108,21 @@ public class Lemming implements
     }
 
     @Override
-    public void bindGameEngService(GameEngService service) {
-        gameEngine = service;
+    public void bindLevelService(LevelService service) {
+        level = service;
     }
     
     @SuppressWarnings("unused")
     private void stepWALKER() {
         if (direction == Direction.RIGHT) {
-            if (!gameEngine.isAnObstacle(hPos + 1, wPos)) {
+            if (!level.isAnObstacle(hPos + 1, wPos)) {
                 behaviour = Behaviour.FALLER;
             }
-            else if (gameEngine.isAnObstacle(hPos - 1, wPos + 1)) {
+            else if (level.isAnObstacle(hPos - 1, wPos + 1)) {
                 direction = Direction.LEFT;
             }
-            else if (gameEngine.isAnObstacle(hPos, wPos + 1)) {
-                if (gameEngine.isAnObstacle(hPos - 2,  wPos + 1)) {
+            else if (level.isAnObstacle(hPos, wPos + 1)) {
+                if (level.isAnObstacle(hPos - 2,  wPos + 1)) {
                     direction = Direction.LEFT;
                 }
                 else {
@@ -134,14 +135,14 @@ public class Lemming implements
             }
         }
         else {
-            if (!gameEngine.isAnObstacle(hPos + 1, wPos)) {
+            if (!level.isAnObstacle(hPos + 1, wPos)) {
                 behaviour = Behaviour.FALLER;
             }
-            else if (gameEngine.isAnObstacle(hPos - 1, wPos - 1)) {
+            else if (level.isAnObstacle(hPos - 1, wPos - 1)) {
                 direction = Direction.RIGHT;
             }
-            else if (gameEngine.isAnObstacle(hPos, wPos - 1)) {
-                if (gameEngine.isAnObstacle(hPos - 2, wPos - 1)) {
+            else if (level.isAnObstacle(hPos, wPos - 1)) {
+                if (level.isAnObstacle(hPos - 2, wPos - 1)) {
                     direction = Direction.LEFT;
                 }
                 else {
@@ -157,7 +158,7 @@ public class Lemming implements
     
     @SuppressWarnings("unused")
     private void stepFALLER() {
-        if (!gameEngine.isAnObstacle(hPos + 1, wPos)) {
+        if (!level.isAnObstacle(hPos + 1, wPos)) {
             ++hPos;
             ++counterFaller;
         }
@@ -173,16 +174,23 @@ public class Lemming implements
     }
     
     @SuppressWarnings("unused")
-    private void setDIGGER() {
+    private void stepDIGGER() {
         final int POS_BELOW = hPos + 1;
-        if (!gameEngine.isAnObstacle(POS_BELOW, wPos)) {
+        if (!level.isAnObstacle(POS_BELOW, wPos)) {
             behaviour = Behaviour.FALLER;
         }
-        else if (gameEngine.isAMetalObstacle(POS_BELOW, wPos)){
+        else if (level.getNature(POS_BELOW, wPos) == Nature.METAL){
             behaviour = Behaviour.WALKER;
         }
-        else if (gameEngine.isADirtObstacle(POS_BELOW, wPos)) {
+        else if (level.getNature(POS_BELOW, wPos) == Nature.DIRT) {
+            level.remove(POS_BELOW, wPos);
             
+            if (level.getNature(POS_BELOW, wPos - 1)  == Nature.DIRT) {
+                level.remove(POS_BELOW, wPos - 1);
+            }
+            if (level.getNature(POS_BELOW, wPos + 1)  == Nature.DIRT) {
+                level.remove(POS_BELOW, wPos + 1);
+            }
         }
     }
     
