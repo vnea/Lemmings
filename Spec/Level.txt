@@ -39,6 +39,7 @@ Operators:
 Observations: 
 			  [invariants]
 			  		∀ i, 0 ≤ i < height(L) ^ ∀ j, 0 ≤ j < width(L), squareExist(L,i,j)
+			  		obstacle(L,h,w) = (nature(L,h,w) = Nature::DIRT  or  nature(L,h,w) = Nature::METAL) //minimisation
 			  [init]	
 			  		height(init(h,w)) = h
 			  		width(init(h,w)) = w

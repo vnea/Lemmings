@@ -23,24 +23,11 @@ Constructors:
 			 init: int * int * Level -> [GameEng]
 			 	   pre init(sizeC,spawnS,L) require sizeC>0 ^ spawnS>0
 Operators:
-			 newLemming: [GameEng] * int -> [GameEng]
-			 	   pre newLemming(G,num) require active(G,num)=false 
-			 	   								  ^ nbLemmingsCreated(G) < sizeColony(G)
-			 	   								  ^ nbLemmingsCreated(G)*spawnSpeed(G) = turn(G)
-			 	   								  ^ gameOver(G)=false
-			 callStepLemmings: [GameEng] -> [GameEng]
-			       pre callStepLemmings(G) require gameOver(G)=false
-			 checkSaved: [GameEng] -> [GameEng]
-			       pre checkSaved(G) require gameOver(G)=false
-			 checkDead: [GameEng] -> [GameEng]
-			       pre checkDead(G) require gameOver(G)=false
-			 checkWin: [GameEng] -> [GameEng]
-			       pre checkWin(G) require gameOver(G)=false
+			 executeTurn: [GameEng] -> [GameEng]
+			 	pre executeTurn(G) require gameOver(G)=false
 			 
 Observations: 
 			 [invariants]
-			 		obstacle(G,h,w) = ((Level::nature(level(G),h,w) = Nature::DIRT) or 
-			 							(Level::nature(level(G),h,w) = Nature::METAL)) //minimisation
 			 		active(G,num) = num ∈ numLemmingsActive(G) //minimisation
 			 		gameOver(G) = (nbLemmingsSaved(G) + nbLemmingsDead(G) = sizeColony(G)) //minimisation
 			 		nbLemmingsActive(G) = card(numLemmingsActive(G)) //minimisation
@@ -58,21 +45,15 @@ Observations:
 			 		card(numLemmingsActive(init(sizeC,spawnS,L))) = 0
 			 		spawnSpeed(init(sizeC,spawnS,L)) = spawnS
 			 		level(init(sizeC,spawnS,L)) = L	
-			 [callStepLemmings]
-			        turn(callStepLemmings(G)) = turn(G) + 1	
-			 [newLemming]
-			 		numLemmingsActive(newLemming(G,num)) = numLemmingsActive U {num}
-			 		lemming(newLemming(G,num),num) = Lemming::init(num, Level::hEntrance(level(newLemming(G,num))), Level::wEntrance(level(newLemming(G,num))), level(newLemming(G,num)))
-			 		∀ n ∈ numLemmingsActive(G), lemming(newLemming(G,num),n) = lemming(G,n)
-			 [checkSaved]
-			 		∀ num ∈ numLemmingsActive(G) if Level::nature(Level(checkSaved(G)), Lemming::hPos(lemming(G,num)),  Lemming::wPos(lemming(G,num))) = Level::Nature::EXIT then:
-			 		   									 numLemmingsActive(checkSaved(G)) = numLemmingsActive(G) \ {num}
-			 		nbLemmingSaved(checkSaved(G)) = nbLemmingsCreated(checkSaved(G)) - (nbLemmingsActive(checkSaved(G))	+ nbLemmingsDead(checkSaved(G)))	
-			 [checkDead]
-			 		∀ num ∈ numLemmingsActive(G) if Lemming::dead(lemming(G,num)) then:
-                        								numLemmingsActive(checkDead(G)) = numLemmingsActive(G) \ {num}
-                    nbLemmingsDead(checkDead(G)) = nbLemmingsCreated(checkDead(G)) - (nbLemmingsActive(checkDead(G)) + nbLemmingsSaved(checkDead(G)))
-			 [checkWin]
-			 		if gameOver(checkWin(G)) then:
-			 			  score(checkWin(G)) = (nbLemmingsSaved(checkWin(G))/turn(checkWin(G))) * 100
+			 [executeTurn]
+			 		turn(executeTurn(G)) = turn(G) + 1
+			 		∀ num ∈ numLemmingsActive(G) if Level::nature(Level(executeTurn(G)), Lemming::hPos(lemming(executeTurn(G),num)),  Lemming::wPos(lemming(executeTurn(G),num))) = Level::Nature::EXIT then:
+			 		   									 {num} ∉  numLemmingsActive(executeTurn(G)) ^ nbLemmingsSaved(executeTurn(G))++
+			 		∀ num ∈ numLemmingsActive(G) if Lemming::dead(lemming(executeTurn(G),num)) then:
+                        								{num} ∉  numLemmingsActive(executeTurn(G)) ^ nbLemmingsDead(executeTurn(G))++
+			 		if nbLemmingsCreated(G)*spawnSpeed(G) = turn(G)  and  nbLemmingsCreated(G) < sizeColony(executeTurn(G)) then:
+			 			  lemming(executeTurn(G),nbLemmingsCreated(G)) = Lemming::init(nbLemmingsCreated(G), Level::hEntrance(level(executeTurn(G))), Level::wEntrance(level(executeTurn(G))), level(execute(G)))
+			 		if gameOver(executeTurn(G)) then:
+			 			  score(executeTurn(G)) = (nbLemmingsSaved(executeTurn(G))/turn(executeTurn(G))) * 100  
+			 		
 
