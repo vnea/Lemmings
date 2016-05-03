@@ -133,6 +133,41 @@ public class LevelTest {
 	
 	@Test
 	// OK
+	public void testIsAnObstaclePre1() {
+		// init
+		level.init(30, 30);
+		
+		// operation
+		try{
+			level.isAnObstacle(0, 0);
+		}
+		catch(PostconditionError | InvariantError e){}
+		catch(PreconditionError e){
+			assertTrue("No exception must be raised.", false);
+		}
+	}
+	
+	@Test
+	// KO \pre: squareExist(h, w)
+	public void testIsAnObstaclePre2() {
+		boolean excpt = false;
+		
+		// init
+		level.init(30, 30);
+		
+		// operation
+		try{
+			level.isAnObstacle(-1, -1);
+		}
+		catch(PostconditionError | InvariantError e){}
+		catch(PreconditionError e){
+			excpt = true;
+		}
+		assertTrue("A PreconditionError must be raised.", excpt);
+	}
+	
+	@Test
+	// OK
 	public void testGetHEntrancePre1(){
 		// init
 		level.init(30, 30);

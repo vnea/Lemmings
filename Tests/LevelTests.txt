@@ -93,6 +93,32 @@ Report :
 	No exception :
 		"A PreconditionError must be raised."	
 		
+
+Test : testIsAnObstaclePre1
+
+Coverage : preconditions
+Goal : precondition resolved
+Initial conditions : C0 := init(30, 30)
+Operations : C1 := nature(C0, 0, 0);
+Oracle :
+	No exception
+Report :
+	A PreconditionError was raised :
+		"No exception must be raised"		
+		
+
+Test : testIsAnObstaclePre2
+
+Coverage : preconditions
+Goal : precondition unresolved
+Initial conditions : C0 := init(30, 30)
+Operations : C1 := nature(C0, -1, -1);
+Oracle :
+	A PreconditionError must be raised
+Report :
+	No exception :
+		"A PreconditionError must be raised."	
+		
 		
 Test : testGetHEntrancePre1
 
