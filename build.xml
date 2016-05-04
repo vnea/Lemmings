@@ -1,4 +1,4 @@
-<project name="Lemming" default="compile" basedir=".">
+<project name="game" default="compile" basedir=".">
     <description>
        Fichier de construction pour le projet "Lemmings" de CPS
     </description>
@@ -7,7 +7,6 @@
   <property name="build" location="build"/>
   <property name="jars" location="jars"/>
 
-  <!-- METTRE ICI LE NOM DU BINOME -->
   <property name="nom1" value="LAUSSAUZAY"/>
   <property name="nom2" value="NEA"/>
 
@@ -21,24 +20,32 @@
   <target name="compile" depends="init"
         description="compile the source " >
     <!-- Compile the java code from ${src} into ${build} -->
-    <javac debug="true" srcdir="${src}" excludes="" destdir="${build}" includeantruntime="false" />
+    <javac debug="true" classpath="${jars}/junit.jar" srcdir="${src}" excludes="" destdir="${build}" includeantruntime="false" />
   </target>
 	
 	<target name="run1" depends="compile"
-	          description="run application in release mode">
+	          description="run application without contract">
 	    <echo>================ Run Object Main ================</echo>
-	    <java classname="game.main.Main"
+	    <java classname="game.main.MainWithoutContract"
+	          classpath="${build}">
+	    </java>
+	 </target>
+	
+	<target name="run2" depends="compile"
+	          description="run application with contract">
+	    <echo>================ Run Object Main ================</echo>
+	    <java classname="game.main.MainWithContract"
 	          classpath="${build}">
 	    </java>
 	 </target>
 
   <target name="test" depends="compile"
-          description="Run test">
+          description="Run tests for Level">
     <echo>================ Run first test ================</echo>
     <junit printsummary="yes">
       <classpath>
         <pathelement location="${build}"/>
-        <pathelement location="${jars}/junit.jar"/>
+      	<pathelement location="${jars}/junit.jar"/>
       </classpath>
 
       <formatter type="plain"/>
@@ -52,8 +59,8 @@
   <target name="dist" depends="init,clean"
         description="Generer la distribution" >
     <!-- tout mettre dans l'archive -->
-    <jar basedir=".." jarfile="../CPS_Projet-${nom1}-${nom2}-${DSTAMP}.jar"
-    includes="CPS_Projet/**/*" excludes="**/CVS"/>
+    <jar basedir=".." jarfile="../Lemmings-${nom1}-${nom2}-${DSTAMP}.jar"
+    includes="Lemmings/**/*" excludes="**/CVS"/>
   </target>
 
   <target name="clean"
