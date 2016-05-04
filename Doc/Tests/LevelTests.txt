@@ -564,4 +564,9 @@ Report :
 		"Case's nature must be dirt."
 		
 		
+///////// Test use case /////////		
+		
+* See the code LevelTest.java
+		
+		
 		

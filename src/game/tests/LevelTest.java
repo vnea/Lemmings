@@ -969,13 +969,13 @@ public class LevelTest {
 		catch(PreconditionError e){}
 	}
 	
-	
 	///////// Test remarkable state /////////
+	
+	@Test
 	// OK
 	public void testSetDirtTwice() {
 		// init
 		level.init(30, 30);
-		
 		
 		level.setNature(10, 10, Nature.DIRT);
 		
@@ -988,6 +988,46 @@ public class LevelTest {
 		assertTrue("Case's nature must be dirt", 
 								level.getNature(10, 10) == Nature.DIRT);
 		
+	}
+	
+	@Test
+	///////// Test use case /////////
+	public void testUseCase1() {
+		// init
+		level.init(30, 30);
+		
+		
+		// operation
+		try{
+			for(int i=0; i < level.getHeight(); i++){
+				level.setNature(i, 0, Nature.METAL);
+				level.setNature(i, level.getWidth()-1, Nature.METAL);
+			}
+			for(int i=0; i < level.getWidth(); i++){
+				level.setNature(0, i, Nature.METAL);
+				level.setNature(level.getHeight()-1, i, Nature.METAL);
+			}
+			level.setNature(13, 13, Nature.DIRT);
+			level.setNature(14, 13, Nature.DIRT);
+			level.setNature(11, 11, Nature.DIRT);
+			level.setNature(13, 14, Nature.DIRT);
+			level.setNature(15, 15, Nature.METAL);
+			level.setNature(14, 14, Nature.METAL);
+			level.setNature(12, 12, Nature.METAL);
+			
+			level.setNature(9, 8, Nature.METAL);
+			level.goPlay(5, 5, 8, 8);
+		}
+		catch(PostconditionError | InvariantError | PreconditionError e){
+		}
+		assertTrue("Case's nature must be dirt", 
+										level.isAnObstacle(13, 13) &&
+										level.isAnObstacle(14, 13) &&
+										level.isAnObstacle(11, 11) &&
+										level.isAnObstacle(13, 14) &&
+										level.isAnObstacle(15, 15) &&
+										level.isAnObstacle(14, 14) &&
+										level.isAnObstacle(12, 12));
 	}
 	
 }

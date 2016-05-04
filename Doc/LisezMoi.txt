@@ -11,9 +11,8 @@ suivante:
 public void useLemmingContract(boolean use);
 
 Comme les Lemmings sont créés directement par le service GameEngService, cette
-méthode
-nous permet simplement d'indiquer si nous voulons créér des Lemming ou des
-LemmingContract. Cette méthode ne fait donc pas partie de la spécification.
+méthode nous permet simplement d'indiquer si nous voulons créér des Lemming ou 
+des LemmingContract. Cette méthode ne fait donc pas partie de la spécification.
 
 --------------------------------------------------------------------------------
 
