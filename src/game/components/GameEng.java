@@ -1,5 +1,6 @@
 package game.components;
 
+import game.contracts.LemmingContract;
 import game.enums.Nature;
 import game.services.GameEngService;
 import game.services.LemmingService;
@@ -146,9 +147,9 @@ public class GameEng implements
     }
     
     private void newLemming() {
-        Lemming lemming = new Lemming();
-        lemming.init(nbLemmingsCreated, level.getHEntrance(), level.getWEntrance());
+        LemmingContract lemming = new LemmingContract(new Lemming());
         lemming.bindLevelService(level);
+        lemming.init(nbLemmingsCreated, level.getHEntrance(), level.getWEntrance());
         
         lemmingsActive.add(lemming);
         ++nbLemmingsCreated;
