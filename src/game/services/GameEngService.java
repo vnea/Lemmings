@@ -56,7 +56,7 @@ public interface GameEngService extends RequireLevelService {
     
     //**INVARIANT(S)*********************************************************//
     
-    /** \inv: \forall num \in getNumLemmingsActive(), isActive(num) = num \in getNumLemmingsActive() (minimisation) */
+    /** \inv: \forall num \in getNumLemmingsActive(), isActive(num) (minimisation) */
     
     /** \inv: isGameOver() = getNbLemmingsSaved() + getNbLemmingsDead() ==
      *                       getSizeColony() (minimisation)
@@ -113,7 +113,7 @@ public interface GameEngService extends RequireLevelService {
      * \post: if getNbLemmingsCreated()@pre * getSpawnSpeed()@pre == getTurn()@pre ^ getNbLemmingsCreated()@pre < getSizeColony() then:
      *             getLemming(getNbLemmingsCreated()@pre) == Lemming::init(getNbLemmingsCreated(), getLevel().getHEntrance(), getLevel().getWEntrance())
      * \post if isGameOver() then:
-     *          getScore() == (getNbLemmingsSaved() / getTurn()) * 100
+     *          getScore() == (getNbLemmingsSaved() / getTurn()@pre) * 100
      */
     public void executeTurn();
     

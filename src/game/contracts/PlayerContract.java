@@ -27,10 +27,10 @@ public class PlayerContract extends PlayerDecorator {
     public void init(int nbTW, int nbDI, int nbBU, int nbST, int nbBA, int nbB,
                      int nbCL, int nbFL, int nbBO) {
         /* Pre-condition(s) */
-        // \pre: nbTW ≥ 0 nbFA ≥ 0, nbDI ≥ 0, nbBU ≥ 0, nbST ≥ 0, nbBA ≥ 0, nbB ≥ 0, nbCL ≥ 0, nbFL ≥ 0, nbBO > ≥ 0
+        // \pre: nbTW ≥ 0, nbDI ≥ 0, nbBU ≥ 0, nbST ≥ 0, nbBA ≥ 0, nbB ≥ 0, nbCL ≥ 0, nbFL ≥ 0, nbBO > ≥ 0
         if (!(nbTW >= 0 && nbDI >= 0 && nbBU >= 0 && nbST >= 0 && nbBA >= 0 &&
               nbB >= 0 && nbCL >= 0 && nbFL >= 0 && nbBO >= 0)) {
-            throw new PreconditionError("!(nbTW ≥ 0 nbFA ≥ 0, nbDI ≥ 0, nbBU ≥ 0, nbST ≥ 0, nbBA ≥ 0, nbB ≥ 0, nbCL ≥ 0, nbFL ≥ 0, nbBO > ≥ 0)");
+            throw new PreconditionError("!(nbTW ≥ 0, nbDI ≥ 0, nbBU ≥ 0, nbST ≥ 0, nbBA ≥ 0, nbB ≥ 0, nbCL ≥ 0, nbFL ≥ 0, nbBO > ≥ 0)");
         }
         
         /* Initialisation */

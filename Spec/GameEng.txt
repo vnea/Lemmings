@@ -29,7 +29,7 @@ Operators:
 			 
 Observations: 
 			 [invariants]
-			 		∀ num ∈ numLemmingsActive(G), active(G,num) = num ∈ numLemmingsActive(G) //minimisation
+			 		∀ num ∈ numLemmingsActive(G), active(G,num) //minimisation
 			 		gameOver(G) = (nbLemmingsSaved(G) + nbLemmingsDead(G) = sizeColony(G)) //minimisation
 			 		nbLemmingsActive(G) = card(numLemmingsActive(G)) //minimisation
 			 		nbLemmingsCreated(G) = nbLemmingsDead(G) + nbLemmingsSaved(G) + nbLemmingsActive(G)  //minimisation 

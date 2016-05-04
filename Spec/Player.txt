@@ -9,9 +9,9 @@ Observators:
 			 gameEngine: [Player] -> GameEng
 			 
 Constructors:
-			 init: int * int * int * int * int * int * int * int * int * int * GameEng -> [Player]
-			 	   pre init(nbTW,nbFA,nbDI,nbBU,nbST,nbBA,nbB,nbCL,nbFL,nbBO,G) require 
-			 	   		 	nbTW ≥ 0 nbFA ≥ 0, nbDI ≥ 0, nbBU ≥ 0, nbST ≥ 0, nbBA ≥ 0, nbB ≥ 0, nbCL ≥ 0, nbFL ≥ 0, nbBO > ≥ 0
+			 init: int * int * int * int * int * int * int * int * int * GameEng -> [Player]
+			 	   pre init(nbTW,nbDI,nbBU,nbST,nbBA,nbB,nbCL,nbFL,nbBO,G) require 
+			 	   		 	nbTW ≥ 0, nbDI ≥ 0, nbBU ≥ 0, nbST ≥ 0, nbBA ≥ 0, nbB ≥ 0, nbCL ≥ 0, nbFL ≥ 0, nbBO > ≥ 0
 Operators:
 			 useToken: [Player] * int -> [Player]
 				   pre useToken(P, numLemming) require 
@@ -22,26 +22,26 @@ Observations:
 			 [invariants]
 			 	   ∀ X ∈ TokenType, nbToken(P, X) ≥ 0
 			 [init]
-			 	   nbToken(init(nbTW,nbFA,nbDI,nbBU,nbST,nbBA,nbB,nbCL,nbFL,nbBO,G),TokenType::WALKER) = nbTW
-			 	   nbTokenInit(init(nbTW,nbFA,nbDI,nbBU,nbST,nbBA,nbB,nbCL,nbFL,nbBO,G),TokenType::WALKER) = nbTW
-			 	   nbToken(init(nbTW,nbFA,nbDI,nbBU,nbST,nbBA,nbB,nbCL,nbFL,nbBO,G),TokenType::DIGGER) = nbDI
-			 	   nbTokenInit(init(nbTW,nbFA,nbDI,nbBU,nbST,nbBA,nbB,nbCL,nbFL,nbBO,G),TokenType::DIGGER) = nbDI
-			 	   nbToken(init(nbTW,nbFA,nbDI,nbBU,nbST,nbBA,nbB,nbCL,nbFL,nbBO,G),TokenType::BUILDER) = nbBU
-			 	   nbTokenInit(init(nbTW,nbFA,nbDI,nbBU,nbST,nbBA,nbB,nbCL,nbFL,nbBO,G),TokenType::BUILDER) = nbBU
-			 	   nbToken(init(nbTW,nbFA,nbDI,nbBU,nbST,nbBA,nbB,nbCL,nbFL,nbBO,G),TokenType::STOPPER) = nbST
-			 	   nbTokenInit(init(nbTW,nbFA,nbDI,nbBU,nbST,nbBA,nbB,nbCL,nbFL,nbBO,G),TokenType::STOPPER) = nbST
-			 	   nbToken(init(nbTW,nbFA,nbDI,nbBU,nbST,nbBA,nbB,nbCL,nbFL,nbBO,G),TokenType::BASHER) = nbBA
-			 	   nbTokenInit(init(nbTW,nbFA,nbDI,nbBU,nbST,nbBA,nbB,nbCL,nbFL,nbBO,G),TokenType::BASHER) = nbBA
-			 	   nbToken(init(nbTW,nbFA,nbDI,nbBU,nbST,nbBA,nbB,nbCL,nbFL,nbBO,G),TokenType::BASIC) = nbB
-			 	   nbTokenInit(init(nbTW,nbFA,nbDI,nbBU,nbST,nbBA,nbB,nbCL,nbFL,nbBO,G),TokenType::BASIC) = nbB
-			 	   nbToken(init(nbTW,nbFA,nbDI,nbBU,nbST,nbBA,nbB,nbCL,nbFL,nbBO,G),TokenType::CLIMBER) = nbCL
-			 	   nbTokenInit(init(nbTW,nbFA,nbDI,nbBU,nbST,nbBA,nbB,nbCL,nbFL,nbBO,G),TokenType::CLIMBER) = nbCL
-			 	   nbToken(init(nbTW,nbFA,nbDI,nbBU,nbST,nbBA,nbB,nbCL,nbFL,nbBO,G),TokenType::FLOATER) = nbFL
-			 	   nbTokenInit(init(nbTW,nbFA,nbDI,nbBU,nbST,nbBA,nbB,nbCL,nbFL,nbBO,G),TokenType::FLOATER) = nbFL
-			 	   nbToken(init(nbTW,nbFA,nbDI,nbBU,nbST,nbBA,nbB,nbCL,nbFL,nbBO,G),TokenType::BOMBER) = nbBO
-			 	   nbTokenInit(init(nbTW,nbFA,nbDI,nbBU,nbST,nbBA,nbB,nbCL,nbFL,nbBO,G),TokenType::BOMBER) = nbBO
-			 	   tokenSelected(init(nbTW,nbFA,nbDI,nbBU,nbST,nbBA,nbB,nbCL,nbFL,nbBO,G)) = TokenType::WALKER
-			 	   gameEngine(init(nbTW,nbFA,nbDI,nbBU,nbST,nbBA,nbB,nbCL,nbFL,nbBO,G)) = G
+			 	   nbToken(init(nbTW,nbDI,nbBU,nbST,nbBA,nbB,nbCL,nbFL,nbBO,G),TokenType::WALKER) = nbTW
+			 	   nbTokenInit(init(nbTW,nbDI,nbBU,nbST,nbBA,nbB,nbCL,nbFL,nbBO,G),TokenType::WALKER) = nbTW
+			 	   nbToken(init(nbTW,nbDI,nbBU,nbST,nbBA,nbB,nbCL,nbFL,nbBO,G),TokenType::DIGGER) = nbDI
+			 	   nbTokenInit(init(nbTW,nbDI,nbBU,nbST,nbBA,nbB,nbCL,nbFL,nbBO,G),TokenType::DIGGER) = nbDI
+			 	   nbToken(init(nbTW,nbDI,nbBU,nbST,nbBA,nbB,nbCL,nbFL,nbBO,G),TokenType::BUILDER) = nbBU
+			 	   nbTokenInit(init(nbTW,nbDI,nbBU,nbST,nbBA,nbB,nbCL,nbFL,nbBO,G),TokenType::BUILDER) = nbBU
+			 	   nbToken(init(nbTW,nbDI,nbBU,nbST,nbBA,nbB,nbCL,nbFL,nbBO,G),TokenType::STOPPER) = nbST
+			 	   nbTokenInit(init(nbTW,nbDI,nbBU,nbST,nbBA,nbB,nbCL,nbFL,nbBO,G),TokenType::STOPPER) = nbST
+			 	   nbToken(init(nbTW,nbDI,nbBU,nbST,nbBA,nbB,nbCL,nbFL,nbBO,G),TokenType::BASHER) = nbBA
+			 	   nbTokenInit(init(nbTW,nbDI,nbBU,nbST,nbBA,nbB,nbCL,nbFL,nbBO,G),TokenType::BASHER) = nbBA
+			 	   nbToken(init(nbTW,nbDI,nbBU,nbST,nbBA,nbB,nbCL,nbFL,nbBO,G),TokenType::BASIC) = nbB
+			 	   nbTokenInit(init(nbTW,nbDI,nbBU,nbST,nbBA,nbB,nbCL,nbFL,nbBO,G),TokenType::BASIC) = nbB
+			 	   nbToken(init(nbTW,nbDI,nbBU,nbST,nbBA,nbB,nbCL,nbFL,nbBO,G),TokenType::CLIMBER) = nbCL
+			 	   nbTokenInit(init(nbTW,nbDI,nbBU,nbST,nbBA,nbB,nbCL,nbFL,nbBO,G),TokenType::CLIMBER) = nbCL
+			 	   nbToken(init(nbTW,nbDI,nbBU,nbST,nbBA,nbB,nbCL,nbFL,nbBO,G),TokenType::FLOATER) = nbFL
+			 	   nbTokenInit(init(nbTW,nbDI,nbBU,nbST,nbBA,nbB,nbCL,nbFL,nbBO,G),TokenType::FLOATER) = nbFL
+			 	   nbToken(init(nbTW,nbDI,nbBU,nbST,nbBA,nbB,nbCL,nbFL,nbBO,G),TokenType::BOMBER) = nbBO
+			 	   nbTokenInit(init(nbTW,nbDI,nbBU,nbST,nbBA,nbB,nbCL,nbFL,nbBO,G),TokenType::BOMBER) = nbBO
+			 	   tokenSelected(init(nbTW,nbDI,nbBU,nbST,nbBA,nbB,nbCL,nbFL,nbBO,G)) = TokenType::WALKER
+			 	   gameEngine(init(nbTW,nbDI,nbBU,nbST,nbBA,nbB,nbCL,nbFL,nbBO,G)) = G
 			 [useToken]
 			       if tokenSelected(P)=X, X ∈  {WALKER, DIGGER, BUILDER, STOPPER, BASHER}) then: 
 										 	   nbToken(useToken(P, numLemming),X) = nbToken(P,X)-1 ^

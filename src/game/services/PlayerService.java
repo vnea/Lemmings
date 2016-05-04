@@ -30,7 +30,7 @@ public interface PlayerService extends RequireGameEngService {
     //**INIT*****************************************************************//
     
     /** Initialisation
-     * \pre: nbTW ≥ 0 nbFA ≥ 0, nbDI ≥ 0, nbBU ≥ 0, nbST ≥ 0, nbBA ≥ 0, nbB ≥ 0, nbCL ≥ 0, nbFL ≥ 0, nbBO > ≥ 0
+     * \pre: nbTW ≥ 0, nbDI ≥ 0, nbBU ≥ 0, nbST ≥ 0, nbBA ≥ 0, nbB ≥ 0, nbCL ≥ 0, nbFL ≥ 0, nbBO > ≥ 0
      * \post: getNbToken(TokenType::WALKER) == nbTW
      * \post: getNbTokenInit(TokenType::WALKER) == nbTW
      * \post: getNbToken(TokenType::DIGGER) == nbDI
