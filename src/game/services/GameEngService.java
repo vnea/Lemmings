@@ -118,4 +118,13 @@ public interface GameEngService extends RequireLevelService {
     public void executeTurn();
     
     //***********************************************************************//
+    
+    //**OTHER(S)**********************************************************//
+    
+    /**
+     * Use LemmingContract when creating a new Lemming
+     */
+    public void useLemmingContract(boolean use);
+    
+    //***********************************************************************//
 }

@@ -1,0 +1,30 @@
+Depuis la présention, nous avons rajouté les contrats de Player et de Lemming
+(sauf pour step, le contrat de DIGGER n'est pas terminé).
+Pour rappel, nous n'avons géré que les types WALKER, FALLER et DIGGER.
+Les contrats de GameEng est partiellement fini.
+
+--------------------------------------------------------------------------------
+
+Remarque :
+Vous pourrez remarque que dans le service GameEngService se trouve la méthode
+suivante:
+public void useLemmingContract(boolean use);
+
+Comme les Lemmings sont créés directement par le service GameEngService, cette
+méthode
+nous permet simplement d'indiquer si nous voulons créér des Lemming ou des
+LemmingContract. Cette méthode ne fait donc pas partie de la spécification.
+
+--------------------------------------------------------------------------------
+
+Pour lancer l'application sans les contrats, il faut taper dans un terminal:
+ant run1
+
+Pour lancer l'application avec les contrats, il faut taper dans un terminal:
+ant run2
+
+Pour lancer les tests, il faut taper dans un terminal:
+ant test
+
+Remarque:
+Un fichier de log nommé "reportTest.txt" est crée à la racine du projet.
