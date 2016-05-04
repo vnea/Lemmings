@@ -11,7 +11,7 @@ Observators:
 Constructors:
 			 init: int * int * int * int * int * int * int * int * int * int * GameEng -> [Player]
 			 	   pre init(nbTW,nbFA,nbDI,nbBU,nbST,nbBA,nbB,nbCL,nbFL,nbBO,G) require 
-			 	   		 	nbTW > 0 nbFA > 0, nbDI > 0, nbBU > 0, nbST > 0, nbBA > 0, nbB > 0, nbCL > 0, nbFL > 0, nbBO > 0
+			 	   		 	nbTW ≥ 0 nbFA ≥ 0, nbDI ≥ 0, nbBU ≥ 0, nbST ≥ 0, nbBA ≥ 0, nbB ≥ 0, nbCL ≥ 0, nbFL ≥ 0, nbBO > ≥ 0
 Operators:
 			 useToken: [Player] * int -> [Player]
 				   pre useToken(P, numLemming) require 

@@ -22,7 +22,7 @@ public interface PlayerService extends RequireGameEngService {
     
     //**INVARIANT(S)*********************************************************//
     
-    /** \inv: ∀ X ∈ TokenType, getNbTokenWalker(X) ≥ 0 */
+    /** \inv: ∀ X ∈ TokenType, getNbToken(X) ≥ 0 */
     
     //***********************************************************************//
 
@@ -30,7 +30,7 @@ public interface PlayerService extends RequireGameEngService {
     //**INIT*****************************************************************//
     
     /** Initialisation
-     * \pre: nbTW > 0, nbDI > 0, nbBU > 0, nbST > 0, nbBA > 0, nbB > 0, nbCL > 0, nbFL > 0, nbBO > 0
+     * \pre: nbTW ≥ 0 nbFA ≥ 0, nbDI ≥ 0, nbBU ≥ 0, nbST ≥ 0, nbBA ≥ 0, nbB ≥ 0, nbCL ≥ 0, nbFL ≥ 0, nbBO > ≥ 0
      * \post: getNbToken(TokenType::WALKER) == nbTW
      * \post: getNbTokenInit(TokenType::WALKER) == nbTW
      * \post: getNbToken(TokenType::DIGGER) == nbDI
@@ -60,7 +60,7 @@ public interface PlayerService extends RequireGameEngService {
     //**OPERATOR(S)**********************************************************//
     
     /** Use a token
-     * \pre: getTokenSelected() == X => getNbToken(X) > 0, X  ∈ TokenType
+     * \pre: getNbToken(getTokenSelected()) > 0
      * \post: if getTokenSelected() == X, X ∈ {WALKER, FALLER, DIGGER, BUILDER, STOPPER, BASHER} then:
      *           getNbToken(X) == getNbToken(X)@pre - 1 ^ getGameEngine().getLemming(numLemming).getBehaviour() == X
      *        else getTokenSelected() == X, X ∈  {BASIC, CLIMBER, FLOATER, BOMBER} then:
@@ -69,9 +69,9 @@ public interface PlayerService extends RequireGameEngService {
     public void useToken(int numLemming);
     
     /** Reset the game
-     * \post: getGameEngine() == getGameEngine()@pre.init(getGameEngine()@pre.getSizeColony(), getGameEngine()@pre.getSpawnSpeed(), getGameEngine()@pre.getLevelInit()) 
+     * \post: getGameEngine() == getGameEngine()@pre.init(getGameEngine()@pre.getSizeColony(), getGameEngine()@pre.getSpawnSpeed(), getGameEngine()@pre.getLevelInit())
      * \post: \forall X \in TokenType, getNbToken(X) == getNbTokenInit(X)@pre()
-     * \post: \forall X \in TokenType, getNbTokenInit(X) == getNbTokenInit(X)@pre() 
+     * \post: \forall X \in TokenType, getNbTokenInit(X) == getNbTokenInit(X)@pre()
      * \post: getTokenSelected() == TokenType::WALKER
      */
     public void resetGame();

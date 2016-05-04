@@ -149,12 +149,13 @@ public class GameEngContract extends GameEngDecorator {
             throw new PreconditionError("isGameOver()");
         }
         
-        // captures
+        /* Capture(s) */
         final int turn_atPre = getTurn();
         final List<Integer> numLemmingsCreated_atPre = getNumLemmingsActive();
         final int nbLemmingsCreate_atPre = getNbLemmingsCreated();
         final int spawnSpeed = getSpawnSpeed();
         
+        /* Processing */
         super.executeTurn();
         
         /* Post-invariant */

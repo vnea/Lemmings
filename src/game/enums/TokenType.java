@@ -23,4 +23,12 @@ public enum TokenType {
     public boolean isABehaviour() {
         return value >= 0;
     }
+    
+    public boolean equalsBehaviour(Behaviour behaviour) {
+        return value == behaviour.getValue();
+    }
+    
+    public boolean equalsState(State state) {
+        return value == state.getValue();
+    }
 }

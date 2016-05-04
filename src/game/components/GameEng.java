@@ -181,4 +181,42 @@ public class GameEng implements
             score = (int) ((double) nbLemmingsSaved / turn * 100);
         }
     }
+    
+    public static boolean areEqual(GameEngService gameEngine, GameEngService other) {
+        if (gameEngine.getTurn() != other.getTurn()) {
+            return false;
+        }
+        
+        if (gameEngine.getSizeColony() != other.getSizeColony()) {
+            return false;
+        }
+        
+        if (gameEngine.getSpawnSpeed() != other.getSpawnSpeed()) {
+            return false;
+        }
+        
+        if (gameEngine.getNbLemmingsActive() != other.getNbLemmingsActive()) {
+            return false;
+        }
+        
+        if (gameEngine.getNbLemmingsSaved() != other.getNbLemmingsSaved()) {
+            return false;
+        }
+        
+        if (gameEngine.getNbLemmingsDead() != other.getNbLemmingsDead()) {
+            return false;
+        }
+        
+        gameEngine.getNumLemmingsActive().equals(other.getNumLemmingsActive());
+        
+        if (!Level.areEqual(gameEngine.getLevel(), other.getLevel())) {
+            return false;
+        }
+        
+        if (!Level.areEqual(gameEngine.getLevelInit(), other.getLevelInit())) {
+            return false;
+        }
+        
+        return true;
+    }
 }
