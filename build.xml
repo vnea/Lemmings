@@ -27,7 +27,7 @@
 	          description="run application without contract">
 	    <echo>================ Run Object Main ================</echo>
 	    <java classname="game.main.MainWithoutContract"
-	          classpath="${build}">
+	          classpath="${build}" fork="true">
 	    </java>
 	 </target>
 	
@@ -35,7 +35,7 @@
 	          description="run application with contract">
 	    <echo>================ Run Object Main ================</echo>
 	    <java classname="game.main.MainWithContract"
-	          classpath="${build}">
+	          classpath="${build}" fork="true">
 	    </java>
 	 </target>
 
