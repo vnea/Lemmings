@@ -30,6 +30,8 @@ public class GameEng implements
     private LevelService level;
     private LevelService levelInit;
     
+    private boolean useLemmingContract = false;
+    
     @Override
     public int getScore() {
         return score;
@@ -147,7 +149,9 @@ public class GameEng implements
     }
     
     private void newLemming() {
-        LemmingContract lemming = new LemmingContract(new Lemming());
+        LemmingService lemming = useLemmingContract
+                            ? new LemmingContract(new Lemming())
+                            : new Lemming();
         lemming.bindLevelService(level);
         lemming.init(nbLemmingsCreated, level.getHEntrance(), level.getWEntrance());
         
@@ -219,5 +223,10 @@ public class GameEng implements
         }
         
         return true;
+    }
+
+    @Override
+    public void useLemmingContract(boolean use) {
+        useLemmingContract = use;        
     }
 }

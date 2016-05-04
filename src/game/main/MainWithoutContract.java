@@ -9,6 +9,7 @@ public class MainWithoutContract {
     public static void main(String[] args) throws InterruptedException {
         // Composant(s)
         GameEng gameEngine = new GameEng();
+        gameEngine.useLemmingContract(false);
         Level level = new Level();
         Player player = new Player();
         

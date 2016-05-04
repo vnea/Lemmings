@@ -97,4 +97,9 @@ public class GameEngDecorator implements GameEngService {
     public void bindLevelService(LevelService service) {
         delegate.bindLevelService(service);
     }
+
+    @Override
+    public void useLemmingContract(boolean use) {
+        delegate.useLemmingContract(use);
+    }
 }

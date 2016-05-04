@@ -12,6 +12,8 @@ public class MainWithContract {
     public static void main(String[] args) throws InterruptedException {
         // Composant(s)
         GameEngContract gameEngineContract = new GameEngContract(new GameEng());
+        gameEngineContract.useLemmingContract(true);
+        
         LevelContract levelContract = new LevelContract(new Level());
         PlayerContract playerContract = new PlayerContract(new Player());
         
