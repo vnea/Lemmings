@@ -1,8 +1,6 @@
 package game.components.display;
 
-import game.components.GameEng;
 import game.components.Level;
-import game.components.Player;
 import game.enums.Nature;
 import game.enums.TokenType;
 import game.services.GameEngService;
@@ -32,9 +30,9 @@ import javax.swing.SpinnerNumberModel;
 public class Display {
     private JFrame mainFrame = new JFrame();
     
-    private GameEng gameEngine;
-    private Level level;
-    private Player player;
+    private GameEngService gameEngine;
+    private LevelService level;
+    private PlayerService player;
     
     private Nature currentNature = Nature.EMPTY;
     
@@ -58,7 +56,7 @@ public class Display {
     private Integer initWidth = null;
     
     
-    public Display(GameEng gameEngine, Level level, Player player) {
+    public Display(GameEngService gameEngine, LevelService level, PlayerService player) {
         this.gameEngine = gameEngine; 
         this.level = level;
         this.player = player;

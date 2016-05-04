@@ -2,7 +2,7 @@ package game.services;
 
 import game.enums.TokenType;
 
-public interface PlayerService {
+public interface PlayerService extends RequireGameEngService {
     //**OBSERVATOR(S)********************************************************//
     
     /** Number of init tokens (needed when reseting the game) */

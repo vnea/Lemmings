@@ -5,7 +5,7 @@ import game.components.Level;
 import game.components.Player;
 import game.components.display.Display;
 
-public class Main {
+public class MainWithoutContract {
     public static void main(String[] args) throws InterruptedException {
         // Composant(s)
         GameEng gameEngine = new GameEng();

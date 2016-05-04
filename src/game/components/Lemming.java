@@ -6,13 +6,12 @@ import game.enums.Nature;
 import game.enums.State;
 import game.services.LemmingService;
 import game.services.LevelService;
-import game.services.RequireLevelService;
 
 import java.lang.reflect.InvocationTargetException;
 
 public class Lemming implements
     /* require */
-    RequireLevelService,
+    /*RequireLevelService,*/
 
     /* provide */
     LemmingService {

@@ -51,4 +51,9 @@ public class PlayerDecorator implements PlayerService {
     public void selectToken(TokenType tokenType) {
         delegate.selectToken(tokenType);
     }
+
+    @Override
+    public void bindGameEngService(GameEngService service) {
+        delegate.bindGameEngService(service);        
+    }
 }

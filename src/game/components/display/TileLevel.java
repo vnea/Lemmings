@@ -101,7 +101,9 @@ public class TileLevel extends JLabel implements TileService {
     private void updateNature(Nature nature) {
         setNature(nature);
         
-        display.getLevel().setNature(h, w, this.nature);
+        if (display.getLevel().isEditing()) {
+            display.getLevel().setNature(h, w, this.nature);
+        }
         switch (this.nature) {
             case EMPTY:
                 setIcon(emptyImg);

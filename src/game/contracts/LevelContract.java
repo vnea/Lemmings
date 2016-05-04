@@ -262,7 +262,7 @@ public class LevelContract extends LevelDecorator {
         }
         
         // \post: getWEntrance() == w1
-        if (!(getHEntrance() == w1)) {
+        if (!(getWEntrance() == w1)) {
             throw new PostconditionError("!(getHEntrance() == w1)");
         }
         

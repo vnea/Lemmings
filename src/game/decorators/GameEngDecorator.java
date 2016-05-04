@@ -92,4 +92,9 @@ public class GameEngDecorator implements GameEngService {
     public void executeTurn() {
         delegate.executeTurn();
     }
+
+    @Override
+    public void bindLevelService(LevelService service) {
+        delegate.bindLevelService(service);
+    }
 }

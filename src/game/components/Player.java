@@ -6,14 +6,13 @@ import game.enums.TokenType;
 import game.services.GameEngService;
 import game.services.LemmingService;
 import game.services.PlayerService;
-import game.services.RequireGameEngService;
 
 import java.util.HashMap;
 import java.util.Map;
 
 public class Player implements
     /* require */
-    RequireGameEngService,
+    /*RequireGameEngService,*/
 
     /* provide */
     PlayerService {
@@ -120,7 +119,7 @@ public class Player implements
 
     @Override
     public void resetGame() {
-    	((GameEng) gameEngine).bindLevelService(gameEngine.getLevelInit());
+    	gameEngine.bindLevelService(gameEngine.getLevelInit());
         gameEngine.init(gameEngine.getSizeColony(), gameEngine.getSpawnSpeed());
         mapNbInitToken.entrySet().forEach(entry ->
                               mapNbToken.put(entry.getKey(), entry.getValue()));

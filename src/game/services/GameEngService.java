@@ -2,7 +2,7 @@ package game.services;
 
 import java.util.List;
 
-public interface GameEngService {
+public interface GameEngService extends RequireLevelService {
     //**OBSERVATOR(S)********************************************************//
     
     /** Score of the game

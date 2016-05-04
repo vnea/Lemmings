@@ -77,4 +77,9 @@ public class LemmingDecorator implements LemmingService {
     public void step() {
         delegate.step();
     }
+
+    @Override
+    public void bindLevelService(LevelService service) {
+        delegate.bindLevelService(service);
+    }
 }

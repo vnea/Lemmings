@@ -4,7 +4,7 @@ import game.enums.Behaviour;
 import game.enums.Direction;
 import game.enums.State;
 
-public interface LemmingService {
+public interface LemmingService extends RequireLevelService {
     //**CONSTANT(S)**********************************************************//
     
     /** Minimum vertical position of the Lemming */

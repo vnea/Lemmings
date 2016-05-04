@@ -4,7 +4,6 @@ import game.enums.Nature;
 import game.services.GameEngService;
 import game.services.LemmingService;
 import game.services.LevelService;
-import game.services.RequireLevelService;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -12,7 +11,7 @@ import java.util.stream.Collectors;
 
 public class GameEng implements
     /* require */
-    RequireLevelService,
+    /*RequireLevelService,*/
 
     /* provide */
     GameEngService {
