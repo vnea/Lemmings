@@ -15,9 +15,7 @@ public class LevelContract extends LevelDecorator {
         for (int h = 0; h < getHeight(); ++h) {
             for (int w = 0; w < getWidth(); ++w) {
                 if (!squareExist(h, w)) {
-                    throw new InvariantError("\\forall i \\in [0, getHeight()["
-                            + " ^ \forall j in [0, getWidth()[,"
-                            + " !squareExist(i, j)");
+                    throw new InvariantError("!squareExist(i, j)");
                 }
             }
         }
@@ -29,9 +27,7 @@ public class LevelContract extends LevelDecorator {
         for (int h = 0; h < getHeight(); ++h) {
             for (int w = 0; w < getWidth(); ++w) {
                 if (!(isAnObstacle(h, w) == (getNature(h, w) == Nature.DIRT || getNature(h, w) == Nature.METAL))) {
-                    throw new InvariantError("\\forall i \\in [0, getHeight()["
-                            + " ^ \forall j in [0, getWidth()[,"
-                            + " !(isAnObstacle(i, j) = (getNature(i, j) == Nature::DIRT or getNature(i, j) = Nature::METAL))");
+                    throw new InvariantError("!(isAnObstacle(i, j) = (getNature(i, j) == Nature::DIRT or getNature(i, j) = Nature::METAL))");
                 }
             }
         }
@@ -213,9 +209,7 @@ public class LevelContract extends LevelDecorator {
         //         getNature(i, 0) == Nature::METAL ^ getNature(i, getWidth() - 1) == Nature::METAL
         for (int i = 0; i < getHeight(); ++i) {
             if (!(getNature(i, 0) == Nature.METAL && getNature(i,  getWidth() - 1) == Nature.METAL)) {
-                throw new PreconditionError("\forall i in [0, getHeight() - 1],"
-                        + "!(getNature(i, 0) == Nature::METAL ^ "
-                        + "getNature(i, getWidth() - 1) == Nature::METAL)");
+                throw new PreconditionError("!(getNature(i, 0) == Nature::METAL ^ getNature(i, getWidth() - 1) == Nature::METAL)");
             }
         }
         
@@ -223,9 +217,7 @@ public class LevelContract extends LevelDecorator {
         //         getNature(0, j) == Nature::METAL ^ getNature(getHeight() - 1, j) == Nature::METAL
         for (int j = 0; j < getWidth(); ++j) {
             if (!(getNature(0, j) == Nature.METAL && getNature(getHeight() - 1,  j) == Nature.METAL)) {
-                throw new PreconditionError("\forall i in [0, getHeight() - 1],"
-                        + "!(getNature(0, j) == Nature::METAL ^ "
-                        + "getNature(getHeight() - 1,  j) == Nature::METAL)");
+                throw new PreconditionError("!(getNature(0, j) == Nature::METAL ^ getNature(getHeight() - 1,  j) == Nature::METAL)");
             }
         }
         

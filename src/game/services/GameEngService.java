@@ -86,13 +86,13 @@ public interface GameEngService extends RequireLevelService {
     //**INIT*****************************************************************//
 
     /** Initialisation
-     * \pre: sizeC > 0
-     * \pre: spawnS > 0
      * \post: getTurn() == 0
      * \post: getSizeColony() == sizeC
      * \post: getNbLemmingsSaved() == 0
+     * \post: getNbLemmingsDead() == 0
      * \post: card(getNumLemmingsActive()) == 0
      * \post: getSpawnSpeed() == spawnS
+     * \post: getLevelInit() == getLevel() (copy)
      */
     public void init(int sizeC, int spawnS);
     
@@ -105,15 +105,15 @@ public interface GameEngService extends RequireLevelService {
      * \pre: !isGameOver()
      * \post: getTurn() == getTurn()@pre + 1
      * \post: \forall num \in getNumLemmingsActive()@pre,
-     *              if Level::getNature(Lemming::getHPos(num), Lemming::getWPos(num)) == Nature::EXIT then:
+     *              if getLevel().getNature(getLemming(num).getHPos(), getLemming(num).getWPos()) == Nature::EXIT then:
      *                         {num} ∉  getNumLemmingsActive() ^ getNbLemmingsSaved()++
      * \post: \forall num \in getNumLemmingsActive()@pre,
-     *              if Lemming::isDead() then:
+     *              if getLemming(num).isDead() then:
      *                  {num} ∉  getNumLemmingsActive() ^ getNbLemmingsDead()++
      * \post: if getNbLemmingsCreated()@pre * getSpawnSpeed()@pre == getTurn()@pre ^ getNbLemmingsCreated()@pre < getSizeColony() then:
-     *             getLemming(getNbLemmingsCreated()@pre) == Lemming::init(getNbLemmingsCreated(), Level::getHEntrance(), Level::getWEntrance(), getLevel())
+     *             getLemming(getNbLemmingsCreated()@pre) == Lemming::init(getNbLemmingsCreated(), getLevel().getHEntrance(), getLevel().getWEntrance())
      * \post if isGameOver() then:
-     *          getScore() = (getNbLemmingsSaved() / getTurn()) * 100                
+     *          getScore() == (getNbLemmingsSaved() / getTurn()) * 100
      */
     public void executeTurn();
     

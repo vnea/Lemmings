@@ -115,4 +115,42 @@ public class Level implements
         wEntrance = w;
         squares[h][w] = Nature.ENTRANCE;
     }
+    
+    public static boolean areEqual(LevelService level, LevelService other) {
+        // Check height
+        if (level.getHeight() != other.getHeight()) {
+            return false;
+        }
+        
+        // Check width
+        if (level.getWidth() != other.getWidth()) {
+            return false;
+        }
+        
+        // Check editing
+        if (level.isEditing() != other.isEditing()) {
+            return false;
+        }
+        
+        // Check natures
+        for (int h = 0; h < level.getWidth(); ++h) {
+            for (int w = 0; w < level.getHeight(); ++w) {
+                if (level.getNature(h, w) != other.getNature(h, w)) {
+                    return false;
+                }
+            }
+        }
+        
+        // Check entrance
+        if (level.getHEntrance() != other.getHEntrance()) {
+            return false;
+        }
+        
+        // Check exit
+        if (level.getWEntrance() != other.getWEntrance()) {
+            return false;
+        }
+        
+        return true;
+    }
 }
