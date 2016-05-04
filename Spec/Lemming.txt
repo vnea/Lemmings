@@ -67,13 +67,13 @@ Observations:
 			 			
 			 		else if behaviour(L)=Behaviour::FALLER then:
 			 			if Level::obstacle(level(L),hPos(L)+1,wPos(L))=false then:
-		 					hPos(step(L)) = hPos(L)+1
+		 					hPos(step(L)) = hPos(L)+1 ^
 		 					counterFaller(step(L)) = counterFaller(L)+1
 			 			else: 
 			 				if counterFaller(L) > 8 then:
 				 				dead(step(l)) = true
 			 				else:
-			 					behaviour(step(L)) = Behaviour::WALKER	
+			 					behaviour(step(L)) = Behaviour::WALKER ^
 			 					counterFaller(step(L)) = 0
                     else if behaviour(L)=Behaviour::DIGGER then:
 			 			if Level::obstacle(level(L),hPos(L)+1,wPos(L))=false then:
