@@ -56,7 +56,7 @@ public interface GameEngService extends RequireLevelService {
     
     //**INVARIANT(S)*********************************************************//
     
-    /** \inv: isActive(num) = num \in getNumLemmingsActive() (minimisation) */
+    /** \inv: \forall num \in getNumLemmingsActive(), isActive(num) = num \in getNumLemmingsActive() (minimisation) */
     
     /** \inv: isGameOver() = getNbLemmingsSaved() + getNbLemmingsDead() ==
      *                       getSizeColony() (minimisation)
@@ -106,10 +106,10 @@ public interface GameEngService extends RequireLevelService {
      * \post: getTurn() == getTurn()@pre + 1
      * \post: \forall num \in getNumLemmingsActive()@pre,
      *              if getLevel().getNature(getLemming(num).getHPos(), getLemming(num).getWPos()) == Nature::EXIT then:
-     *                         {num} ∉  getNumLemmingsActive() ^ getNbLemmingsSaved()++
+     *                  num \not \in getNumLemmingsActive() ^ getNbLemmingsSaved()++
      * \post: \forall num \in getNumLemmingsActive()@pre,
      *              if getLemming(num).isDead() then:
-     *                  {num} ∉  getNumLemmingsActive() ^ getNbLemmingsDead()++
+     *                  num \not \in getNumLemmingsActive() ^ getNbLemmingsDead()++
      * \post: if getNbLemmingsCreated()@pre * getSpawnSpeed()@pre == getTurn()@pre ^ getNbLemmingsCreated()@pre < getSizeColony() then:
      *             getLemming(getNbLemmingsCreated()@pre) == Lemming::init(getNbLemmingsCreated(), getLevel().getHEntrance(), getLevel().getWEntrance())
      * \post if isGameOver() then:

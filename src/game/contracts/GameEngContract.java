@@ -14,13 +14,21 @@ public class GameEngContract extends GameEngDecorator {
     }
     
     private void checkInvariant() {
-        // \inv: isActive(num) = num \in getNumLemmingsActive()
+        // \inv: \forall num \in getNumLemmingsActive(), isActive(num) = num \in getNumLemmingsActive()
+        final List<Integer> numLemmingsActive = getNumLemmingsActive();
+        for (Integer num : numLemmingsActive) {
+            if (isActive(num)) {
+                if (!numLemmingsActive.contains(num)) {
+                    throw new InvariantError("!(num \\in getNumLemmingsActive())");
+                }
+            }
+        }
     	
     	// inv: isGameOver() = getNbLemmingsSaved() + getNbLemmingsDead() ==
         //                       getSizeColony() (minimisation)
     	if (!(isGameOver() ==
-    			(getNbLemmingsSaved() + getSizeColony() == getSizeColony()))) {
-    		throw new InvariantError("!(isGameOver() == (getNbLemmingsSaved() + getSizeColony() == getSizeColony()))");
+    			(getNbLemmingsSaved() + getNbLemmingsDead() == getSizeColony()))) {
+    		throw new InvariantError("!(isGameOver() == (getNbLemmingsSaved() + getNbLemmingsDead() == getSizeColony()))");
     	}
     	
         // \inv: getNbLemmingsActive() = card(getNumLemmingsActive())
@@ -136,15 +144,16 @@ public class GameEngContract extends GameEngDecorator {
         checkInvariant();
         
         /* Pre-condition(s) */
-        // \pre: isGameOver()
-        if (!isGameOver()) {
-            throw new PreconditionError("!isGameOver()");
+        // \pre: !isGameOver()
+        if (isGameOver()) {
+            throw new PreconditionError("isGameOver()");
         }
         
         // captures
         final int turn_atPre = getTurn();
         final List<Integer> numLemmingsCreated_atPre = getNumLemmingsActive();
         final int nbLemmingsCreate_atPre = getNbLemmingsCreated();
+        final int spawnSpeed = getSpawnSpeed();
         
         super.executeTurn();
         
@@ -157,21 +166,48 @@ public class GameEngContract extends GameEngDecorator {
             throw new PostconditionError("!(getTurn() == getTurn()@pre + 1)");
         }
         
+        /*
+        
         // \post: \forall num \in getNumLemmingsActive()@pre,
         //              if getLevel().getNature(getLemming(num).getHPos(), getLemming(num).getWPos()) == Nature::EXIT then:
-        //                        {num} ∉  getNumLemmingsActive() ^ getNbLemmingsSaved()++
+        //                  num \not \in getNumLemmingsActive() ^ getNbLemmingsSaved()++
         for (Integer num : numLemmingsCreated_atPre) {
             if (getLevel().getNature(getLemming(num).getHPos(), getLemming(num).getWPos()) == Nature.EXIT) {
-                
+                if (!(!getNumLemmingsActive().contains(num))) {
+                    throw new PostconditionError("!(num \\not \\in getNumLemmingsActive() ^ getNbLemmingsSaved()++)");
+                }
             }
         }
         
-        // \post if isGameOver() then:
+        // \post: \forall num \in getNumLemmingsActive()@pre,
+        //              if getLemming(num).isDead() then:
+        //                  num \not \in getNumLemmingsActive() ^ getNbLemmingsDead()++
+        for (Integer num : numLemmingsCreated_atPre) {
+            if (getLemming(num).isDead()) {
+                if (!(!getNumLemmingsActive().contains(num))) {
+                    throw new PostconditionError("!(num \\not \\in getNumLemmingsActive() ^ getNbLemmingsDead()++)");
+                }
+             }
+        }
+        
+        */
+        
+        // \post: if getNbLemmingsCreated()@pre * getSpawnSpeed()@pre == getTurn()@pre ^ getNbLemmingsCreated()@pre < getSizeColony() then:
+        //             getLemming(getNbLemmingsCreated()@pre) == Lemming::init(getNbLemmingsCreated(), getLevel().getHEntrance(), getLevel().getWEntrance())
+        if (nbLemmingsCreate_atPre * spawnSpeed == turn_atPre && nbLemmingsCreate_atPre < getSizeColony()) {
+            if (!(getLemming(nbLemmingsCreate_atPre) != null)) {
+                throw new PostconditionError("!(getLemming(getNbLemmingsCreated()@pre) == Lemming::init(getNbLemmingsCreated(), getLevel().getHEntrance(), getLevel().getWEntrance())");
+            }
+        }
+        
+        // \post: if isGameOver() then:
         //          getScore() == (getNbLemmingsSaved() / getTurn()) * 100
+        /*
         if (isGameOver()) {
-            if (!(getScore() == (getNbLemmingsSaved() / getTurn()) * 100)) {
+            if (!(getScore() == (int) ((double) getNbLemmingsSaved() / getTurn() * 100))) {
                 throw new PostconditionError("!(getScore() == (getNbLemmingsSaved() / getTurn()) * 100)");
             }
-        }   
+        }
+        */
     }
 }
